@@ -27,6 +27,8 @@ public class RecipediaJDBC {
 	private final static String tresultTable = "SELECT * FROM Tags WHERE tagID=Tags";
 	private final static String addIngredient = "INSERT INTO Ingredients(recipeID, quantity, units, ingredient) VALUES(?,?,?,?)";
 	private final static String addInstruction = "INSERT INTO Instructions(recipeID, instruction) VALUES(?,?)";
+	private final static String addTag = "INSERT INTO Tags(tag) VALUES(?)";
+	private final static String addTagConnection = "INSERT INTO TagToRecipe(tagID, recipeID) VALUES(?,?)";
 	public RecipediaJDBC() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -129,7 +131,7 @@ public class RecipediaJDBC {
 			
 			Vector<Ingredient> ingredients = recipe.getIngredients();
 			Vector<String> instructions = recipe.getInstructions();
-			
+			Vector<String> tags = recipe.getTags();
 			int recipeKey;
 			if (rs.next()) {
 				recipeKey = rs.getInt(1);
@@ -147,6 +149,20 @@ public class RecipediaJDBC {
 					ps.setString(2,  instructions.get(i));
 					ps.executeUpdate();
 				}
+				for (int i = 0; i < tags.size(); i++) {
+					ps = conn.prepareStatement(addTag, Statement.RETURN_GENERATED_KEYS);
+					ps.setString(1, tags.get(i));
+					ps.executeUpdate();
+					rs = ps.getGeneratedKeys();
+					if (rs.next()) {
+						ps = conn.prepareStatement(addTagConnection);
+						ps.setInt(1, rs.getInt(1));
+						ps.setInt(2, recipeKey);
+						ps.executeUpdate();
+					}
+					
+				}
+				
 			}
 			
 			
