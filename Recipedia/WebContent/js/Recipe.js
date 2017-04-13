@@ -4,6 +4,7 @@
 function Recipe() {
 	this.ingredients = [];
 	this.instructions = [];
+	this.tags = [];
 	this.imageURL = "";
 	this.name = "";
 }
@@ -25,6 +26,16 @@ Recipe.prototype.removeInstructionWithId = function (id) {
 	for (var i = 0; i < this.instructions.length; i++) {
 		if (this.instructions[i].id === id) {
 			this.instructions.splice(i, 1);
+		}
+	}
+}
+Recipe.prototype.addTag = function (tag) {
+	this.tags.push(tag);
+}
+Recipe.prototype.removeTagWithId = function (id) {
+	for (var i = 0; i < this.tags.length; i++) {
+		if (this.tags[i].id === id) {
+			this.tag.splice(i, 1);
 		}
 	}
 }
