@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+
+body {
+	background-color: #e4fde1;
+}
+
+.navbar {
+	background-color: #ff8a5b;
+	border-color: #ff8a5b;
+}
+
+.row-sidebar {
+	height: 800px;
+	width:  100%;
+	font-family: sans-serif;
+	background-color: #f7c59f;
+}
+
+#recipeImage {
+	height: 400px;
+	width: 400px;	
+}
