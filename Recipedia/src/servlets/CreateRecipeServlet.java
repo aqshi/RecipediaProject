@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import data.RecipediaJDBC;
 import recipediaClasses.*;
 
 /**
@@ -64,6 +65,8 @@ public class CreateRecipeServlet extends HttpServlet {
         	tags.add(jsonTags.get(i).getText());
         }
         Recipe recipe = new Recipe(ingredients, instructions, tags, jsonRecipe.getName(), jsonRecipe.getImageURL());
+        RecipediaJDBC rjdbc = new RecipediaJDBC();
+        rjdbc.addRecipe(recipe);
         //Need to grab current user, pass in the data from the json java object to the a real recipe
         //add that recipe to the user, and them save this to the database
         sr.setStatus("Success");
