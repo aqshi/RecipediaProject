@@ -5,6 +5,8 @@
 	<head>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/profile.css">
+				<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/feed.css">
+	
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		
@@ -14,19 +16,24 @@
 	<body>
 	
 	<!-- ===========================NAV BAR============================================ -->
-		<nav class="navbar navbar-inverse">
+	   <nav class="navbar navbar-inverse">
 		  <div class="container-fluid">
 		    <div class="navbar-header">
-		      <a class="navbar-brand" href="#">Recipedia</a>
+		      <img id='recipedia-logo' alt='recipedia-logo' src='../images/Recipedia_logo.png'>
 		    </div>
-		      
-		      <form class = "navbar-form navbar-left" role = "search">
-		      	<span style = "color: white">Username</span>
-		      	 <input  type = "text" name = "username" value = "username"/>
-		      	<span style = "color: white"> Password</span>
-		      	 <input type = "text" name = "password" value = "password"/>
-		      	 <input type ="submit"  value = "Login" name = "login" class = "btn btn-default"/>
-		      </form>
+		    <ul class="nav navbar-nav">
+		      <li class="active"><a href="${pageContext.request.contextPath}/jsp/feed.jsp">Feed</a></li>
+		      <li><a href="${pageContext.request.contextPath}/jsp/profile.jsp">View Profile</a></li>
+		      <li><a href="${pageContext.request.contextPath}/jsp/CreateRecipe.jsp">Create Recipes</a></li>
+		    </ul>
+		    <form class="navbar-form navbar-left">
+		      <div class="form-group">
+		        <input id="search" type="text" class="form-control" placeholder="Search Recipes...">
+		      </div>
+		     <button class="btn btn-default" type="button">
+	            <span class="glyphicon glyphicon-search"></span>
+	          </button>
+		    </form>
 		  </div>
 		</nav>
 		
