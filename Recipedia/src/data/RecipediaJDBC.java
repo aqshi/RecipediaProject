@@ -3,6 +3,9 @@ package data;
 import java.sql.*;
 import java.util.*;
 
+import recipediaClasses.Ingredient;
+import recipediaClasses.Recipe;
+
 public class RecipediaJDBC {
 	
 	//Data Members
@@ -19,9 +22,10 @@ public class RecipediaJDBC {
 	private final static String followingTable = "SELECT * FROM Fans WHERE userID=?";
 	private final static String addFollowing = "INSERT INTO Fans(userID, fanName) VALUES(?,?)";
 	private final static String removeFollower = "DELETE FROM Fans WHERE userID=? AND fanName=?";
-	private final static String resultTable = "SELECT * FROM Recipes WHERE recipeID=Recipes";
+	private final static String addRecipe = "INSERT INTO Recipes(title, likes, image) VALUES(?,?,?)";
+    private final static String resultTable = "SELECT * FROM Recipes WHERE recipeID=Recipes";
 	private final static String tresultTable = "SELECT * FROM Tags WHERE tagID=Tags";
-	
+	private final static String addIngredient = "INSERT INTO Ingredients(recipeID, quantity, units, ingredient) VALUES(?,?,?,?)";
 	
 	public RecipediaJDBC() {
 		try {
@@ -107,22 +111,46 @@ public class RecipediaJDBC {
 		}
 	}
 	
-	public void uploadRecipe(String username, String recipeName){
-		Statement st = null;
-		int userID = this.getUserIDByUsername(username);
-		int recipeID = this.getRecipeIDByRecipeName(recipeName);
+	public void uploadRecipe(String recipeName){
 		
-		if (userID != 0 && recipeID != 0){
-			try {
-				st.executeUpdate("INSERT INTO UploadedRecipes(userID, recipeID) " + 
-						"VALUES ('" + userID + "','" + recipeID + "');");
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+		int recipeID = 0;
 		
 	}
 	
+	//adds a recipe into the database (INCOMPLETE)
+	public void addRecipe(Recipe recipe) {
+		try {
+			ps = conn.prepareStatement(addRecipe, Statement.RETURN_GENERATED_KEYS);
+			ps.setString(1, recipe.getName());
+			ps.setInt(2, 0);
+			ps.setString(3, recipe.getImageURL());
+			ps.executeUpdate();
+			ResultSet rs = ps.getGeneratedKeys();
+			
+			Vector<Ingredient> ingredients = recipe.getIngredients();
+			
+			
+			int recipeKey;
+			if (rs.next()) {
+				recipeKey = rs.getInt(1);
+				for (int i = 0; i < ingredients.size(); i++) {
+					ps = conn.prepareStatement(addIngredient);
+					ps.setInt(1, recipeKey);
+					ps.setDouble(2, ingredients.get(i).getQuantity());
+					ps.setString(3, ingredients.get(i).getUnits());
+					ps.setString(4,  ingredients.get(i).getName());
+					ps.executeUpdate();
+				}
+				
+				
+				
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
+	}
 	public int getUserIDByUsername(String username){
 		ResultSet rs = null;
 		Statement st = null;
@@ -138,10 +166,8 @@ public class RecipediaJDBC {
 		}
 		return userID;
 	}
-		
+
 	public int getRecipeIDByRecipeName(String recipeName){
-		ResultSet rs = null;
-		Statement st = null;
 		int recipeID = 0;
 		try {
 			st = conn.createStatement();
@@ -227,10 +253,10 @@ public class RecipediaJDBC {
 		
 		return following;
 	}
-	
-	public Set<String> nameResult(String entry) {
-		Set<String> results = new HashSet<>();
-		try {
+    
+    public Set<String> nameResult(String entry) {
+        Set<String> results = new HashSet<>();
+        try {
 			st = conn.createStatement();
 			ps = conn.prepareStatement(resultTable);
 			rs = ps.executeQuery();
@@ -261,5 +287,4 @@ public class RecipediaJDBC {
 		return results;
 	}
 }
-	
-	
+
