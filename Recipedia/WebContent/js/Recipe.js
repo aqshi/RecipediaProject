@@ -35,7 +35,7 @@ Recipe.prototype.addTag = function (tag) {
 Recipe.prototype.removeTagWithId = function (id) {
 	for (var i = 0; i < this.tags.length; i++) {
 		if (this.tags[i].id === id) {
-			this.tag.splice(i, 1);
+			this.tags.splice(i, 1);
 		}
 	}
 }
