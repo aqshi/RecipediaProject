@@ -12,17 +12,20 @@ import javax.servlet.http.HttpServletResponse;
 
 public class Recipe {
 	public Recipe(Vector<Ingredient> ingred, Vector<String> instruct,
-					Vector<String> tg, String nm)
+					Vector<String> tg, String nm, String imageURL)
 	{
 		ingredient=ingred;
 		instructions=instruct;
 		tags=tg;
 		name=nm;
+		this.imageURL = imageURL;
 	}
 	private Vector<Ingredient> ingredient;
 	private Vector<String> instructions;
 	private Vector<String> tags;
 	private String name;
+	private String imageURL;
+	
 	
 	//not part of constructor
 	private int likes = 0;
@@ -100,6 +103,12 @@ public class Recipe {
 	public String getName()
 	{
 		return name;
+	}
+	public String getImageURL() {
+		return imageURL;
+	}
+	public void setImageURL(String imageURL) {
+		this.imageURL = imageURL;
 	}
 	
 }

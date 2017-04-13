@@ -12,32 +12,32 @@ public class Ingredient {
 	private String unit;
 	private double quantity;
 	
-	void setName(String nm)
+	public void setName(String nm)
 	{
 		name=nm;
 	}
 	
-	String getName()
+	public String getName()
 	{
 		return name;
 	}
-	void setUnits(String unt)
+	public void setUnits(String unt)
 	{
 		unit=unt;
 	}
-	String getUnits()
+	public String getUnits()
 	{
 		return unit;
 	}
-	void setQuantity(int quant)
+	public void setQuantity(int quant)
 	{
 		quantity=quant;
 	}
-	double getQuantity()
+	public double getQuantity()
 	{
 		return quantity;
 	}
-	String toStringWrong()
+	public String toStringWrong()
 	{
 		//insert bs
 		return "";
