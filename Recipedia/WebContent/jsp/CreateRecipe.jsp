@@ -19,7 +19,7 @@
 <script type='text/javascript' src='../js/Tag.js'></script>
 
 <link rel="stylesheet" href="../css/CreateRecipe.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/feed.css">
+
 
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -32,9 +32,9 @@
 		      <img id='recipedia-logo' alt='recipedia-logo' src='../images/Recipedia_logo.png'>
 		    </div>
 		    <ul class="nav navbar-nav">
-		      <li class="active"><a href="${pageContext.request.contextPath}/jsp/feed.jsp">Feed</a></li>
+		      <li><a href="${pageContext.request.contextPath}/jsp/feed.jsp">Feed</a></li>
 		      <li><a href="${pageContext.request.contextPath}/jsp/profile.jsp">View Profile</a></li>
-		      <li><a href="${pageContext.request.contextPath}/jsp/CreateRecipe.jsp">Create Recipes</a></li>
+		      <li class="active" ><a id="create-recipes-tab" href="${pageContext.request.contextPath}/jsp/CreateRecipe.jsp">Create Recipes</a></li>
 		    </ul>
 		    <form class="navbar-form navbar-left">
 		      <div class="form-group">

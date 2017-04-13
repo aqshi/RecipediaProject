@@ -7,7 +7,10 @@ NAV BAR
 	border-color: transparent;
 	border-style: none;
 }
-
+.image-container{
+	background-color: #f7c59f;
+	border-radius: 15%;
+}
 .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover{
 	background-color: #f7ed6a;
 }
@@ -28,13 +31,20 @@ nav.navbar.navbar-inverse {
 	
 }
 
-.btn-default:hover{
-	background-color:#f7c59f;
+.navbar-brand:hover {
+	color: #ff8a5b;
 }
 
+.navbar-inverse .navbar-brand:hover, 
+.navbar-inverse .navbar-brand:focus {
+  background-color: transparent;
+  color: #f7c59f;
+}
 .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{
 	background-color: #f7c59f;
+	background-image: linear-gradient(to bottom,#f7c59f 0,#f7c59f 100%);
 }
+
 
 /*
 BODY
@@ -47,6 +57,8 @@ body{
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
 }
 
 #ingredient-box {
@@ -199,8 +211,20 @@ body{
 	margin-left: 0;
 }
 #recipedia-logo {
-	height: 40px;
-	width: 90px;
+	height: 20px;
+	width: 87px;
 	margin-left: -5%;
-	margin-top: 10%;
+	margin-top: 21.5%;
+	padding-left: 11%;
+	padding-right: 10%;
+}
+
+.active {
+	background-color: #f7ef5f;
+	color: #f7ef5f;
+	background-image: linear-gradient(to bottom,#f7ef5f 0,#f7ef5f 100%);
+	
+}
+#create-recipes-tab {
+	background-image: none;
 }

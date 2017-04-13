@@ -63,7 +63,7 @@ public class CreateRecipeServlet extends HttpServlet {
         for (int i = 0; i < jsonTags.size(); i++) {
         	tags.add(jsonTags.get(i).getText());
         }
-        Recipe recipe = new Recipe(ingredients, instructions, tags, jsonRecipe.getName());
+        Recipe recipe = new Recipe(ingredients, instructions, tags, jsonRecipe.getName(), jsonRecipe.getImageURL());
         //Need to grab current user, pass in the data from the json java object to the a real recipe
         //add that recipe to the user, and them save this to the database
         sr.setStatus("Success");
