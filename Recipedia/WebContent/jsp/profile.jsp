@@ -16,15 +16,15 @@
 	<body>
 	
 	<!-- ===========================NAV BAR============================================ -->
-	   <nav class="navbar navbar-inverse">
+	    <nav class="navbar navbar-inverse navbar-fixed-top">
 		  <div class="container-fluid">
 		    <div class="navbar-header">
 		      <img id='recipedia-logo' alt='recipedia-logo' src='../images/Recipedia_logo.png'>
 		    </div>
 		    <ul class="nav navbar-nav">
-		      <li class="active"><a href="${pageContext.request.contextPath}/jsp/feed.jsp">Feed</a></li>
-		      <li><a href="${pageContext.request.contextPath}/jsp/profile.jsp">View Profile</a></li>
-		      <li><a href="${pageContext.request.contextPath}/jsp/CreateRecipe.jsp">Create Recipes</a></li>
+		      <li><a href="${pageContext.request.contextPath}/jsp/feed.jsp">Feed</a></li>
+		      <li  class="active"><a href="${pageContext.request.contextPath}/jsp/profile.jsp">View Profile</a></li>
+		      <li ><a id="create-recipes-tab" href="${pageContext.request.contextPath}/jsp/CreateRecipe.jsp">Create Recipes</a></li>
 		    </ul>
 		    <form class="navbar-form navbar-left">
 		      <div class="form-group">

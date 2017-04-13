@@ -13,7 +13,7 @@
 	<body>
 <!-- ===========================NAV BAR============================================ -->
 	    
-	   <nav class="navbar navbar-inverse">
+	   <nav class="navbar navbar-inverse navbar-fixed-top">
 		  <div class="container-fluid">
 		    <div class="navbar-header">
 		      <img id='recipedia-logo' alt='recipedia-logo' src='../images/Recipedia_logo.png'>
