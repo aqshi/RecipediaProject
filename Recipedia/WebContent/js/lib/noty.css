@@ -392,6 +392,10 @@
 	background-color: rgba(203, 227, 225, .9);
   	
 }
+.noty_theme__bootstrap-v3.noty_type__custom:hover  {
+	background-color: rgba(203, 227, 225, 1);
+  	transform: scale(1.01);
+}
 
 .noty_theme__bootstrap-v4.noty_bar {
   margin: 4px 0;

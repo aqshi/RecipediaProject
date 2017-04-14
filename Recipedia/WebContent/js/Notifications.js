@@ -26,6 +26,6 @@ $(document).ready(function() {
 		newNotification.show();
 	}
 	
-//	n.show();
-//	n1.show();
+	n.show();
+	n1.show();
 });
