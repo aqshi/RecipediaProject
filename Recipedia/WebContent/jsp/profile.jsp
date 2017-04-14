@@ -9,7 +9,9 @@
 	
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		
+		<link href="../js/lib/noty.css" rel="stylesheet"></link>
+		<script src="../js/lib/noty.js" type="text/javascript"></script>
+		<script type='text/javascript' src='../js/Notifications.js'></script>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Profile</title>
 	</head>
@@ -39,7 +41,7 @@
 		
 		
 		<!-- =============================WHOLE PAGE================================== -->
-		<div class = "row">
+		<div id="main-div" class = "row">
 			<div style="float:left">
 				<img style ="width: 200px; height:200px; margin:20px 50px 20px 100px"src="../pasta.jpg"/>
 			</div>

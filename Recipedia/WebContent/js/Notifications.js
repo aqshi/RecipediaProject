@@ -26,15 +26,15 @@ $(document).ready(function() {
 	    type: "custom",
 	    closeWith: ['click', 'button']
 	});
-	var n = new Noty({
-		text: "Daniel liked your recipe 'Chocolate Cake'!",
-		
-		});
-	var n1 = new Noty({
-		text: "Jen is now a fan of you!",
-		
-		});
-	
+//	var n = new Noty({
+//		text: "Daniel liked your recipe 'Chocolate Cake'!",
+//		
+//		});
+//	var n1 = new Noty({
+//		text: "Jen is now a fan of you!",
+//		
+//		});
+	showNotification("Daniel", "Saved", "Mac and cheese");
 	
 //	n.show();
 //	n1.show();

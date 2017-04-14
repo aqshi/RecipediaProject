@@ -8,7 +8,9 @@
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/feed.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		
+		<link href="../js/lib/noty.css" rel="stylesheet"></link>
+		<script src="../js/lib/noty.js" type="text/javascript"></script>
+		<script type='text/javascript' src='../js/Notifications.js'></script>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>View Recipe</title>
 	</head>

@@ -389,8 +389,9 @@
   color: #3c763d;
   border-color: #d6e9c6; }
 .noty_theme__bootstrap-v3.noty_type__custom {
-	background-color: rgba(203, 227, 225, .95);
-  	
+	background-color: rgba(203, 227, 225, .9);
+	border-color: rgba(203, 227, 225, 1);
+  	color: #335a6c;
 }
 .noty_theme__bootstrap-v3.noty_type__custom:hover  {
 	background-color: rgba(203, 227, 225, 1);
