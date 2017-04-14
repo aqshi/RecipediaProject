@@ -15,27 +15,27 @@
 		<title>View Recipe</title>
 	</head>
 	<body>
-		<nav class="navbar navbar-inverse">
-  			<div class="container-fluid">
-    		<div class="navbar-header">
-				<a class="navbar-brand" href="#">Recipedia</a>
-    		</div>
-    		<ul class="nav navbar-nav">
-      			<li class="active"><a href="#">Feed</a></li>
-     			 <li><a href="#">View Profile</a></li>
-      			<li><a href="#">Create Recipes</a></li>
-    		</ul>
-    		<form class="navbar-form navbar-left">
-      			<div class="form-group">
-        			<input id="search" type="text" class="form-control" placeholder="Search Recipes...">
-      			</div>
-     			<button class="btn btn-default" type="button">
-            		<span class="glyphicon glyphicon-search"></span>
-          		</button>
-    		</form>
-  		</div>
-	</nav>
-		<div class="container">
+		 <nav class="navbar navbar-inverse navbar-fixed-top">
+		  <div class="container-fluid">
+		    <div class="navbar-header">
+		      <img id='recipedia-logo' alt='recipedia-logo' src='../images/Recipedia_logo.png'>
+		    </div>
+		    <ul class="nav navbar-nav">
+		      <li><a href="${pageContext.request.contextPath}/jsp/feed.jsp">Feed</a></li>
+		      <li><a href="${pageContext.request.contextPath}/jsp/profile.jsp">View Profile</a></li>
+		      <li class="active" ><a id="create-recipes-tab" href="${pageContext.request.contextPath}/jsp/CreateRecipe.jsp">Create Recipes</a></li>
+		    </ul>
+		    <form class="navbar-form navbar-left">
+		      <div class="form-group">
+		        <input id="search" type="text" class="form-control" placeholder="Search Recipes...">
+		      </div>
+		     <button class="btn btn-default" type="button">
+	            <span class="glyphicon glyphicon-search"></span>
+	          </button>
+		    </form>
+		  </div>
+		</nav>
+		<div class="container" style="margin-top: 50px;">
 			<div class="row">
 				<div class="col-md-4">
 					<img id="recipeImage" src="../pasta.jpeg" style="height:400px; width:400px; margin-left:-50px;">
@@ -55,6 +55,5 @@
 				</div>
 			</div>
 		</div>
-
 </body>
 </html>
