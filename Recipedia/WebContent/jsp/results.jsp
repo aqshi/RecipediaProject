@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.* "%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -45,6 +45,8 @@
 	    	<%
 	    		//play around with counter to control how many elements appear
 	    		int counter = 7;
+	    		Vector<String> images= new Vector<String>();
+	    		
 	    		for(int i=0;i<counter;i++)
 	    		{
 	    			if(i%3==0)
@@ -53,6 +55,7 @@
 	    				out.println("<div class=\"col-md-2\"></div>");
 	    				out.println("<div class=\"col-md-2\">");
 	    				out.println("<div class=\"image-container\">");
+	    				//Images
 	    				out.println("<a href=\"${pageContext.request.contextPath}/jsp/viewRecipes.jsp\"><img src=\"../pasta.jpeg\"></a>");
 	    				out.println("<div class=\"dropdown\">");
 	    				out.println("<button class=\"btn btn-primary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">");
@@ -70,6 +73,7 @@
 		    			out.println("<div class=\"col-sm-1\"></div>");
 		    			out.println("<div class=\"col-md-2\">");
 		    			out.println("<div class=\"image-container\">");
+		    			//Images
 		    			out.println("<a href=\"${pageContext.request.contextPath}/jsp/viewRecipes.jsp\"><img src=\"../pasta.jpeg\"></a>");
 		    			out.println("<div class=\"dropdown\">");
 		    			out.println("<button class=\"btn btn-primary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">");
