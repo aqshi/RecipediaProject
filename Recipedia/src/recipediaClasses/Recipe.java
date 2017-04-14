@@ -25,7 +25,7 @@ public class Recipe {
 	private Vector<String> tags;
 	private String name;
 	private String imageURL;
-	
+	private int id;
 	
 	//not part of constructor
 	private int likes = 0;
@@ -109,6 +109,12 @@ public class Recipe {
 	}
 	public void setImageURL(String imageURL) {
 		this.imageURL = imageURL;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 }
