@@ -29,6 +29,7 @@ public class RecipediaJDBC {
 	private final static String addInstruction = "INSERT INTO Instructions(recipeID, instruction) VALUES(?,?)";
 	private final static String addTag = "INSERT INTO Tags(tag) VALUES(?)";
 	private final static String addTagConnection = "INSERT INTO TagToRecipe(tagID, recipeID) VALUES(?,?)";
+	private final static String addUploadedRecipe = "INSERT INTO SavedRecipes(userID, recipeID) VALUES (?,?)";
 	public RecipediaJDBC() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -98,26 +99,18 @@ public class RecipediaJDBC {
 		return false;
 	}
 	
-	public void saveRecipe(String username, String recipeName){
-		Statement st = null;
-		int userID = this.getUserIDByUsername(username);
-		int recipeID = this.getRecipeIDByRecipeName(recipeName);
-		
-		if (userID != 0 && recipeID != 0){
-			try {
-				st.executeUpdate("INSERT INTO SavedRecipes(userID, recipeID) " + 
-						"VALUES ('" + userID + "','" + recipeID + "');");
+
+	
+	public void saveRecipe(int recipeID, int userID){
+		try {
+			ps = conn.prepareStatement(addUploadedRecipe);
+			ps.setInt(1, recipeID);
+			ps.setInt(2, userID);
+			ps.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}
-		}
-	}
-	
-	public void addRecipeToUser(int recipeID, int userID) {
-		try {
-			
-		}
-		
+			}		  		
+
 	}
 	
 	//adds a recipe into the database (INCOMPLETE)
