@@ -30,7 +30,8 @@ public class RecipediaJDBC {
 	private final static String addInstruction = "INSERT INTO Instructions(recipeID, instruction) VALUES(?,?)";
 	private final static String addTag = "INSERT INTO Tags(tag) VALUES(?)";
 	private final static String addTagConnection = "INSERT INTO TagToRecipe(tagID, recipeID) VALUES(?,?)";
-	private final static String addUploadedRecipe = "INSERT INTO SavedRecipes(userID, recipeID) VALUES (?,?)";
+	private final static String addUploadedRecipe = "INSERT INTO UploadedRecipes(userID, recipeID) VALUES (?,?)";
+	private final static String addSavedRecipe = "INSERT INTO SavedRecipes(userID, recipeID) VALUES (?,?)";
 	private final static String getRecipe = "SELECT * FROM RECIPES WHERE recipeID=?";
 	private final static String getIngredients = "SELECT * FROM INGREDIENTS WHERE recipeID=?";
 	private final static String getInstructions = "SELECT * FROM INSTRUCTIONS WHERE recipeID=?";
@@ -66,6 +67,7 @@ public class RecipediaJDBC {
 		
 		scanner.close();
 	}
+
 	
 	//checks if username exists
 	public boolean doesUserExist(String name) {
@@ -147,9 +149,9 @@ public class RecipediaJDBC {
 		}
 		return null;
 	}
-	public void saveRecipe(int recipeID, int userID){
+	public void addSavedRecipe(int recipeID, int userID){
 		try {
-			ps = conn.prepareStatement(addUploadedRecipe);
+			ps = conn.prepareStatement(addSavedRecipe);
 			ps.setInt(1, recipeID);
 			ps.setInt(2, userID);
 			ps.executeUpdate();
@@ -158,8 +160,18 @@ public class RecipediaJDBC {
 			}		  		
 
 	}
+	public void addUploadedRecipe(int recipeID, int userID) {
+		try {
+			ps = conn.prepareStatement(addUploadedRecipe);
+			ps.setInt(1, recipeID);
+			ps.setInt(2, userID);
+			ps.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}	
+	}
 	
-	//adds a recipe into the database (INCOMPLETE)
+
 	public int addRecipe(Recipe recipe) {
 		try {
 			ps = conn.prepareStatement(addRecipe, Statement.RETURN_GENERATED_KEYS);
