@@ -116,5 +116,8 @@ public class Recipe {
 	public void setId(int id) {
 		this.id = id;
 	}
+	public void addLike() {
+		this.likes +=1;
+	}
 	
 }

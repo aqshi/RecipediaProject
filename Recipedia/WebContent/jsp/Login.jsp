@@ -105,7 +105,7 @@
 					<form name="signupform" id="signup-form" onsubmit="return signup()">
 						<div class="form-group">
 							<label>Full name</label>
-							<input type="text" name="fullname" class="form-control">
+							<input type="text" placeholder="fullname" name="fullname" class="form-control">
 					      	
 				      	</div>
 				      	<div class="form-group">
@@ -117,6 +117,11 @@
 				    		<label> Password</label>
 					      	<input type="password" name="password" placeholder="password" class="form-control"/>
 				    	</div>	
+				    	<div class="form-group">
+							<label>Image</label>
+							<input type="text" name="image"  placeholder = "url" class="form-control">
+					      	
+				      	</div>
 					      	 <input type="submit" value="Sign Up" class="btn btn-default"/>
 					      	 <div id="result_1"></div>	
 					   <!--  <div class="col-md-6"> -->

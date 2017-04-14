@@ -3,6 +3,8 @@ package data;
 import java.sql.*;
 import java.util.*;
 
+import recipediaClasses.User;
+
 public class RecipediaJDBC2 {
 	
 	//Data Members
@@ -20,6 +22,8 @@ public class RecipediaJDBC2 {
 	private final static String addFollowing = "INSERT INTO Fans(userID, fanName) VALUES(?,?)";
 	private final static String removeFollower = "DELETE FROM Fans WHERE userID=? AND fanName=?";
 	private final static String addRecipe = "INSERT INTO Recipes(title, tagID, likes) VALUES(?,?,?)";
+	private final static String getUsernameFromID = "SELECT * FROM Users WHERE userID=?"; //COPY AND PASTE
+
 	
 	public RecipediaJDBC2() {
 		try {
@@ -225,5 +229,28 @@ public class RecipediaJDBC2 {
 		}
 		
 		return following;
+	}
+
+	//get the username w/ the ID (COPY AND PASTE)
+	public String getUsernameByID(int idNum) {
+		try {
+			st = conn.createStatement();
+			ps = conn.prepareStatement(getUsernameFromID);
+			ps.setInt(1, idNum);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				return rs.getString(2);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return "";
+	}
+
+	//we have to get the username first somehow
+	public User getUserObject(String username) {
+		User user = new User(username);
+		return user;
 	}
 }

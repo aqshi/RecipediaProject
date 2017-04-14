@@ -20,15 +20,21 @@ public class RecipediaJDBC {
 	private final static String inputUsername = "SELECT * FROM Users WHERE username=?";
 	private final static String inputPassword = "SELECT * FROM Users WHERE pword=?";
 	private final static String followingTable = "SELECT * FROM Fans WHERE userID=?";
+	private final static String followerTable = "SELECT * FROM Following WHERE followingName=?";
 	private final static String addFollowing = "INSERT INTO Fans(userID, fanName) VALUES(?,?)";
 	private final static String removeFollower = "DELETE FROM Fans WHERE userID=? AND fanName=?";
 	private final static String addRecipe = "INSERT INTO Recipes(title, likes, image) VALUES(?,?,?)";
-    private final static String resultTable = "SELECT * FROM Recipes WHERE recipeID=Recipes";
-	private final static String tresultTable = "SELECT * FROM Tags WHERE tagID=Tags";
+    private final static String resultTable = "SELECT * FROM Recipes WHERE recipeID=?";
+	private final static String tresultTable = "SELECT * FROM Tags WHERE tagID=?";
 	private final static String addIngredient = "INSERT INTO Ingredients(recipeID, quantity, units, ingredient) VALUES(?,?,?,?)";
 	private final static String addInstruction = "INSERT INTO Instructions(recipeID, instruction) VALUES(?,?)";
 	private final static String addTag = "INSERT INTO Tags(tag) VALUES(?)";
 	private final static String addTagConnection = "INSERT INTO TagToRecipe(tagID, recipeID) VALUES(?,?)";
+	private final static String addUploadedRecipe = "INSERT INTO SavedRecipes(userID, recipeID) VALUES (?,?)";
+	private final static String getRecipe = "SELECT * FROM RECIPES WHERE recipeID=?";
+	private final static String getIngredients = "SELECT * FROM INGREDIENTS WHERE recipeID=?";
+	private final static String getInstructions = "SELECT * FROM INSTRUCTIONS WHERE recipeID=?";
+	private final static String getTags = "SELECT * FROM TagToRecipe WHERE recipeID=?";
 	public RecipediaJDBC() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -97,27 +103,60 @@ public class RecipediaJDBC {
 		
 		return false;
 	}
-	
-	public void saveRecipe(String username, String recipeName){
-		Statement st = null;
-		int userID = this.getUserIDByUsername(username);
-		int recipeID = this.getRecipeIDByRecipeName(recipeName);
-		
-		if (userID != 0 && recipeID != 0){
-			try {
-				st.executeUpdate("INSERT INTO SavedRecipes(userID, recipeID) " + 
-						"VALUES ('" + userID + "','" + recipeID + "');");
+	public Recipe getRecipe(int recipeID) {
+		try {
+			ps = conn.prepareStatement(getRecipe);
+			ps.setInt(1, recipeID);
+			rs = ps.executeQuery();
+			rs.next();
+			String title = rs.getString(2);
+			int likes = rs.getInt(3);
+			String image = rs.getString(4);
+			ps = conn.prepareStatement(getIngredients);
+			ps.setInt(1,  recipeID);
+			rs = ps.executeQuery();
+			Vector<Ingredient> ingredients = new Vector<Ingredient>();
+			while(rs.next()) {
+				int quantity = rs.getInt(2);
+				String units = rs.getString(3);
+				String name = rs.getString(4);
+				Ingredient ingredient = new Ingredient(name, units, quantity);
+				ingredients.add(ingredient);
+			}
+			Vector<String> instructions = new Vector<String>();
+			ps = conn.prepareStatement(getInstructions);
+			ps.setInt(1, recipeID);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				String instruction = rs.getString(2);
+				instructions.add(instruction);
+			}
+			Vector<String> tags = new Vector<String>();
+			ps = conn.prepareStatement(getTags);
+			ps.setInt(2, recipeID);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				String tag = rs.getString(1);
+				tags.add(tag);
+			}
+			Recipe recipe = new Recipe(ingredients, instructions, tags, title, image);
+			recipe.setLikes(likes);
+			return recipe;
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	public void saveRecipe(int recipeID, int userID){
+		try {
+			ps = conn.prepareStatement(addUploadedRecipe);
+			ps.setInt(1, recipeID);
+			ps.setInt(2, userID);
+			ps.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}
-		}
-	}
-	
-	public void addRecipeToUser(int recipeID, int userID) {
-		try {
-			
-		}
-		
+			}		  		
+
 	}
 	
 	//adds a recipe into the database (INCOMPLETE)
@@ -202,28 +241,6 @@ public class RecipediaJDBC {
 		}
 		return recipeID;
 	}
-	
-	//print following
-	public Set<String> followingSet() {
-			String temp = userToCheck;
-			int check = getUserIDByUsername(temp);
-			String usernameID = Integer.toString(check);
-			Set<String> following = new HashSet<>();
-			try {
-				st = conn.createStatement();
-				ps = conn.prepareStatement(followingTable);
-				ps.setString(1, usernameID);
-				rs = ps.executeQuery();
-				while(rs.next()) {
-					following.add(rs.getString(3));
-				}
-				
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			
-			return following;
-		}
 		
 	//adds a following to loggedinUser and follower for viewedUser
 	public void addtoFollowing(String loggedinUser, String viewedUser) {
@@ -253,27 +270,6 @@ public class RecipediaJDBC {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-		
-	//print the following set on profile page
-	public Set<String> profileFollowingSet(String name) {
-		int userID = getUserIDByUsername(name);
-		String usernameID = Integer.toString(userID);
-		Set<String> following = new HashSet<>();
-		try {
-			st = conn.createStatement();
-			ps = conn.prepareStatement(followingTable);
-			ps.setString(1, usernameID);
-			rs = ps.executeQuery();
-			while(rs.next()) {
-				following.add(rs.getString(3));
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return following;
 	}
     
     public Set<String> nameResult(String entry) {
@@ -307,6 +303,66 @@ public class RecipediaJDBC {
 		}
 		
 		return results;
+	}
+	
+	// print the following set on profile page
+	public Set<String> profileFollowingSet(String name) {
+		int IDnum = getUserIDByUsername(name);
+		Set<String> following = new HashSet<>();
+		try {
+			st = conn.createStatement();
+			ps = conn.prepareStatement(followingTable);
+			ps.setInt(1, IDnum);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				following.add(rs.getString(3));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return following;
+	}
+
+	//print following (TEST-- NOT THIS ONE)
+	public Set<String> followingSet() {
+			String temp = userToCheck;
+			int check = getUserIDByUsername(temp);
+			String usernameID = Integer.toString(check);
+			Set<String> following = new HashSet<>();
+			try {
+				st = conn.createStatement();
+				ps = conn.prepareStatement(followingTable);
+				ps.setString(1, usernameID);
+				rs = ps.executeQuery();
+				while(rs.next()) {
+					following.add(rs.getString(3));
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			return following;
+		}
+
+	// print follower
+	public Set<String> followerSet(String name) {
+		Set<String> follower = new HashSet<>();
+		try {
+			st = conn.createStatement();
+			ps = conn.prepareStatement(followerTable);
+			ps.setString(1, name);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				follower.add(rs.getString(2));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return follower;
 	}
 }
 

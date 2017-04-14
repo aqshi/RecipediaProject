@@ -597,34 +597,35 @@ INSERT INTO Instructions(recipeID, instruction)
 
 CREATE TABLE Fans (
 	userID int(11) not null,
-    fanID int(11) not null,
-    FOREIGN KEY (userID) REFERENCES users(userID),
-    FOREIGN KEY (fanID) REFERENCES users(userID)
+    fanName varchar(50) not null,
+    -- fanID int(11) not null,
+    FOREIGN KEY (userID) REFERENCES users(userID)
+    -- FOREIGN KEY (fanID) REFERENCES users(userID)
 );
 
-INSERT INTO Fans(userID, fanID)
-	VALUES(1, 2);
+INSERT INTO Fans(userID, fanName)
+	VALUES(1, 'dimizrahi');
     
-INSERT INTO Fans(userID, fanID)
-	VALUES(1, 3);
+INSERT INTO Fans(userID, fanName)
+	VALUES(1, 'ejung');
     
-INSERT INTO Fans(userID, fanID)
-	VALUES(2, 1);
+INSERT INTO Fans(userID, fanName)
+	VALUES(2, 'janthony');
 
-INSERT INTO Fans(userID, fanID)
-	VALUES(2, 4);
+INSERT INTO Fans(userID, fanName)
+	VALUES(2, 'ashi');
 
-INSERT INTO Fans(userID, fanID)
-	VALUES(3, 2);
+INSERT INTO Fans(userID, fanName)
+	VALUES(3, 'dimizrahi');
     
-INSERT INTO Fans(userID, fanID)
-	VALUES(3, 1);
+INSERT INTO Fans(userID, fanName)
+	VALUES(3, 'janthony');
     
-INSERT INTO Fans(userID, fanID)
-	VALUES(4, 2);
+INSERT INTO Fans(userID, fanName)
+	VALUES(4, 'dimizrahi');
 
-INSERT INTO Fans(userID, fanID)
-	VALUES(4, 3);
+INSERT INTO Fans(userID, fanName)
+	VALUES(4, 'ejung');
     
     
 CREATE TABLE Reviews (
