@@ -34,7 +34,7 @@
 		  </div>
 		</nav>
  <!-- =============================WHOLE PAGE================================== -->
-	    <div class="row ">
+	    <div id="main-div" class="row ">
 	    	<div class="col-md-2"></div>
 	    	<div class="col-md-2">
 		    	<div class="image-container">

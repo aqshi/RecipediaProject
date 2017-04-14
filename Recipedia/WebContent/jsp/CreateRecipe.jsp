@@ -11,12 +11,16 @@
 
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!-- Latest compiled and minified JavaScript -->
+<link href="../js/lib/noty.css" rel="stylesheet"></link>
+<script src="../js/lib/noty.js" type="text/javascript"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script type='text/javascript' src='../js/Recipe.js'></script>
 <script type='text/javascript' src='../js/Ingredient.js'></script>
 <script type='text/javascript' src='../js/Instruction.js'></script>
 <script type='text/javascript' src='../js/CreateRecipe.js'></script>
 <script type='text/javascript' src='../js/Tag.js'></script>
+<script type='text/javascript' src='../js/Notifications.js'></script>
+
 
 <link rel="stylesheet" href="../css/CreateRecipe.css">
 
