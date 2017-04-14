@@ -48,7 +48,7 @@ public class RecipediaJDBC {
 		}
 	}
 	
-	public void addUser(String fullName, String username, String password) {
+	public void addUser(String fullName, String username, String password, String imageURL) {
 		Scanner scanner = new Scanner(fullName);
 		String firstName = scanner.next();
 		String lastName = scanner.next();
@@ -58,7 +58,7 @@ public class RecipediaJDBC {
 			ps.setString(2, password);
 			ps.setString(3, firstName);
 			ps.setString(4, lastName);
-			ps.setString(5, "");
+			ps.setString(5, imageURL);
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
