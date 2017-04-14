@@ -1,6 +1,23 @@
 /**
  * 
  */
+function showNotification(user, action, recipe) {
+		//make a better notification parser
+		var nText = "";
+		if (action === "LikeUploaded") {
+			nText = user + " " + "liked your recipe '" + recipe + "'!";
+		} else if (action === "LikeSaved") {
+			nText = user + " " + "liked your saved recipe '" + recipe + "'!"; 
+		} else if (action ==="Follow") {
+			nText = user + " " + "just became of fan of you!";
+		} else if (action === "Saved") {
+			nText = user + " saved your recipe '" + recipe + "'!";
+		}
+		var newNotification = new Noty({
+			text: nText
+		});
+		newNotification.show();
+}
 $(document).ready(function() {
 	Noty.overrideDefaults({
 	    layout   : 'topRight',
@@ -17,24 +34,8 @@ $(document).ready(function() {
 		text: "Jen is now a fan of you!",
 		
 		});
-	function showNotification(user, action, recipe) {
-		//make a better notification parser
-		var nText = "";
-		if (action === "LikeUploaded") {
-			nText = user + " " + "liked your recipe '" + recipe + "'!";
-		} else if (action === "LikeSaved") {
-			nText = user + " " + "liked your saved recipe '" + recipe + "'!"; 
-		} else if (action ==="Follow") {
-			nText = user + " " + "just became of fan of you!";
-		} else if (action === "Saved") {
-			nText = user + " saved your recipe '" + recipe + "'!";
-		}
-		var newNotification = new Noty({
-			text: nText
-		});
-		newNotification.show();
-	}
-	showNotification("Daniel", "Saved", "Mac and cheese");
+	
+	
 //	n.show();
 //	n1.show();
 });

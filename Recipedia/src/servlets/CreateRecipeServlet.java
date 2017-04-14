@@ -45,7 +45,6 @@ public class CreateRecipeServlet extends HttpServlet {
         if(br != null){
             json = br.readLine();
         }
-        System.out.println(json);
         JsonRecipe jsonRecipe = gson.fromJson(json, JsonRecipe.class);
         ArrayList<JsonIngredient> jsonIngredients = jsonRecipe.getIngredients();
         ArrayList<JsonInstruction> jsonInstructions = jsonRecipe.getInstructions();

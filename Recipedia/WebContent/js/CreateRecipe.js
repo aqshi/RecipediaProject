@@ -168,6 +168,7 @@ $(document).ready(function() {
 		}
 		
 	}, true);
+	showNotification("Daniel", "Saved", "Mac and cheese");
 	document.getElementById("submit-tag").addEventListener("click", function(event) {
 		event.preventDefault();
 		$("#tag-form").removeClass("has-feedback");
