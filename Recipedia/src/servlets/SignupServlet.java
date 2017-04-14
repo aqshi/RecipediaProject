@@ -34,6 +34,7 @@ public class SignupServlet extends HttpServlet {
 		String fullName = request.getParameter("fullname");
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		String imageURL = request.getParameter("image");
 		
 		if(fullName.length() == 0 || username.length() == 0 || password.length() == 0) {
 			response.setContentType("text/plain");
@@ -49,7 +50,7 @@ public class SignupServlet extends HttpServlet {
 		}
 
 		else {
-			jdbc.addUser(fullName, username, password);
+			jdbc.addUser(fullName, username, password, imageURL);
 			HttpSession userChosen = request.getSession(true);
 			userChosen.setAttribute("username", username);
 		}
