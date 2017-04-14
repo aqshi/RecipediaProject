@@ -20,6 +20,7 @@ public class RecipediaJDBC {
 	private final static String inputUsername = "SELECT * FROM Users WHERE username=?";
 	private final static String inputPassword = "SELECT * FROM Users WHERE pword=?";
 	private final static String followingTable = "SELECT * FROM Fans WHERE userID=?";
+	private final static String followerTable = "SELECT * FROM Following WHERE followingName=?";
 	private final static String addFollowing = "INSERT INTO Fans(userID, fanName) VALUES(?,?)";
 	private final static String removeFollower = "DELETE FROM Fans WHERE userID=? AND fanName=?";
 	private final static String addRecipe = "INSERT INTO Recipes(title, likes, image) VALUES(?,?,?)";
@@ -98,8 +99,6 @@ public class RecipediaJDBC {
 		
 		return false;
 	}
-	
-
 	
 	public void saveRecipe(int recipeID, int userID){
 		try {
@@ -195,28 +194,6 @@ public class RecipediaJDBC {
 		}
 		return recipeID;
 	}
-	
-	//print following
-	public Set<String> followingSet() {
-			String temp = userToCheck;
-			int check = getUserIDByUsername(temp);
-			String usernameID = Integer.toString(check);
-			Set<String> following = new HashSet<>();
-			try {
-				st = conn.createStatement();
-				ps = conn.prepareStatement(followingTable);
-				ps.setString(1, usernameID);
-				rs = ps.executeQuery();
-				while(rs.next()) {
-					following.add(rs.getString(3));
-				}
-				
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			
-			return following;
-		}
 		
 	//adds a following to loggedinUser and follower for viewedUser
 	public void addtoFollowing(String loggedinUser, String viewedUser) {
@@ -246,27 +223,6 @@ public class RecipediaJDBC {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-		
-	//print the following set on profile page
-	public Set<String> profileFollowingSet(String name) {
-		int userID = getUserIDByUsername(name);
-		String usernameID = Integer.toString(userID);
-		Set<String> following = new HashSet<>();
-		try {
-			st = conn.createStatement();
-			ps = conn.prepareStatement(followingTable);
-			ps.setString(1, usernameID);
-			rs = ps.executeQuery();
-			while(rs.next()) {
-				following.add(rs.getString(3));
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return following;
 	}
     
     public Set<String> nameResult(String entry) {
@@ -300,6 +256,66 @@ public class RecipediaJDBC {
 		}
 		
 		return results;
+	}
+	
+	// print the following set on profile page
+	public Set<String> profileFollowingSet(String name) {
+		int IDnum = getUserIDByUsername(name);
+		Set<String> following = new HashSet<>();
+		try {
+			st = conn.createStatement();
+			ps = conn.prepareStatement(followingTable);
+			ps.setInt(1, IDnum);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				following.add(rs.getString(3));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return following;
+	}
+
+	//print following (TEST-- NOT THIS ONE)
+	public Set<String> followingSet() {
+			String temp = userToCheck;
+			int check = getUserIDByUsername(temp);
+			String usernameID = Integer.toString(check);
+			Set<String> following = new HashSet<>();
+			try {
+				st = conn.createStatement();
+				ps = conn.prepareStatement(followingTable);
+				ps.setString(1, usernameID);
+				rs = ps.executeQuery();
+				while(rs.next()) {
+					following.add(rs.getString(3));
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			return following;
+		}
+
+	// print follower
+	public Set<String> followerSet(String name) {
+		Set<String> follower = new HashSet<>();
+		try {
+			st = conn.createStatement();
+			ps = conn.prepareStatement(followerTable);
+			ps.setString(1, name);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				follower.add(rs.getString(2));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return follower;
 	}
 }
 
