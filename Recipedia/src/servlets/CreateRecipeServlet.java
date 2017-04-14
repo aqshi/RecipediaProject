@@ -70,7 +70,7 @@ public class CreateRecipeServlet extends HttpServlet {
         //Need to grab current user, pass in the data from the json java object to the a real recipe
         //add that recipe to the user, and them save this to the database
         sr.setStatus("Success");
-        sr.setData("../RecipePage");
+        sr.setData("viewRecipes.jsp");
         String returnJson = gson.toJson(sr);
 		out.write(returnJson);
 	}
