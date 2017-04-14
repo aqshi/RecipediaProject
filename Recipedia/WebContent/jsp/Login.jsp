@@ -48,15 +48,15 @@
 		<nav class="navbar navbar-inverse">
 		  <div class="container-fluid">
 		    <div class="navbar-header">
-		      <a class="navbar-brand" href="#">Recipedia</a>
+		      <img id='recipedia-logo' alt='recipedia-logo' src='../images/Recipedia_logo.png'>
 		    </div>
 		      
 		      <%-- <form action="${pageContext.request.contextPath}/LoginServlet" class="navbar-form navbar-left" role="search"> --%>
-		      <form name="loginform" style="text-align: left; padding: 8px 0px 0px 90px;" onsubmit="return validate()">
-		      	<span style = "color: white">Username</span>
-		      	 <input type="text" name="username" value="username"/>
-		      	<span style= "color: white"> Password</span>
-		      	 <input type="text" name ="password" value="password"/>
+		      <form name="loginform" id = "login-form"  onsubmit="return validate()">
+		      	<span id="text-box">Username</span>
+		      	 <input id = "fillers" type="text" name="username" value="username"/>
+		      	<span id = "text-box"> Password</span>
+		      	 <input id="fillers" type="text" name ="password" value="password"/>
 		      	 <input type="submit"  value="Login" name="login" class="btn btn-default"/>
 		      	 <div id="result"></div>
 		      </form>
@@ -70,8 +70,8 @@
 			</div>
 			<div class="col-md-6">		<!--  sign up -->
 				
-				<h1>Sign Up</h1>
-					<form name="signupform" style="text-align: left; padding: 8px 0px 0px 90px;" onsubmit="return signup()">
+				<h1 id="header" >Sign Up</h1>
+					<form name="signupform" id="signup-form" onsubmit="return signup()">
 						<div class="form-group">
 							<label>Full name</label>
 							<input type="text" name="fullname" class="form-control">
@@ -86,7 +86,7 @@
 				    		<label> Password</label>
 					      	<input type="password" name="password" class="form-control"/>
 				    	</div>	
-					      	 <input type="submit" value="signup" class="btn btn-default"/>
+					      	 <input type="submit" value="Sign Up" class="btn btn-default"/>
 					      	 <div id="result_1"></div>	
 		      </form>
 			</div>

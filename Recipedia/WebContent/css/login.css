@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 
 .navbar{
-	background-color: #ff8a5b;
+	background-color: white;
 	border-color: #ff8a5b;
 }
 
@@ -10,4 +10,36 @@
 	width:  100%;
 	font-family: sans-serif;
 	background-color: #f7c59f;
+}
+
+#recipedia-logo {
+	height: 40px;
+	width: 90px;
+	margin-left: -5%;
+	margin-top: 10%;
+}
+
+#login-form{
+	text-align: left; 
+	padding: 8px 0px 0px 90px;
+}
+
+#text-box{
+	color: black;
+	margin-left: 10px;
+}
+
+#fillers{
+	color: grey;	
+}
+
+#signup-form{
+	text-align: left; 
+	padding: 8px 0px 0px 90px;
+}
+
+#header{
+	margin-left: 20px;
+	font-family: sans-serif;
+	
 }
