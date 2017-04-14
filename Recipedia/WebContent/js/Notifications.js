@@ -19,13 +19,22 @@ $(document).ready(function() {
 		});
 	function showNotification(user, action, recipe) {
 		//make a better notification parser
-		var nText = user + " " + action + " " + recipe;
+		var nText = "";
+		if (action === "LikeUploaded") {
+			nText = user + " " + "liked your recipe '" + recipe + "'!";
+		} else if (action === "LikeSaved") {
+			nText = user + " " + "liked your saved recipe '" + recipe + "'!"; 
+		} else if (action ==="Follow") {
+			nText = user + " " + "just became of fan of you!";
+		} else if (action === "Saved") {
+			nText = user + " saved your recipe '" + recipe + "'!";
+		}
 		var newNotification = new Noty({
 			text: nText
 		});
 		newNotification.show();
 	}
-	
-	n.show();
-	n1.show();
+	showNotification("Daniel", "Saved", "Mac and cheese");
+//	n.show();
+//	n1.show();
 });

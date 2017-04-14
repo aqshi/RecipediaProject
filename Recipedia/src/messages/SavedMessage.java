@@ -5,8 +5,9 @@ public class SavedMessage extends Message{
 	private String userName;
 	private String recipe;
 	public SavedMessage(String userName, String recipe) {
-		this.action = "LikeUploaded";
+		this.action = "Saved";
 		this.userName = userName;
+		this.recipe = recipe;
 	}
 	
 }
