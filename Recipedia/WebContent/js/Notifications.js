@@ -34,7 +34,7 @@ $(document).ready(function() {
 //		text: "Jen is now a fan of you!",
 //		
 //		});
-	showNotification("Daniel", "Saved", "Mac and cheese");
+//	showNotification("Daniel", "Saved", "Mac and cheese");
 	
 //	n.show();
 //	n1.show();
