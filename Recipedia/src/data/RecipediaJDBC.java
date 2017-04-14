@@ -113,14 +113,15 @@ public class RecipediaJDBC {
 		}
 	}
 	
-	public void uploadRecipe(String recipeName){
-		
-		int recipeID = 0;
+	public void addRecipeToUser(int recipeID, int userID) {
+		try {
+			
+		}
 		
 	}
 	
 	//adds a recipe into the database (INCOMPLETE)
-	public void addRecipe(Recipe recipe) {
+	public int addRecipe(Recipe recipe) {
 		try {
 			ps = conn.prepareStatement(addRecipe, Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, recipe.getName());
@@ -162,13 +163,15 @@ public class RecipediaJDBC {
 					}
 					
 				}
+				return recipeKey;
 				
 			}
 			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}	
+		}
+		return -1;
 	}
 	public int getUserIDByUsername(String username){
 		ResultSet rs = null;

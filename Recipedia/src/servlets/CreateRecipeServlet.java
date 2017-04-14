@@ -69,9 +69,10 @@ public class CreateRecipeServlet extends HttpServlet {
             }
             Recipe recipe = new Recipe(ingredients, instructions, tags, jsonRecipe.getName(), jsonRecipe.getImageURL());
             RecipediaJDBC rjdbc = new RecipediaJDBC();
-            rjdbc.addRecipe(recipe);
-            //Need to grab current user, pass in the data from the json java object to the a real recipe
-            //add that recipe to the user, and them save this to the database
+            int recipeKey = rjdbc.addRecipe(recipe);
+            int userID = rjdbc.getUserIDByUsername(userName);
+            rjdbc.addRecipeToUser(recipeKey, userID);
+         
             
             System.out.println(userName);
             sr.setStatus("Success");
