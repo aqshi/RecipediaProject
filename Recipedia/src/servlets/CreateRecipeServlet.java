@@ -71,7 +71,7 @@ public class CreateRecipeServlet extends HttpServlet {
             RecipediaJDBC rjdbc = new RecipediaJDBC();
             int recipeKey = rjdbc.addRecipe(recipe);
             int userID = rjdbc.getUserIDByUsername(userName);
-            rjdbc.saveRecipe(recipeKey, userID);
+            rjdbc.addRecipeToUser(recipeKey, userID);
          
             
             System.out.println(userName);
