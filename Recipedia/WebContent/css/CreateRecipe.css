@@ -2,6 +2,10 @@
 NAV BAR
 */
 
+#title{
+	font-family:  "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
+}
+
 .container-fluid{
 	background-color: white;
 	border-color: transparent;
@@ -58,7 +62,7 @@ body{
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
-	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-family:  "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
     font-size: 14px;
 }
 

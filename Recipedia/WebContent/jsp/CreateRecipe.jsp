@@ -39,7 +39,7 @@
 		    <ul class="nav navbar-nav">
 		      <li><a href="${pageContext.request.contextPath}/jsp/feed.jsp">Feed</a></li>
 		      <li><a href="${pageContext.request.contextPath}/jsp/profile.jsp">View Profile</a></li>
-		      <li class="active" ><a id="create-recipes-tab" href="${pageContext.request.contextPath}/jsp/CreateRecipe.jsp">Create Recipes</a></li>
+		      <li class="active" ><a id="create-recipes-tab" href="${pageContext.request.contextPath}/jsp/CreateRecipe.jsp">Create Recipe</a></li>
 		    </ul>
 		    <form class="navbar-form navbar-left">
 		      <div class="form-group">
@@ -52,7 +52,7 @@
 		  </div>
 		</nav>
 	<div class="container" id="main-container">
-		<h2>Create a recipe</h2>
+		<h2 id="title">Create a recipe</h2>
 			<p> Step 1: Add ingredients<p>
 			<form class="form-inline">
 				<div class="form-group " id="ingredient-name-form">
