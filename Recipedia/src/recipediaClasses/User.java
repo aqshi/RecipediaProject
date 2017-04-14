@@ -11,7 +11,7 @@ public class User {
 	private String image;
 	private Vector<Recipe> savedRecipes;
 	private Vector<Recipe> uploadedRecipes;
-	private Vector<Recipe> myFans;
+	private Vector<String> myFans;
 	
 	public User(String username){
 		this.username = username;
@@ -104,10 +104,10 @@ public class User {
 	public void removeFan(String fan){
 		myFans.remove((String)fan);
 	}
-	
-	public Vector<String> getFansOf(String username){
-		//have to have a map from user to its fans but don't think this is the right place for it
-	}
+//	
+//	public Vector<String> getFansOf(String username){
+//		//have to have a map from user to its fans but don't think this is the right place for it
+//	}
 	
 }
 
