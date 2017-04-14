@@ -72,7 +72,7 @@ public class CreateRecipeServlet extends HttpServlet {
             int recipeKey = rjdbc.addRecipe(recipe);
             int userID = rjdbc.getUserIDByUsername(userName);
             rjdbc.saveRecipe(recipeKey, userID);
-         
+            
             
             System.out.println(userName);
             sr.setStatus("Success");

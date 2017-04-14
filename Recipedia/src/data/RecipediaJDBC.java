@@ -24,13 +24,17 @@ public class RecipediaJDBC {
 	private final static String addFollowing = "INSERT INTO Fans(userID, fanName) VALUES(?,?)";
 	private final static String removeFollower = "DELETE FROM Fans WHERE userID=? AND fanName=?";
 	private final static String addRecipe = "INSERT INTO Recipes(title, likes, image) VALUES(?,?,?)";
-    private final static String resultTable = "SELECT * FROM Recipes WHERE recipeID=Recipes";
-	private final static String tresultTable = "SELECT * FROM Tags WHERE tagID=Tags";
+    private final static String resultTable = "SELECT * FROM Recipes WHERE recipeID=?";
+	private final static String tresultTable = "SELECT * FROM Tags WHERE tagID=?";
 	private final static String addIngredient = "INSERT INTO Ingredients(recipeID, quantity, units, ingredient) VALUES(?,?,?,?)";
 	private final static String addInstruction = "INSERT INTO Instructions(recipeID, instruction) VALUES(?,?)";
 	private final static String addTag = "INSERT INTO Tags(tag) VALUES(?)";
 	private final static String addTagConnection = "INSERT INTO TagToRecipe(tagID, recipeID) VALUES(?,?)";
 	private final static String addUploadedRecipe = "INSERT INTO SavedRecipes(userID, recipeID) VALUES (?,?)";
+	private final static String getRecipe = "SELECT * FROM RECIPES WHERE recipeID=?";
+	private final static String getIngredients = "SELECT * FROM INGREDIENTS WHERE recipeID=?";
+	private final static String getInstructions = "SELECT * FROM INSTRUCTIONS WHERE recipeID=?";
+	private final static String getTags = "SELECT * FROM TagToRecipe WHERE recipeID=?";
 	public RecipediaJDBC() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -99,7 +103,50 @@ public class RecipediaJDBC {
 		
 		return false;
 	}
-	
+	public Recipe getRecipe(int recipeID) {
+		try {
+			ps = conn.prepareStatement(getRecipe);
+			ps.setInt(1, recipeID);
+			rs = ps.executeQuery();
+			rs.next();
+			String title = rs.getString(2);
+			int likes = rs.getInt(3);
+			String image = rs.getString(4);
+			ps = conn.prepareStatement(getIngredients);
+			ps.setInt(1,  recipeID);
+			rs = ps.executeQuery();
+			Vector<Ingredient> ingredients = new Vector<Ingredient>();
+			while(rs.next()) {
+				int quantity = rs.getInt(2);
+				String units = rs.getString(3);
+				String name = rs.getString(4);
+				Ingredient ingredient = new Ingredient(name, units, quantity);
+				ingredients.add(ingredient);
+			}
+			Vector<String> instructions = new Vector<String>();
+			ps = conn.prepareStatement(getInstructions);
+			ps.setInt(1, recipeID);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				String instruction = rs.getString(2);
+				instructions.add(instruction);
+			}
+			Vector<String> tags = new Vector<String>();
+			ps = conn.prepareStatement(getTags);
+			ps.setInt(2, recipeID);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				String tag = rs.getString(1);
+				tags.add(tag);
+			}
+			Recipe recipe = new Recipe(ingredients, instructions, tags, title, image);
+			recipe.setLikes(likes);
+			return recipe;
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	public void saveRecipe(int recipeID, int userID){
 		try {
 			ps = conn.prepareStatement(addUploadedRecipe);
