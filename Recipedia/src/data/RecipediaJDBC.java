@@ -501,10 +501,21 @@ public class RecipediaJDBC {
 	public Vector<Event> getUserEvents(String username) {
 		try {
 			ps = conn.prepareStatement(getUserEvents);
+			int userID = this.getUserIDByUsername(username);
+			ps.setInt(1, userID);
+			rs = ps.executeQuery();
+			Vector<Event> events = new Vector<Event>();
+			while(rs.next()) {
+				Event event = getEvent(rs.getInt(1));
+				events.add(event);
+			}
+			return events;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
+	
+	
 }
 
