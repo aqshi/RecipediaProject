@@ -3,6 +3,7 @@ package data;
 import java.sql.*;
 import java.util.*;
 
+import recipediaClasses.Event;
 import recipediaClasses.Ingredient;
 import recipediaClasses.Recipe;
 import recipediaClasses.User;
@@ -41,7 +42,9 @@ public class RecipediaJDBC {
 	private final static String getUploadedRecipes = "SELECT * FROM UPLOADEDRECIPES WHERE userID=?";
 	private final static String getUser = "SELECT * FROM USERS WHERE username=?";
 	private final static String addEvent = "INSERT INTO ActionEvents(userID, actionString, recipeID, eventTimestamp) VALUES (?,?,?,?)";
-
+	private final static String getEvent = "SELECT * FROM ActionEvents WHERE eventID=?";
+	private final static String getUsernameByID = "SELECT * FROM USERS WHERE userID=?";
+	private final static String getUserEvents = "SELECT * FROM ActionEvents WHERE userID=?";
 	public RecipediaJDBC() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -310,6 +313,19 @@ public class RecipediaJDBC {
 		}
 		return userID;
 	}
+	public String getUsernameByUserID(int userID) {
+		try {
+			ps = conn.prepareStatement(getUsernameByID);
+			ps.setInt(1, userID);
+			rs = ps.executeQuery();
+			rs.next();
+			String username = rs.getString(1);
+			return username;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 
 	public int getRecipeIDByRecipeName(String recipeName){
@@ -463,6 +479,32 @@ public class RecipediaJDBC {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	public Event getEvent(int eventID) {
+		try {
+			ps = conn.prepareStatement(getEvent);
+			ps.setInt(1,  eventID);
+			rs = ps.executeQuery();
+			rs.next();
+			Event event = new Event();
+			event.setUsernameDidAction(this.getUsernameByUserID(rs.getInt(2)));
+			event.setAction(rs.getString(3));
+			event.setRecipeID(rs.getInt(4));
+			event.setTimestamp(rs.getTimestamp(5));
+			return event;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public Vector<Event> getUserEvents(String username) {
+		try {
+			ps = conn.prepareStatement(getUserEvents);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }
 
