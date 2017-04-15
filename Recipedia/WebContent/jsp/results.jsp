@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.* "%>
+    <%@ page import= "java.util.*, data.*, recipediaClasses.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -16,8 +17,17 @@
 		<script type='text/javascript' src='../js/Notifications.js'></script>
 	</head>
 	<%
+		RecipediaJDBC jdbc = new RecipediaJDBC();
+		
 		String search_result=request.getParameter("searchInput");
-		System.out.println(search_result);
+		//System.out.println(search_result);
+		Set<Recipe> results = jdbc.nameResult(search_result);
+		Iterator<Recipe> it = results.iterator();
+		while(it.hasNext())
+		{
+			Recipe re = it.next();
+			System.out.println(re.getName());
+		}
 	%>
 	<body>
 <!-- ===========================NAV BAR============================================ -->
