@@ -110,6 +110,7 @@
 				<%
 					for(Recipe s : user.getUploadedRecipes()) {
 						String recipeImage = s.getImageURL();
+						System.out.println(s.getName());
 					
 				%>
 				<!-- <img style ="width: 150px; height:150px; margin:20px 40px 20px 30px"src="../pasta.jpeg"/>
