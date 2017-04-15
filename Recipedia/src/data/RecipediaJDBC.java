@@ -51,7 +51,7 @@ public class RecipediaJDBC {
 			Class.forName("com.mysql.jdbc.Driver");
 			
 			//change this according to your inputs
-			conn = DriverManager.getConnection("jdbc:mysql://localhost/recipedia?user=root&password=790536e&useSSL=false");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost/recipedia?user=root&password=Xnd0725&useSSL=false");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -372,6 +372,7 @@ public class RecipediaJDBC {
         Set<Recipe> results = new HashSet<Recipe>();
         try {
 			ps = conn.prepareStatement(resultTable);
+			ps.setString(1, entry);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
 				results.add(this.getRecipe(rs.getInt(1)));
@@ -390,7 +391,7 @@ public class RecipediaJDBC {
 			ps = conn.prepareStatement(tresultTable);
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				if(rs.getString(1).equalsIgnoreCase(entry)) results.add(rs.getString(1));
+				//if(rs.getString(1).equalsIgnoreCase(entry)) results.add(rs.getString(1));
 			}
 			
 		} catch (SQLException e) {
