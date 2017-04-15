@@ -23,6 +23,8 @@ public class RecipediaJDBC2 {
 	private final static String removeFollower = "DELETE FROM Fans WHERE userID=? AND fanName=?";
 	private final static String addRecipe = "INSERT INTO Recipes(title, tagID, likes) VALUES(?,?,?)";
 	private final static String getUsernameFromID = "SELECT * FROM Users WHERE userID=?"; //COPY AND PASTE
+	private final static String followerTable = "SELECT * FROM Following WHERE followingName=?";
+
 
 	
 	public RecipediaJDBC2() {
@@ -231,26 +233,40 @@ public class RecipediaJDBC2 {
 		return following;
 	}
 
-	//get the username w/ the ID (COPY AND PASTE)
-	public String getUsernameByID(int idNum) {
+	//follower set
+	public Set<String> followerSet(String name) {
+		Set<String> follower = new HashSet<>();
 		try {
 			st = conn.createStatement();
-			ps = conn.prepareStatement(getUsernameFromID);
-			ps.setInt(1, idNum);
+			ps = conn.prepareStatement(followerTable);
+			ps.setString(1, name);
 			rs = ps.executeQuery();
-			while(rs.next()) {
-				return rs.getString(2);
+			while (rs.next()) {
+				follower.add(rs.getString(2));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return follower;
+	}
+	
+	//get profile information
+	public String getProfileInfo(String name, int num) {
+		try {
+			st = conn.createStatement();
+			ps = conn.prepareStatement(inputUsername);
+			ps.setString(1, name);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				if(num == 1) { return rs.getString(6);}
+				else if(num == 2) { return rs.getString(4) + " " + rs.getString(5);}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		return "";
-	}
 
-	//we have to get the username first somehow
-	public User getUserObject(String username) {
-		User user = new User(username);
-		return user;
+		return "";
 	}
 }
