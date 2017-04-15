@@ -51,7 +51,7 @@ public class RecipediaJDBC {
 			Class.forName("com.mysql.jdbc.Driver");
 			
 			//change this according to your inputs
-			conn = DriverManager.getConnection("jdbc:mysql://localhost/recipedia?user=root&password=iwtaekcwne&useSSL=false");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost/recipedia?user=root&password=790536e&useSSL=false");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -245,7 +245,6 @@ public class RecipediaJDBC {
 		return null;
 		
 	}
-	
 	public int addRecipe(Recipe recipe) {
 		try {
 			ps = conn.prepareStatement(addRecipe, Statement.RETURN_GENERATED_KEYS);
@@ -344,11 +343,10 @@ public class RecipediaJDBC {
 	//adds a following to loggedinUser and follower for viewedUser
 	public void addtoFollowing(String loggedinUser, String viewedUser) {
 		int userID = getUserIDByUsername(loggedinUser);
-		String usernameID = Integer.toString(userID);
 		try {
 			st = conn.createStatement();
 			ps = conn.prepareStatement(addFollowing);
-			ps.setString(1, usernameID);
+			ps.setInt(1, userID);
 			ps.setString(2, viewedUser);
 			ps.executeUpdate();
 		} catch (SQLException e) {
@@ -359,11 +357,10 @@ public class RecipediaJDBC {
 	//remove a following to loggedinUser and viewedUser loses a follower
 	public void removeFromFollowing(String loggedinUser, String viewedUser) {
 		int userID = getUserIDByUsername(loggedinUser);
-		String usernameID = Integer.toString(userID);
 		try {
 			st = conn.createStatement();
 			ps = conn.prepareStatement(removeFollower);
-			ps.setString(1, usernameID);
+			ps.setInt(1, userID);
 			ps.setString(2, viewedUser);
 			ps.executeUpdate();
 		} catch (SQLException e) {
