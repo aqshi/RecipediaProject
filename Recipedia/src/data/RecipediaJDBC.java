@@ -424,14 +424,17 @@ public class RecipediaJDBC {
 			ps = conn.prepareStatement(tresultTable);
 			ps.setString(1, entry);
 			ResultSet rs = ps.executeQuery();
-			rs.next();
-			int tagID = rs.getInt(1);
-			ps = conn.prepareStatement(getTagWithID);
-			ps.setInt(1, tagID);
-			ResultSet rs2 = ps.executeQuery();
-			while(rs2.next()) {
-				results.add(this.getRecipe(rs2.getInt(2)));
+
+			if (rs.next()) {
+				int tagID = rs.getInt(1);
+				ps = conn.prepareStatement(getTagWithID);
+				ps.setInt(1, tagID);
+				ResultSet rs2 = ps.executeQuery();
+				while(rs2.next()) {
+					results.add(this.getRecipe(rs2.getInt(2)));
+				}
 			}
+			
 			
 			
 		} catch (SQLException e) {
