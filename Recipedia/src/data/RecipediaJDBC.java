@@ -14,7 +14,7 @@ public class RecipediaJDBC {
 	private static Connection conn = null;
 	private static Statement st = null;
 	private static PreparedStatement ps = null;
-	private static ResultSet rs = null;
+	//private static ResultSet rs = null;
 	private String userToCheck = null;
 	
 	//Strings for Database
@@ -89,7 +89,7 @@ public class RecipediaJDBC {
 				st = conn.createStatement();
 				ps = conn.prepareStatement(inputUsername);
 				ps.setString(1, name);
-				rs = ps.executeQuery();
+				ResultSet rs = ps.executeQuery();
 				while(rs.next()) {
 					userToCheck = name;
 					return true;
@@ -107,7 +107,7 @@ public class RecipediaJDBC {
 			st = conn.createStatement();
 			ps = conn.prepareStatement(inputPassword);
 			ps.setString(1, password);
-			rs = ps.executeQuery();
+			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {					
 				if(rs.getString(2).equals(userToCheck) && rs.getString(3).equals(password)) {
 					return true;
@@ -123,7 +123,7 @@ public class RecipediaJDBC {
 		try {
 			ps = conn.prepareStatement(getRecipe);
 			ps.setInt(1, recipeID);
-			rs = ps.executeQuery();
+			ResultSet rs = ps.executeQuery();
 			rs.next();
 			String title = rs.getString(2);
 			int likes = rs.getInt(3);
@@ -225,7 +225,7 @@ public class RecipediaJDBC {
 			User user = new User(username);
 			ps = conn.prepareStatement(inputUsername);
 			ps.setString(1, username);
-			rs = ps.executeQuery();
+			ResultSet rs = ps.executeQuery();
 			while(rs.next()){
 				int userID = rs.getInt(1);
 				user.setPassword(rs.getString(3));
@@ -331,7 +331,7 @@ public class RecipediaJDBC {
 		int recipeID = 0;
 		try {
 			st = conn.createStatement();
-			rs = st.executeQuery("SELECT * FROM Recipes WHERE title = '" + recipeName + "';");
+			ResultSet rs = st.executeQuery("SELECT * FROM Recipes WHERE title = '" + recipeName + "';");
 			if (rs.next()){
 				recipeID = Integer.parseInt(rs.getString("recipeID"));
 			}
@@ -376,7 +376,7 @@ public class RecipediaJDBC {
         try {
 			st = conn.createStatement();
 			ps = conn.prepareStatement(resultTable);
-			rs = ps.executeQuery();
+			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
 				if(rs.getString(1).equalsIgnoreCase(entry)) results.add(rs.getString(1));
 			}
@@ -411,7 +411,7 @@ public class RecipediaJDBC {
 		try {
 			ps = conn.prepareStatement(followingTable);
 			ps.setInt(1, IDnum);
-			rs = ps.executeQuery();
+			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				following.add(rs.getString(2));
 			}
@@ -429,7 +429,7 @@ public class RecipediaJDBC {
 			st = conn.createStatement();
 			ps = conn.prepareStatement(getUsernameFromID);
 			ps.setString(1, name);
-			rs = ps.executeQuery();
+			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				return rs.getString(2);
 			}
@@ -448,7 +448,7 @@ public class RecipediaJDBC {
 			st = conn.createStatement();
 			ps = conn.prepareStatement(followerTable);
 			ps.setString(1, name);
-			rs = ps.executeQuery();
+			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				follower.add(rs.getString(1));
 			}
@@ -471,7 +471,7 @@ public class RecipediaJDBC {
 		try {
 			ps = conn.prepareStatement(inputUsername);
 			ps.setString(1, name);
-			rs = ps.executeQuery();
+			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				if(num == 1) { return rs.getString(6);}
 				else if(num == 2) { return rs.getString(4) + " " + rs.getString(5);}
@@ -520,7 +520,7 @@ public class RecipediaJDBC {
 			ps = conn.prepareStatement(getUserEvents);
 			int userID = this.getUserIDByUsername(username);
 			ps.setInt(1, userID);
-			rs = ps.executeQuery();
+			ResultSet rs = ps.executeQuery();
 			Vector<Event> events = new Vector<Event>();
 			while(rs.next()) {
 				Event event = getEvent(rs.getInt(1));
