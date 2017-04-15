@@ -5,7 +5,7 @@ public class Event {
 	private String usernameDidAction;
 	private String usernameGotAction;
 	private String recipeName;
-	
+	private int recipeID;
 	public Event() {
 		
 	}
@@ -40,5 +40,13 @@ public class Event {
 	
 	public void setRecipeName(String recipeName) {
 		this.recipeName = recipeName;
+	}
+
+	public int getRecipeID() {
+		return recipeID;
+	}
+
+	public void setRecipeID(int recipeID) {
+		this.recipeID = recipeID;
 	}
 }
