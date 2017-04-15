@@ -5,6 +5,7 @@ import java.util.*;
 
 import recipediaClasses.Ingredient;
 import recipediaClasses.Recipe;
+import recipediaClasses.User;
 
 public class RecipediaJDBC {
 	
@@ -206,6 +207,11 @@ public class RecipediaJDBC {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	public User getUserByUsername(String username) {
+		
+		return null;
+		
 	}
 	
 
