@@ -37,12 +37,11 @@
 		    </form>
 		    <div class="logout">
 	          	<a href="${pageContext.request.contextPath}/jsp/Login.jsp"><img id="logout-button" src="../images/logout.jpg"></a>
-	          </div>
+	        </div>
 		  </div>
 		</nav>
  <!-- =============================WHOLE PAGE================================== -->
 	    <div id="main-div" class="row ">
-	    
 	    	<%
 	    		//play around with counter to control how many elements appear
 	    		int counter = 9;

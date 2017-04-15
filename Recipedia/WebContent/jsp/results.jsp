@@ -7,6 +7,8 @@
 		<title>Search Results</title>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/results.css">
+				<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/navbar.css">
+		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<link href="../js/lib/noty.css" rel="stylesheet"></link>
@@ -38,7 +40,7 @@
 		</nav>
  <!-- =============================WHOLE PAGE================================== -->
  		<div id ="search-div" style="background-color:#F7C59F">
- 			<h2 align="center">Search Results</h2>
+ 			<h2 align="center" id="header" >Search Results</h2>
  		</div>
 	    <div id="main-div" class="row ">
 	    
