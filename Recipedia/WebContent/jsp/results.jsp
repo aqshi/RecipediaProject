@@ -54,56 +54,46 @@
 	    			if(i%3==0)
 	    			{
 	    				if(i!=0) out.println("<div class=\"row\">");
-	    				out.println("<div class=\"col-md-2\"></div>");
-	    				out.println("<div class=\"col-md-2\">");
-	    				out.println("<div class=\"image-container\">");
-	    				//Images
-	    				%>
-		    			<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp">
-		    			<%
-		    	
-		    			out.println(/*"<a href=\"${pageContext.request.contextPath}/jsp/viewRecipes.jsp\">*/"<img src=\"../pasta.jpeg\"></a>");
-		    			
-	    				//out.println("<a href=\"${pageContext.request.contextPath}/jsp/viewRecipes.jsp\"><img src=\"../pasta.jpeg\"></a>");
-	    				out.println("<div class=\"dropdown\">");
-	    				out.println("<button class=\"btn btn-primary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">");
-	    				out.println("<span class=\"caret\"></span></button>");
-	    				out.println("<ul class=\"dropdown-menu\">");
-	    				out.println("<li><a href=\"#\">Save</a></li>");
-	    				out.println("<li><a href=\"#\">Like</a></li>");
-	    				out.println("</ul>");
-	    				out.println("</div>");
-	    				out.println("</div>");
-	    				out.println("</div>");	
+	    	%>
+	    				<div class="col-md-2"></div>
+	    					<div class="col-md-2">
+	    						<div class="image-container">
+		    						<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp"><img src="../pasta.jpeg"></a>
+	    							<div class="dropdown">
+	    								<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+	    								<span class="caret"></span></button>
+	    								<ul class="dropdown-menu">
+	    									<li><a href="#">Save</a></li>
+	    									<li><a href="#">Like</a></li>
+	    								</ul>
+	    							</div>
+	    						</div>
+	    					</div>
+	    			<%
 	    			}
 	    			else
 	    			{
-		    			out.println("<div class=\"col-sm-1\"></div>");
-		    			out.println("<div class=\"col-md-2\">");
-		    			out.println("<div class=\"image-container\">");
-		    			//Images
-		    			%>
-		    			<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp">
+	    			%>
+		    			<div class="col-sm-1"></div>
+		    				<div class="col-md-2">
+		    					<div class="image-container">
+		    						<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp"><img src="../pasta.jpeg"></a>
+		    						<div class="dropdown">
+		    							<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+		    							<span class="caret"></span></button>
+		    							<ul class="dropdown-menu">
+		    								<li><a href="#">Save</a></li>
+		    								<li><a href="#">Like</a></li>
+		    							</ul>
+		    						</div>
+		    					</div>
+		    				</div>
 		    			<%
-		    	
-		    			out.println(/*"<a href=\"${pageContext.request.contextPath}/jsp/viewRecipes.jsp\">*/"<img src=\"../pasta.jpeg\"></a>");
-		    			
-		    			//out.println("<a href=\"${pageContext.request.contextPath}/jsp/viewRecipes.jsp\"><img src=\"../pasta.jpeg\"></a>");
-		    			out.println("<div class=\"dropdown\">");
-		    			out.println("<button class=\"btn btn-primary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">");
-		    			out.println("<span class=\"caret\"></span></button>");
-		    			out.println("<ul class=\"dropdown-menu\">");
-		    			out.println("<li><a href=\"#\">Save</a></li>");
-		    			out.println("<li><a href=\"#\">Like</a></li>");
-		    			out.println("</ul>");
-		    			out.println("</div>");
-		    			out.println("</div>");
-		    			out.println("</div>");
-		    			if(i%3==2) out.println("</div>");
+		    				if(i%3==2) out.println("</div>");
 	    			}
 	    		}
 	    	
-	    	%>
+	    				%>
 	   </div>
 	  </div>
 	  	
