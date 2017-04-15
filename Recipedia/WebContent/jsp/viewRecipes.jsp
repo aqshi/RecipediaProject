@@ -7,7 +7,7 @@
 <html>
 <%
 	//String recipeIDString = (String) request.getParameter("recipeID");
-	String recipeIDString = "2";
+	String recipeIDString = "5";
 	int recipeID = Integer.parseInt(recipeIDString);
 	RecipediaJDBC jdbc = new RecipediaJDBC();
 	Recipe recipe = jdbc.getRecipe(recipeID);

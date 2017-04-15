@@ -32,7 +32,7 @@ public class RecipediaJDBC2 {
 			Class.forName("com.mysql.jdbc.Driver");
 			
 			//change this according to your inputs
-			conn = DriverManager.getConnection("jdbc:mysql://localhost/recipedia?user=root&password=iwtaekcwne&useSSL=false");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost/recipedia?user=root&password=Pickoftheweek1!&useSSL=false");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
