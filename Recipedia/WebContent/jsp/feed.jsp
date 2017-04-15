@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -42,138 +42,55 @@
 		</nav>
  <!-- =============================WHOLE PAGE================================== -->
 	    <div id="main-div" class="row ">
-	    	<div class="col-md-2"></div>
-	    	<div class="col-md-2">
-		    	<div class="image-container">
-		  			<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp"><img src="../pasta.jpeg"></a>
-		  			<div class="dropdown">
-					  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-					  <span class="caret"></span></button>
-					  <ul class="dropdown-menu">
-					    <li><a href="#">Save</a></li>
-					    <li><a href="#">Like</a></li>
-					  </ul>
-					</div>
-	  			</div>
-	  		</div>
-	  		<div class="col-sm-1"></div>
-	  		<div class="col-md-2">
-	  		<div class="image-container">
-		  			<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp"><img src="../pasta.jpeg"></a>
-		  			<div class="dropdown">
-					  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-					  <span class="caret"></span></button>
-					  <ul class="dropdown-menu">
-					    <li><a href="#">Save</a></li>
-					    <li><a href="#">Like</a></li>
-					  </ul>
-					</div>
-	  			</div>
-	  		</div>
-	  		<div class="col-sm-1"></div>
-	  		<div class="col-md-2">
-	  			<div class="image-container">
-		  			<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp"><img src="../pasta.jpeg"></a>
-		  			<div class="dropdown">
-					  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-					  <span class="caret"></span></button>
-					  <ul class="dropdown-menu">
-					    <li><a href="#">Save</a></li>
-					    <li><a href="#">Like</a></li>
-					  </ul>
-					</div>
-	  			</div>
-	  		</div>
-	    </div>
-	     <div class="row">
-	    	<div class="col-md-2"></div>
-	    	<div class="col-md-2">
-	  			<div class="image-container">
-		  			<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp"><img src="../pasta.jpeg"></a>
-		  			<div class="dropdown">
-					  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-					  <span class="caret"></span></button>
-					  <ul class="dropdown-menu">
-					    <li><a href="#">Save</a></li>
-					    <li><a href="#">Like</a></li>
-					  </ul>
-					</div>
-	  			</div>
-	  		</div>
-	  		<div class="col-sm-1"></div>
-	  		<div class="col-md-2">
-	  			<div class="image-container">
-		  			<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp"><img src="../pasta.jpeg"></a>
-		  			<div class="dropdown">
-					  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-					  <span class="caret"></span></button>
-					  <ul class="dropdown-menu">
-					    <li><a href="#">Save</a></li>
-					    <li><a href="#">Like</a></li>
-					  </ul>
-					</div>
-	  			</div>
-	  		</div>
-	  		<div class="col-sm-1"></div>
-	  		<div class="col-md-2">
-	  			<div class="image-container">
-		  			<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp"><img src="../pasta.jpeg"></a>
-		  			<div class="dropdown">
-					  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-					  <span class="caret"></span></button>
-					  <ul class="dropdown-menu">
-					    <li><a href="#">Save</a></li>
-					    <li><a href="#">Like</a></li>
-					  </ul>
-					</div>
-	  			</div>
-	  		</div>
-	    </div> 
-	     <div class="row ">
-	     	
-	    	<div class="col-md-2"></div>
-	    	<div class="col-md-2">
-	  			<div class="image-container">
-		  			<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp"><img src="../pasta.jpeg"></a>
-		  			<div class="dropdown">
-					  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-					  <span class="caret"></span></button>
-					  <ul class="dropdown-menu">
-					    <li><a href="#">Save</a></li>
-					    <li><a href="#">Like</a></li>
-					  </ul>
-					</div>
-	  			</div>
-	  		</div>
-	  		<div class="col-sm-1"></div>
-	  		<div class="col-md-2">
-	  			<div class="image-container">
-		  			<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp"><img src="../pasta.jpeg"></a>
-		  			<div class="dropdown">
-					  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-					  <span class="caret"></span></button>
-					  <ul class="dropdown-menu">
-					    <li><a href="#">Save</a></li>
-					    <li><a href="#">Like</a></li>
-					  </ul>
-					</div>
-	  			</div>
-	  		</div>
-	  		<div class="col-sm-1"></div>
-	  		<div class="col-md-2">
-	  			<div class="image-container">
-		  			<a href=""><img src="../pasta.jpeg"></a>
-		  			<div class="dropdown">
-					  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-					  <span class="caret"></span></button>
-					  <ul class="dropdown-menu">
-					    <li><a href="#">Save</a></li>
-					    <li><a href="#">Like</a></li>
-					  </ul>
-					</div>
-	  			</div>
-	  		</div>
-	    </div> 
+	    
+	    	<%
+	    		//play around with counter to control how many elements appear
+	    		int counter = 9;
+	    		Vector<String> images= new Vector<String>();
+	    		
+	    		for(int i=0;i<counter;i++)
+	    		{
+	    			if(i%3==0)
+	    			{
+	    				if(i!=0) out.println("<div class=\"row\">");
+	    				out.println("<div class=\"col-md-2\"></div>");
+	    				out.println("<div class=\"col-md-2\">");
+	    				out.println("<div class=\"image-container\">");
+	    				//Images
+	    				out.println("<a href=\"${pageContext.request.contextPath}/jsp/viewRecipes.jsp\"><img src=\"../pasta.jpeg\"></a>");
+	    				out.println("<div class=\"dropdown\">");
+	    				out.println("<button class=\"btn btn-primary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">");
+	    				out.println("<span class=\"caret\"></span></button>");
+	    				out.println("<ul class=\"dropdown-menu\">");
+	    				out.println("<li><a href=\"#\">Save</a></li>");
+	    				out.println("<li><a href=\"#\">Like</a></li>");
+	    				out.println("</ul>");
+	    				out.println("</div>");
+	    				out.println("</div>");
+	    				out.println("</div>");	
+	    			}
+	    			else
+	    			{
+		    			out.println("<div class=\"col-sm-1\"></div>");
+		    			out.println("<div class=\"col-md-2\">");
+		    			out.println("<div class=\"image-container\">");
+		    			//Images
+		    			out.println("<a href=\"${pageContext.request.contextPath}/jsp/viewRecipes.jsp\"><img src=\"../pasta.jpeg\"></a>");
+		    			out.println("<div class=\"dropdown\">");
+		    			out.println("<button class=\"btn btn-primary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">");
+		    			out.println("<span class=\"caret\"></span></button>");
+		    			out.println("<ul class=\"dropdown-menu\">");
+		    			out.println("<li><a href=\"#\">Save</a></li>");
+		    			out.println("<li><a href=\"#\">Like</a></li>");
+		    			out.println("</ul>");
+		    			out.println("</div>");
+		    			out.println("</div>");
+		    			out.println("</div>");
+		    			if(i%3==2) out.println("</div>");
+	    			}
+	    		}
+	    	
+	    	%>
 	   </div>
 	  </div>
 	  	
