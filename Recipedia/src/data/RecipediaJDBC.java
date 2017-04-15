@@ -40,6 +40,7 @@ public class RecipediaJDBC {
 	private final static String getSavedRecipes = "SELECT * FROM SAVEDRECIPES WHERE userID=?";
 	private final static String getUploadedRecipes = "SELECT * FROM UPLOADEDRECIPES WHERE userID=?";
 	private final static String getUser = "SELECT * FROM USERS WHERE username=?";
+	private final static String addEvent = "INSERT INTO ActionEvents(userID, actionString, recipeID, eventTimestamp) VALUES (?,?,?,?)";
 
 	public RecipediaJDBC() {
 		try {
@@ -448,9 +449,20 @@ public class RecipediaJDBC {
 
 		return follower;
 	}
+
 	public void addEvent(String userName, int recipeID, String action) {
-		int userID = this.getUserIDByUsername(userName);
-		
+		try {
+			Timestamp timeStamp = new java.sql.Timestamp(Calendar.getInstance().getTime().getTime());
+			int userID = this.getUserIDByUsername(userName);
+			ps = conn.prepareStatement(addEvent);
+			ps.setInt(1, userID);
+			ps.setString(2, action);
+			ps.setInt(3,  recipeID);
+			ps.setTimestamp(4, timeStamp);
+			ps.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }
 
