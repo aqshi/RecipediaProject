@@ -499,9 +499,10 @@ public class RecipediaJDBC {
 	}
 	public Event getEvent(int eventID) {
 		try {
+			
 			ps = conn.prepareStatement(getEvent);
 			ps.setInt(1,  eventID);
-			rs = ps.executeQuery();
+			ResultSet rs = ps.executeQuery();
 			rs.next();
 			Event event = new Event();
 			event.setUsernameDidAction(this.getUsernameByUserID(rs.getInt(2)));
