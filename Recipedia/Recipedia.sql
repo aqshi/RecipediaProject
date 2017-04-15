@@ -535,16 +535,16 @@ INSERT INTO Ingredients(recipeID, quantity, units, ingredient)
 	VALUES ( 2,.5  ,'teaspoon','ground black pepper');
 
 INSERT INTO Ingredients(recipeID, quantity, units, ingredient)
-	VALUES ( 3, 1 ,'slice','bread (thick, artisan breads)');
+	VALUES ( 22, 1 ,'slice','bread (thick, artisan breads)');
     
 INSERT INTO Ingredients(recipeID, quantity, units, ingredient)
-	VALUES ( 3,  .5 ,'avocado','(fresh, peeled seeded, and mashed');
+	VALUES ( 22,  .5 ,'avocado','(fresh, peeled seeded, and mashed');
     
 INSERT INTO Ingredients(recipeID, quantity, units, ingredient)
-	VALUES ( 3, 2 ,'slices','heirloom or beefsteak tomato');
+	VALUES ( 22, 2 ,'slices','heirloom or beefsteak tomato');
     
 INSERT INTO Ingredients(recipeID, quantity, units, ingredient)
-	VALUES ( 3, 2 ,'slices','cooked bacon');
+	VALUES ( 22, 2 ,'slices','cooked bacon');
     
 CREATE TABLE Instructions (
 	recipeID int(11) not null,
@@ -590,42 +590,41 @@ INSERT INTO Instructions(recipeID, instruction)
 	VALUES(2, 'Aluminum foil can be used to keep food moist, cook it evenly, and make clean-up easier.');
     
 INSERT INTO Instructions(recipeID, instruction)
-	VALUES (3, 'Toast 1 slice bread, spread with 1/2 ripe, Fresh California Avocado (mashed or sliced) and 2 slices heirloom or beefsteak tomato.');
+	VALUES (22, 'Toast 1 slice bread, spread with 1/2 ripe, Fresh California Avocado (mashed or sliced) and 2 slices heirloom or beefsteak tomato.');
 
 INSERT INTO Instructions(recipeID, instruction)
-	VALUES (3, 'Top with fresh cracked pepper and sea salt to taste.');
+	VALUES (22, 'Top with fresh cracked pepper and sea salt to taste.');
 
 CREATE TABLE Fans (
 	userID int(11) not null,
-    fanName varchar(50) not null,
-    -- fanID int(11) not null,
-    FOREIGN KEY (userID) REFERENCES users(userID)
-    -- FOREIGN KEY (fanID) REFERENCES users(userID)
+    fanID int(11) not null,
+    FOREIGN KEY (userID) REFERENCES users(userID),
+    FOREIGN KEY (fanID) REFERENCES users(userID)
 );
 
-INSERT INTO Fans(userID, fanName)
-	VALUES(1, 'dimizrahi');
+INSERT INTO Fans(userID, fanID)
+	VALUES(1, 2);
     
-INSERT INTO Fans(userID, fanName)
-	VALUES(1, 'ejung');
+INSERT INTO Fans(userID, fanID)
+	VALUES(1, 3);
     
-INSERT INTO Fans(userID, fanName)
-	VALUES(2, 'janthony');
+INSERT INTO Fans(userID, fanID)
+	VALUES(2, 1);
 
-INSERT INTO Fans(userID, fanName)
-	VALUES(2, 'ashi');
+INSERT INTO Fans(userID, fanID)
+	VALUES(2, 4);
 
-INSERT INTO Fans(userID, fanName)
-	VALUES(3, 'dimizrahi');
+INSERT INTO Fans(userID, fanID)
+	VALUES(3, 2);
     
-INSERT INTO Fans(userID, fanName)
-	VALUES(3, 'janthony');
+INSERT INTO Fans(userID, fanID)
+	VALUES(3, 1);
     
-INSERT INTO Fans(userID, fanName)
-	VALUES(4, 'dimizrahi');
+INSERT INTO Fans(userID, fanID)
+	VALUES(4, 2);
 
-INSERT INTO Fans(userID, fanName)
-	VALUES(4, 'ejung');
+INSERT INTO Fans(userID, fanID)
+	VALUES(4, 3);
     
     
 CREATE TABLE Reviews (
@@ -633,3 +632,36 @@ CREATE TABLE Reviews (
     review varchar(5000) not null,
     FOREIGN KEY (recipeID) REFERENCES recipes(recipeID)
 );
+
+CREATE TABLE ActionEvents (
+	eventID int(11) primary key not null auto_increment,
+    userID int(11) not null, 
+    FOREIGN KEY (userID) REFERENCES users(userID),
+    actionString varchar(50),
+    recipeID int(11),
+    FOREIGN KEY (recipeID) REFERENCES recipes(recipeID),
+    eventTimestamp timestamp
+);
+
+
+INSERT INTO ActionEvents(userID, actionString, recipeID, eventTimestamp)
+	VALUES(1, 'Liked', 1, '2008-01-01 00:00:02');
+INSERT INTO ActionEvents(userID, actionString, recipeID, eventTimestamp)
+	VALUES(1, 'Saved', 2, '2008-01-01 00:00:03');
+INSERT INTO ActionEvents(userID, actionString, recipeID, eventTimestamp)
+	VALUES(2, 'Uploaded', 22, '2008-01-01 00:00:04');
+INSERT INTO ActionEvents(userID, actionString, recipeID, eventTimestamp)
+	VALUES(2, 'Liked', 2, '2008-01-01 00:00:05');
+INSERT INTO ActionEvents(userID, actionString, recipeID, eventTimestamp)
+	VALUES(3, 'Liked', 1, '2008-01-01 00:00:06');
+INSERT INTO ActionEvents(userID, actionString, recipeID, eventTimestamp)
+	VALUES(3, 'Saved', 22, '2008-01-01 00:00:07');
+INSERT INTO ActionEvents(userID, actionString, recipeID, eventTimestamp)
+	VALUES(1, 'Liked', 2, '2008-01-01 00:00:08');
+INSERT INTO ActionEvents(userID, actionString, recipeID, eventTimestamp)
+	VALUES(4, 'Uploaded', 1, '2008-01-01 00:00:09');
+INSERT INTO ActionEvents(userID, actionString, recipeID, eventTimestamp)
+	VALUES(4, 'Liked', 2, '2008-01-01 00:00:10');
+INSERT INTO ActionEvents(userID, actionString, recipeID, eventTimestamp)
+	VALUES(4, 'Saved', 22, '2008-01-01 00:00:11');
+

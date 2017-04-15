@@ -40,7 +40,11 @@ public class RecipediaJDBC {
 	private final static String getSavedRecipes = "SELECT * FROM SAVEDRECIPES WHERE userID=?";
 	private final static String getUploadedRecipes = "SELECT * FROM UPLOADEDRECIPES WHERE userID=?";
 	private final static String getUser = "SELECT * FROM USERS WHERE username=?";
+<<<<<<< HEAD
 	private final static String getUsernameFromID = "SELECT * FROM Users WHERE userID=?";
+=======
+	private final static String addEvent = "INSERT INTO ActionEvents(userID, actionString, recipeID, eventTimestamp) VALUES (?,?,?,?)";
+>>>>>>> 8f31d9e1828aafd0be1d6423486d572b05583477
 
 	public RecipediaJDBC() {
 		try {
@@ -54,7 +58,10 @@ public class RecipediaJDBC {
 			e.printStackTrace();
 		}
 	}
-	
+	//liked
+	//saves
+	//uploads
+
 	public void addUser(String fullName, String username, String password, String imageURL) {
 		Scanner scanner = new Scanner(fullName);
 		String firstName = scanner.next();
@@ -220,6 +227,7 @@ public class RecipediaJDBC {
 			ps = conn.prepareStatement(inputUsername);
 			ps.setString(1, username);
 			rs = ps.executeQuery();
+<<<<<<< HEAD
 			while(rs.next()){
 				int userID = rs.getInt(1);
 				user.setPassword(rs.getString(3));
@@ -231,6 +239,19 @@ public class RecipediaJDBC {
 				user.setUploadedRecipes(this.getUploadedRecipes(userID));
 				user.setFans(this.followerSet(username));
 			}
+=======
+			rs.next();
+			int userID = rs.getInt(1);
+			user.setPassword(rs.getString(3));
+			user.setFname(rs.getString(4));
+			user.setLname(rs.getString(5));
+			user.setFullName(user.getFname(), user.getLname());
+			user.setImage(rs.getString(6));
+			user.setSavedRecipes(this.getSavedRecipes(userID));
+			
+			user.setUploadedRecipes(this.getUploadedRecipes(userID));
+			user.setFans(this.profileFollowingSet(username));
+>>>>>>> 8f31d9e1828aafd0be1d6423486d572b05583477
 			return user;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -483,6 +504,21 @@ public class RecipediaJDBC {
 		}
 
 		return "";
+	}
+
+	public void addEvent(String userName, int recipeID, String action) {
+		try {
+			Timestamp timeStamp = new java.sql.Timestamp(Calendar.getInstance().getTime().getTime());
+			int userID = this.getUserIDByUsername(userName);
+			ps = conn.prepareStatement(addEvent);
+			ps.setInt(1, userID);
+			ps.setString(2, action);
+			ps.setInt(3,  recipeID);
+			ps.setTimestamp(4, timeStamp);
+			ps.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }
 
