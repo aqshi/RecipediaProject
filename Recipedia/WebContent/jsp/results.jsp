@@ -15,6 +15,10 @@
 		<script src="../js/lib/noty.js" type="text/javascript"></script>
 		<script type='text/javascript' src='../js/Notifications.js'></script>
 	</head>
+	<%
+		String search_result=request.getParameter("searchInput");
+		System.out.println(search_result);
+	%>
 	<body>
 <!-- ===========================NAV BAR============================================ -->
 	    
