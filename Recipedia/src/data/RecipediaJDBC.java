@@ -282,24 +282,43 @@ public class RecipediaJDBC {
 				PreparedStatement ps2 = conn.prepareStatement(getAllTags);
 				ResultSet rs2 = ps2.executeQuery();
 				Vector<String> addTags = new Vector<String>();
+				Vector<String> linkTags = new Vector<String>();
 				while(rs2.next()) {
 					String tagName = rs2.getString(2);
 					if (!recipe.getTags().contains(tagName)) {
 						addTags.add(tagName);
+					} else {
+						linkTags.add(tagName);
 					}
 				}
+				//have list of tags to add
+				//need to add and link those tags first
 				for (int i = 0; i < addTags.size(); i++) {
 					ps = conn.prepareStatement(addTag, Statement.RETURN_GENERATED_KEYS);
 					ps.setString(1, addTags.get(i));
 					ps.executeUpdate();
-					rs = ps.getGeneratedKeys();
-					if (rs.next()) {
+					ResultSet rs3 = ps.getGeneratedKeys();
+					if (rs3.next()) {
 						ps = conn.prepareStatement(addTagConnection);
-						ps.setInt(1, rs.getInt(1));
+						ps.setInt(1, rs3.getInt(1));
 						ps.setInt(2, recipeKey);
 						ps.executeUpdate();
 					}
 					
+				}
+				//have a list of tags to link
+				//first get the tagid using the tag
+				//then add that to tagtorecipe table
+				for (int i = 0; i < linkTags.size(); i++) {
+					ps = conn.prepareStatement(tresultTable);
+					ps.setString(1, linkTags.get(i));
+					ResultSet rs3 = ps.executeQuery();
+					rs3.next();
+					int tagID = rs3.getInt(1);
+					ps = conn.prepareStatement(addTagConnection);
+					ps.setInt(1, tagID);
+					ps.setInt(2,  recipeKey);
+					ps.executeUpdate();
 				}
 				return recipeKey;
 				
