@@ -393,7 +393,7 @@ public class RecipediaJDBC {
 			ps.setString(1, entry);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
-				//if(rs.getString(1).equalsIgnoreCase(entry)) results.add(rs.getString(1));
+				results.add(this.getRecipe(rs.getInt(1)));
 			}
 			
 		} catch (SQLException e) {
