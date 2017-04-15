@@ -7,7 +7,6 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/profile.css">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/feed.css">
-
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/navbar.css">
 
 	
@@ -47,7 +46,7 @@
 		    <ul class="nav navbar-nav">
 		      <li><a href="${pageContext.request.contextPath}/jsp/feed.jsp">Feed</a></li>
 		      <li  class="active"><a href="${pageContext.request.contextPath}/jsp/profile.jsp">View Profile</a></li>
-		      <li ><a id="create-recipes-tab" href="${pageContext.request.contextPath}/jsp/CreateRecipe.jsp">Create Recipes</a></li>
+		      <li ><a id="create-recipes-tab" href="${pageContext.request.contextPath}/jsp/CreateRecipe.jsp">Create Recipe</a></li>
 		    </ul>
 		    <form class="navbar-form navbar-left">
 		      <div class="form-group">
@@ -66,61 +65,76 @@
 		
 		<!-- =============================WHOLE PAGE================================== -->
 		<div id="main-div" class = "row">
-			<div style="float:left">
-				<img style ="width: 200px; height:200px; margin:20px 50px 20px 100px"src="<%=user.getImage() %>"/>
+			<div class="col-md-10">
+				<div class="col-md-3">
+					<div class="profile-image-container">
+						<img id = "profile-image" src="<%=user.getImage() %>"/>
+					</div>
+				</div>
+				<div class="col-md-2"></div>
+				<div class="col-md-6">
+					<h1 id = "name"><%=user.getFullName() %></h1>
+					<h1 id="username">@<%=user.getUsername() %></h1>
+				</div>
 			</div>
-			</br>
-			<div>
-				<h1 style ="margin-left:30px"><%=user.getFullName() %></h1>
-				<!-- <h1 style ="margin-left:30px">Stuff</h1> -->
-			</div>
-			</br>
-			<div style="clear: left" class  = "col-md-5">
-				<h1 style="margin-left:100px">Fans</h1>
+		</div>
+		<div class = "row">
+			<div class="col-md-1"></div>
+			<div class="col-md-5 recipe-container" id="savedRecipes">
+				<div class = "header-container">
+					<h1 class="header"><a class="link-header" href="jsp/viewAll.jsp">Saved Recipes</a></h1>
+				</div>
 				<%
-					 for(String s : user.getFans()) {
-						String url = jdbc.getProfileInfo(s, 1);
-						/* session.setAttribute("go_to_user", s) */; %>
-						<a href="${pageContext.request.contextPath}/jsp/profile.jsp?userClicked=<%= s %>">
-							<img style ="width: 80px; height:80px; margin:20px 50px 20px 100px"src="<%=url %>"/>
-						</a>
-				<% 	}
-				%>
-			</div>
-			<div class = "col-md-6">
-				<h1 style ="margin-left:30px">Saved Recipes</h1>
-				<%
+					int countSave = 1;
 					for(Recipe s : user.getSavedRecipes()) {
 						String recipeImage = s.getImageURL();
-					
-				%>
-				<!-- <img style ="width: 150px; height:150px; margin:20px 40px 20px 30px"src="../pasta.jpeg"/>
-				<img style ="width: 150px; height:150px; margin:20px 40px 20px 30px"src="../pasta.jpeg"/> -->
-				<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp?recipeClicked=<%=s.getName()%>">
-					<img style ="width: 150px; height:150px; margin:20px 40px 20px 30px"src="<%=recipeImage%>"/>
-				</a>
-				<%} %>
-				</br>
-				</br>
-				</br>
-				</br>
-				</br>
-				</br>
-				<h1 style ="margin-left:30px">Uploaded Recipes</h1>
+						if (countSave < 5){
+							%>
+							<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp?recipeClicked=<%=s.getName()%>">
+								<img style ="width: 150px; height:150px; margin:20px 40px 20px 30px"src="<%=recipeImage%>"/>
+							</a><%
+						}
+					countSave++;
+				} %>
+			</div>
+			<div class="col-md-5 recipe-container">
+				<div class="header-container-upload">
+					<h1 class="header"><a class="link-header" href="jsp/viewAll.jsp">Uploaded Recipes</a></h1>
+				</div>
 				<%
+					int count = 1;
 					for(Recipe s : user.getUploadedRecipes()) {
 						String recipeImage = s.getImageURL();
 						System.out.println(s.getName());
-					
-				%>
-				<!-- <img style ="width: 150px; height:150px; margin:20px 40px 20px 30px"src="../pasta.jpeg"/>
-				<img style ="width: 150px; height:150px; margin:20px 40px 20px 30px"src="../pasta.jpeg"/> -->
-				<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp?recipeClicked=<%=s.getName()%>">
-					<img style ="width: 150px; height:150px; margin:20px 40px 20px 30px"src="<%=recipeImage%>"/>
-				</a>
-				<%} %>
+					if (count < 5){
+						%><a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp?recipeID=<%= s.getId() %>">
+						<img style ="width: 150px; height:150px; margin:20px 40px 20px 30px"src="<%=recipeImage%>"/>
+						</a>
+					<%} %>
+					<%count++;
+				} %>
 			</div>
-		</div>
+			<div class="col-md-1"></div>
+			<div class="row">
+				<div class="col-md-1"></div>
+				<div class= "col-md-6 recipe-container-fans" >
+					<div class="header-container-fans">
+						<h1 class="header" ><a class="link-header" href="jsp/viewAll.jsp">Fans</a></h1>
+					</div>
+					<%
+						 for(String s : user.getFans()) {
+							String url = jdbc.getProfileInfo(s, 1);
+							/* session.setAttribute("go_to_user", s) */; %>
+							
+							<a href="${pageContext.request.contextPath}/jsp/profile.jsp?userClicked=<%= s %>">
+								<img id="fan-image" src="<%=url %>"/>
+							</a>
+							
+					<% 	} %>
+				</div>
+				<div class="col-md-3"></div>
+			</div>	
+		</div> 
 		
 	</body>
 </html>
