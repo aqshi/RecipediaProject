@@ -32,11 +32,11 @@
 		      <li><a href="${pageContext.request.contextPath}/jsp/profile.jsp">View Profile</a></li>
 		      <li><a href="${pageContext.request.contextPath}/jsp/CreateRecipe.jsp">Create Recipes</a></li>
 		    </ul>
-		    <form class="navbar-form navbar-left">
+		    <form class="navbar-form navbar-left" action="results.jsp">
 		      <div class="form-group">
-		        <input id="search" type="text" class="form-control" placeholder="Search Recipes...">
+		        <input id="search" type="text" class="form-control" name="searchInput" placeholder="Search Recipes...">
 		      </div>
-		     <button class="btn btn-default" type="button">
+		     <button class="btn btn-default" type="submit" value="searchInput">
 	            <span class="glyphicon glyphicon-search"></span>
 	          </button>
 		    </form>
