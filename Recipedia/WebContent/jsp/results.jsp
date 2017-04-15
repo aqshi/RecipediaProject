@@ -63,6 +63,9 @@
 	            <span class="glyphicon glyphicon-search"></span>
 	          </button>
 		    </form>
+		     <div class="logout">
+	          	<a href="${pageContext.request.contextPath}/jsp/Login.jsp"><img id="logout-button" src="../images/logout.jpg"></a>
+	        </div>
 		  </div>
 		</nav>
  <!-- =============================WHOLE PAGE================================== -->
