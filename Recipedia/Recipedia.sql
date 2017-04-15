@@ -816,7 +816,7 @@ CREATE TABLE Fans (
 );
 
 INSERT INTO Fans(userID, fanName)
-	VALUES(1, 'dimizrahi');
+	VALUES(1, 'dmizrahi');
     
 INSERT INTO Fans(userID, fanName)
 	VALUES(1, 'ejung');
@@ -834,7 +834,7 @@ INSERT INTO Fans(userID, fanName)
 	VALUES(3, 'janthony');
     
 INSERT INTO Fans(userID, fanName)
-	VALUES(4, 'dimizrahi');
+	VALUES(4, 'dmizrahi');
 
 INSERT INTO Fans(userID, fanName)
 	VALUES(4, 'ejung');
