@@ -1,7 +1,15 @@
 @CHARSET "UTF-8";
 
 body {
-	background-color: #e4fde1;
+	background-color: white;
+	margin-top: 30px;
+	
+}
+.row{
+	margin-top: 50px;
+}
+.headers{
+	color: #f7c59f;
 }
 
 .navbar {
@@ -17,6 +25,20 @@ body {
 }
 
 #recipeImage {
-	height: 400px;
-	width: 400px;	
+	border-radius: 25px;
+	border-color: white;
+	/* padding-left: 7px; */
+	margin: 5%;
+	height: 90%;
+	width: 90%;
+}
+
+#image-container{
+	padding: 5px;
+	border-radius: 25px;
+	border-width: 2px;
+	margin: 20px 20px 20px 20px;
+	height: 420px;
+	width: 420px;
+	background: linear-gradient(-90deg, #ff8a5b, #fc9651);
 }

@@ -24,7 +24,7 @@
 		    <ul class="nav navbar-nav">
 		      <li><a href="${pageContext.request.contextPath}/jsp/feed.jsp">Feed</a></li>
 		      <li><a href="${pageContext.request.contextPath}/jsp/profile.jsp">View Profile</a></li>
-		      <li class="active" ><a id="create-recipes-tab" href="${pageContext.request.contextPath}/jsp/CreateRecipe.jsp">Create Recipe</a></li>
+		      <li><a id="create-recipes-tab" href="${pageContext.request.contextPath}/jsp/CreateRecipe.jsp">Create Recipe</a></li>
 		    </ul>
 		    <form class="navbar-form navbar-left">
 		      <div class="form-group">
@@ -39,23 +39,24 @@
 	         </div>
 		  </div>
 		</nav>
-		<div class="container" style="margin-top: 50px;">
+		<div class="container">
 			<div class="row">
 				<div class="col-md-4">
-					<img id="recipeImage" src="../pasta.jpeg" style="height:400px; width:400px; margin-left:-50px;">
-					<h2>Instructions</h2>
+					<div class="image-container">
+						<img id="recipeImage" src="../pasta.jpeg" ">
+					</div>
+					<h2 class="headers">Instructions</h2>
 					<p>Here are the instructions on how to make pasta</p><br>
 					
-					<h2>Reviews</h2>
+					<h2 class="headers">Reviews</h2>
 					<p>These are the reviews</p><br>
 					
-					<h2>Recommended Recipes</h2>
+					<h2 class="headers">Recommended Recipes</h2>
 					<p>Show the other recipes related to this recipe.</p>
 				</div>
 				<div class="col-md-8">
-					<h1>TITLE OF RECIPE</h1>
-					<h4>BASIC INFO</h4>
-					<h2>Ingredients</h2>
+					<h1 class="headers">TITLE OF RECIPE</h1>
+					<h2 class="headers">Ingredients</h2>
 				</div>
 			</div>
 		</div>
