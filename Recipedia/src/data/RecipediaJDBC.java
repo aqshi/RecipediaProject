@@ -61,6 +61,7 @@ public class RecipediaJDBC {
 			ps.setString(4, lastName);
 			ps.setString(5, imageURL);
 			ps.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}	
