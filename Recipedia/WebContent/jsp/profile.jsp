@@ -82,7 +82,8 @@
 			<div class="col-md-1"></div>
 			<div class="col-md-5 recipe-container" id="savedRecipes">
 				<div class = "header-container">
-					<h1 class="header"><a class="link-header" href="jsp/viewAll.jsp">Saved Recipes</a></h1>
+					<%String urlSave = "viewAll.jsp?username=" +user.getUsername() + "&id=1"; %>
+					<h1 class="header"><a class="link-header" href="<%=urlSave%>">Saved Recipes</a></h1>
 				</div>
 				<%
 					int countSave = 1;
@@ -99,7 +100,8 @@
 			</div>
 			<div class="col-md-5 recipe-container">
 				<div class="header-container-upload">
-					<h1 class="header"><a class="link-header" href="jsp/viewAll.jsp">Uploaded Recipes</a></h1>
+					<% String urlUpload ="viewAll.jsp?username=" +user.getUsername() + "&id=2"; %>
+					<h1 class="header"><a class="link-header" href="<%=urlUpload %>" + >Uploaded Recipes</a></h1>
 				</div>
 				<%
 					int count = 1;
@@ -119,7 +121,8 @@
 				<div class="col-md-1"></div>
 				<div class= "col-md-6 recipe-container-fans" >
 					<div class="header-container-fans">
-						<h1 class="header" ><a class="link-header" href="jsp/viewAll.jsp">Fans</a></h1>
+						<%String urlFans = "viewAll.jsp?username=" +user.getUsername() + "&id=3"; %>
+						<h1 class="header" ><a class="link-header" href="<%=urlFans%>">Fans</a></h1>
 					</div>
 					<%
 						 for(String s : user.getFans()) {
