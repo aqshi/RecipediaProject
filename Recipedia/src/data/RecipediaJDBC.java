@@ -225,7 +225,6 @@ public class RecipediaJDBC {
 			rs.next();
 			int userID = rs.getInt(1);
 			user.setPassword(rs.getString(3));
-			System.out.println("user id: " + rs.getInt(1));
 			user.setFname(rs.getString(4));
 			user.setLname(rs.getString(5));
 			user.setFullName(user.getFname(), user.getLname());

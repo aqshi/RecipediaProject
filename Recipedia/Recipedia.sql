@@ -644,32 +644,24 @@ CREATE TABLE ActionEvents (
 );
 
 
-INSERT INTO AciontEvents(userID, actionString, recipeID, eventTimestamp)
+INSERT INTO ActionEvents(userID, actionString, recipeID, eventTimestamp)
 	VALUES(1, 'Liked', 1, '2008-01-01 00:00:02');
-INSERT INTO AciontEvents(userID, actionString, recipeID, eventTimestamp)
+INSERT INTO ActionEvents(userID, actionString, recipeID, eventTimestamp)
 	VALUES(1, 'Saved', 2, '2008-01-01 00:00:03');
-INSERT INTO AciontEvents(userID, actionString, recipeID, eventTimestamp)
+INSERT INTO ActionEvents(userID, actionString, recipeID, eventTimestamp)
 	VALUES(2, 'Uploaded', 22, '2008-01-01 00:00:04');
-INSERT INTO AciontEvents(userID, actionString, recipeID, eventTimestamp)
+INSERT INTO ActionEvents(userID, actionString, recipeID, eventTimestamp)
 	VALUES(2, 'Liked', 2, '2008-01-01 00:00:05');
-INSERT INTO AciontEvents(userID, actionString, recipeID, eventTimestamp)
+INSERT INTO ActionEvents(userID, actionString, recipeID, eventTimestamp)
 	VALUES(3, 'Liked', 1, '2008-01-01 00:00:06');
-INSERT INTO AciontEvents(userID, actionString, recipeID, eventTimestamp)
+INSERT INTO ActionEvents(userID, actionString, recipeID, eventTimestamp)
 	VALUES(3, 'Saved', 22, '2008-01-01 00:00:07');
-INSERT INTO AciontEvents(userID, actionString, recipeID, eventTimestamp)
+INSERT INTO ActionEvents(userID, actionString, recipeID, eventTimestamp)
 	VALUES(1, 'Liked', 2, '2008-01-01 00:00:08');
-INSERT INTO AciontEvents(userID, actionString, recipeID, eventTimestamp)
+INSERT INTO ActionEvents(userID, actionString, recipeID, eventTimestamp)
 	VALUES(4, 'Uploaded', 1, '2008-01-01 00:00:09');
-INSERT INTO AciontEvents(userID, actionString, recipeID, eventTimestamp)
+INSERT INTO ActionEvents(userID, actionString, recipeID, eventTimestamp)
 	VALUES(4, 'Liked', 2, '2008-01-01 00:00:10');
-INSERT INTO AciontEvents(userID, actionString, recipeID, eventTimestamp)
+INSERT INTO ActionEvents(userID, actionString, recipeID, eventTimestamp)
 	VALUES(4, 'Saved', 22, '2008-01-01 00:00:11');
-
-
-
-
-
-
-
-
 
