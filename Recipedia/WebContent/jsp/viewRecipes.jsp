@@ -6,8 +6,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <%
-	//String recipeIDString = (String) request.getParameter("recipeID");
-	String recipeIDString = "5";
+	String recipeIDString = (String) request.getParameter("recipeID");
+	//String recipeIDString = "5";
 	int recipeID = Integer.parseInt(recipeIDString);
 	RecipediaJDBC jdbc = new RecipediaJDBC();
 	Recipe recipe = jdbc.getRecipe(recipeID);
