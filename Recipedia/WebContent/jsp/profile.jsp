@@ -21,8 +21,18 @@
 	</head>
 	<%
 		String loggedInUser = (String) session.getAttribute("username");
-		String name = loggedInUser;
+		String viewedUser = (String) request.getParameter("userClicked");
 		RecipediaJDBC jdbc = new RecipediaJDBC();
+		String name="";
+		if(viewedUser != null) {
+			name = viewedUser;
+		}
+		
+		else {
+			name = loggedInUser;
+			
+		}
+		
 		User user = jdbc.getUserByUsername(name);
 	%>
 	<body>
@@ -67,37 +77,28 @@
 			<div style="clear: left" class  = "col-md-5">
 				<h1 style="margin-left:100px">Fans</h1>
 				<%
-					/* for(String s : fans) {
-						String temp = jdbc.getProfileInfo(s, 1);
-						session.setAttribute("go_to_user", s); */
-					//}
+					 for(String s : user.getFans()) {
+						String url = jdbc.getProfileInfo(s, 1);
+						/* session.setAttribute("go_to_user", s) */; %>
+						<a href="${pageContext.request.contextPath}/jsp/profile.jsp?userClicked=<%= s %>">
+							<img style ="width: 80px; height:80px; margin:20px 50px 20px 100px"src="<%=url %>"/>
+						</a>
+				<% 	}
 				%>
-								<div class="Row">
-<%--     <div class="Column">
-      <img style ="width: 30px; height:30px; margin:20px 50px 20px 100px"src="<%=temp %>"/>
-    </div>
-    <div class="Column">C2</div>
-    <div class="Column">C3</div>
-</div>
-<div class="Row">
-    <div class="Column">C4
-     <p>
-      hello
-    </p>
-    </div>
-    <div class="Column">C5
-         <p>
-      hello
-    </p>
-    </div>
-    <div class="Column">C6</div>
-</div> --%>
 			</div>
 			<div class = "col-md-6">
 				<h1 style ="margin-left:30px">Saved Recipes</h1>
-				<img style ="width: 150px; height:150px; margin:20px 40px 20px 30px"src="../pasta.jpeg"/>
-				<img style ="width: 150px; height:150px; margin:20px 40px 20px 30px"src="../pasta.jpeg"/>
-				<img style ="width: 150px; height:150px; margin:20px 40px 20px 30px"src="../pasta.jpeg"/>
+				<%
+					for(Recipe s : user.getSavedRecipes()) {
+						String recipeImage = s.getImageURL();
+					
+				%>
+				<!-- <img style ="width: 150px; height:150px; margin:20px 40px 20px 30px"src="../pasta.jpeg"/>
+				<img style ="width: 150px; height:150px; margin:20px 40px 20px 30px"src="../pasta.jpeg"/> -->
+				<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp?recipeClicked=<%=s.getName()%>">
+					<img style ="width: 150px; height:150px; margin:20px 40px 20px 30px"src="<%=recipeImage%>"/>
+				</a>
+				<%} %>
 				</br>
 				</br>
 				</br>
@@ -105,10 +106,17 @@
 				</br>
 				</br>
 				<h1 style ="margin-left:30px">Uploaded Recipes</h1>
-				<img style ="width: 150px; height:150px; margin:20px 40px 20px 30px"src="../pasta.jpeg"/>
-				<img style ="width: 150px; height:150px; margin:20px 40px 20px 30px"src="../pasta.jpeg"/>
-				<img style ="width: 150px; height:150px; margin:20px 40px 20px 30px"src="../pasta.jpeg"/>
-				
+				<%
+					for(Recipe s : user.getUploadedRecipes()) {
+						String recipeImage = s.getImageURL();
+					
+				%>
+				<!-- <img style ="width: 150px; height:150px; margin:20px 40px 20px 30px"src="../pasta.jpeg"/>
+				<img style ="width: 150px; height:150px; margin:20px 40px 20px 30px"src="../pasta.jpeg"/> -->
+				<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp?recipeClicked=<%=s.getName()%>">
+					<img style ="width: 150px; height:150px; margin:20px 40px 20px 30px"src="<%=recipeImage%>"/>
+				</a>
+				<%} %>
 			</div>
 		</div>
 		

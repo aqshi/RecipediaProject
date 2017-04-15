@@ -21,7 +21,7 @@ public class RecipediaJDBC {
 	private final static String inputUsername = "SELECT * FROM Users WHERE username=?";
 	private final static String inputPassword = "SELECT * FROM Users WHERE pword=?";
 	private final static String followingTable = "SELECT * FROM Fans WHERE userID=?";
-	private final static String followerTable = "SELECT * FROM Fans WHERE userID=?";
+	private final static String followerTable = "SELECT * FROM Fans WHERE fanName=?";
 	private final static String addFollowing = "INSERT INTO Fans(userID, fanName) VALUES(?,?)";
 	private final static String removeFollower = "DELETE FROM Fans WHERE userID=? AND fanName=?";
 	private final static String addRecipe = "INSERT INTO Recipes(title, likes, image) VALUES(?,?,?)";
@@ -40,13 +40,14 @@ public class RecipediaJDBC {
 	private final static String getSavedRecipes = "SELECT * FROM SAVEDRECIPES WHERE userID=?";
 	private final static String getUploadedRecipes = "SELECT * FROM UPLOADEDRECIPES WHERE userID=?";
 	private final static String getUser = "SELECT * FROM USERS WHERE username=?";
+	private final static String getUsernameFromID = "SELECT * FROM Users WHERE userID=?";
 
 	public RecipediaJDBC() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			
 			//change this according to your inputs
-			conn = DriverManager.getConnection("jdbc:mysql://localhost/recipedia?user=root&password=iwtaekcwne&useSSL=false");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost/recipedia?user=root&password=790536e&useSSL=false");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -216,21 +217,20 @@ public class RecipediaJDBC {
 	public User getUserByUsername(String username) {
 		try {
 			User user = new User(username);
-			ps = conn.prepareStatement(getUser);
+			ps = conn.prepareStatement(inputUsername);
 			ps.setString(1, username);
 			rs = ps.executeQuery();
-			rs.next();
-			int userID = rs.getInt(1);
-			user.setPassword(rs.getString(3));
-			System.out.println("user id: " + rs.getInt(1));
-			user.setFname(rs.getString(4));
-			user.setLname(rs.getString(5));
-			user.setFullName(user.getFname(), user.getLname());
-			user.setImage(rs.getString(6));
-			user.setSavedRecipes(this.getSavedRecipes(userID));
-			
-			user.setUploadedRecipes(this.getUploadedRecipes(userID));
-			user.setFans(this.profileFollowingSet(username));
+			while(rs.next()){
+				int userID = rs.getInt(1);
+				user.setPassword(rs.getString(3));
+				user.setFname(rs.getString(4));
+				user.setLname(rs.getString(5));
+				user.setFullName(user.getFname(), user.getLname());
+				user.setImage(rs.getString(6));
+				user.setSavedRecipes(this.getSavedRecipes(userID));
+				user.setUploadedRecipes(this.getUploadedRecipes(userID));
+				user.setFans(this.followerSet(username));
+			}
 			return user;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -239,7 +239,6 @@ public class RecipediaJDBC {
 		
 	}
 	
-
 	public int addRecipe(Recipe recipe) {
 		try {
 			ps = conn.prepareStatement(addRecipe, Statement.RETURN_GENERATED_KEYS);
@@ -307,7 +306,6 @@ public class RecipediaJDBC {
 		}
 		return userID;
 	}
-	
 
 	public int getRecipeIDByRecipeName(String recipeName){
 		int recipeID = 0;
@@ -426,7 +424,24 @@ public class RecipediaJDBC {
 			return following;
 		}
 	//need function to add follower to user
+	
+	// get username from ID
+	public String getUsername(String name) {
+		try {
+			st = conn.createStatement();
+			ps = conn.prepareStatement(getUsernameFromID);
+			ps.setString(1, name);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				return rs.getString(2);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
+		return "";
+	}
+	
 	
 	// print follower
 	public Set<String> followerSet(String name) {
@@ -437,14 +452,37 @@ public class RecipediaJDBC {
 			ps.setString(1, name);
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				follower.add(rs.getString(2));
+				follower.add(rs.getString(1));
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		Set<String> names = new HashSet<>();
+		for(String s : follower) {
+			String fan = getUsername(s);
+			names.add(fan);
+		}
 
-		return follower;
+		return names;
+	}
+
+	//get profile information
+	public String getProfileInfo(String name, int num) {
+		try {
+			ps = conn.prepareStatement(inputUsername);
+			ps.setString(1, name);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				if(num == 1) { return rs.getString(6);}
+				else if(num == 2) { return rs.getString(4) + " " + rs.getString(5);}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return "";
 	}
 }
 
