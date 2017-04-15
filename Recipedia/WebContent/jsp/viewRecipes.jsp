@@ -6,6 +6,7 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/recipe.css">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/feed.css">
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/navbar.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<link href="../js/lib/noty.css" rel="stylesheet"></link>
@@ -33,6 +34,9 @@
 	            <span class="glyphicon glyphicon-search"></span>
 	          </button>
 		    </form>
+		    <div class="logout">
+	         	<a href="${pageContext.request.contextPath}/jsp/Login.jsp"><img id="logout-button" src="../images/logout.jpg"></a>
+	         </div>
 		  </div>
 		</nav>
 		<div class="container" style="margin-top: 50px;">

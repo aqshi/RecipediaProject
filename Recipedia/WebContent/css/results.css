@@ -1,5 +1,8 @@
 @CHARSET "UTF-8";
 
+body{
+	font-family:  "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
+}
 .container-fluid{
 	background-color: white;
 	border-color: transparent;

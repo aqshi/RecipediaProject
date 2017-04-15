@@ -1,0 +1,9 @@
+@CHARSET "UTF-8";
+
+#logout-button{
+	height: 30px;
+	width: 30px;
+	float: right;
+	padding: 5px;
+	margin-top: 10px;
+}
