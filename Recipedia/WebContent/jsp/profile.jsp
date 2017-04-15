@@ -23,11 +23,7 @@
 		String loggedInUser = (String) session.getAttribute("username");
 		String name = loggedInUser;
 		RecipediaJDBC jdbc = new RecipediaJDBC();
-		//String imageName = jdbc.getProfileInfo(loggedInUser, 1);
-		//String fullName = jdbc.getProfileInfo(loggedInUser, 2);
-		//Set<String> fans = jdbc.followerSet(name);
 		User user = jdbc.getUserByUsername(name);
-		System.out.println("image:" + user.getImage());
 	%>
 	<body>
 	
