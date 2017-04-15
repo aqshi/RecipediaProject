@@ -51,7 +51,7 @@ public class RecipediaJDBC {
 			Class.forName("com.mysql.jdbc.Driver");
 			
 			//change this according to your inputs
-			conn = DriverManager.getConnection("jdbc:mysql://localhost/recipedia?user=root&password=790536e&useSSL=false");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost/recipedia?user=root&password=iwtaekcwne&useSSL=false");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -167,8 +167,8 @@ public class RecipediaJDBC {
 	public void addSavedRecipe(int recipeID, int userID){
 		try {
 			ps = conn.prepareStatement(addSavedRecipe);
-			ps.setInt(1, recipeID);
-			ps.setInt(2, userID);
+			ps.setInt(1, userID);
+			ps.setInt(2, recipeID);
 			ps.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -178,8 +178,8 @@ public class RecipediaJDBC {
 	public void addUploadedRecipe(int recipeID, int userID) {
 		try {
 			ps = conn.prepareStatement(addUploadedRecipe);
-			ps.setInt(1, recipeID);
-			ps.setInt(2, userID);
+			ps.setInt(1, userID);
+			ps.setInt(2, recipeID);
 			ps.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
