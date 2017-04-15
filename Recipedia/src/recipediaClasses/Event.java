@@ -1,11 +1,14 @@
 package recipediaClasses;
 
+import java.sql.Timestamp;
+
 public class Event {
 	private String action;
 	private String usernameDidAction;
 	private String usernameGotAction;
 	private String recipeName;
 	private int recipeID;
+	private Timestamp timestamp;
 	public Event() {
 		
 	}
@@ -48,5 +51,13 @@ public class Event {
 
 	public void setRecipeID(int recipeID) {
 		this.recipeID = recipeID;
+	}
+
+	public Timestamp getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(Timestamp timestamp) {
+		this.timestamp = timestamp;
 	}
 }

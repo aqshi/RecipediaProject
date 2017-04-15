@@ -3,6 +3,7 @@ package data;
 import java.sql.*;
 import java.util.*;
 
+import recipediaClasses.Event;
 import recipediaClasses.Ingredient;
 import recipediaClasses.Recipe;
 import recipediaClasses.User;
@@ -40,12 +41,11 @@ public class RecipediaJDBC {
 	private final static String getSavedRecipes = "SELECT * FROM SAVEDRECIPES WHERE userID=?";
 	private final static String getUploadedRecipes = "SELECT * FROM UPLOADEDRECIPES WHERE userID=?";
 	private final static String getUser = "SELECT * FROM USERS WHERE username=?";
-<<<<<<< HEAD
 	private final static String getUsernameFromID = "SELECT * FROM Users WHERE userID=?";
-=======
 	private final static String addEvent = "INSERT INTO ActionEvents(userID, actionString, recipeID, eventTimestamp) VALUES (?,?,?,?)";
->>>>>>> 8f31d9e1828aafd0be1d6423486d572b05583477
-
+	private final static String getEvent = "SELECT * FROM ActionEvents WHERE eventID=?";
+	private final static String getUsernameByID = "SELECT * FROM USERS WHERE userID=?";
+	private final static String getUserEvents = "SELECT * FROM ActionEvents WHERE userID=?";
 	public RecipediaJDBC() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -227,7 +227,6 @@ public class RecipediaJDBC {
 			ps = conn.prepareStatement(inputUsername);
 			ps.setString(1, username);
 			rs = ps.executeQuery();
-<<<<<<< HEAD
 			while(rs.next()){
 				int userID = rs.getInt(1);
 				user.setPassword(rs.getString(3));
@@ -239,7 +238,6 @@ public class RecipediaJDBC {
 				user.setUploadedRecipes(this.getUploadedRecipes(userID));
 				user.setFans(this.followerSet(username));
 			}
-=======
 			rs.next();
 			int userID = rs.getInt(1);
 			user.setPassword(rs.getString(3));
@@ -251,7 +249,6 @@ public class RecipediaJDBC {
 			
 			user.setUploadedRecipes(this.getUploadedRecipes(userID));
 			user.setFans(this.profileFollowingSet(username));
->>>>>>> 8f31d9e1828aafd0be1d6423486d572b05583477
 			return user;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -327,7 +324,20 @@ public class RecipediaJDBC {
 		}
 		return userID;
 	}
-
+	public String getUsernameByUserID(int userID) {
+		try {
+			ps = conn.prepareStatement(getUsernameByID);
+			ps.setInt(1, userID);
+			rs = ps.executeQuery();
+			rs.next();
+			String username = rs.getString(1);
+			return username;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public int getRecipeIDByRecipeName(String recipeName){
 		int recipeID = 0;
 		try {
@@ -519,6 +529,32 @@ public class RecipediaJDBC {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	public Event getEvent(int eventID) {
+		try {
+			ps = conn.prepareStatement(getEvent);
+			ps.setInt(1,  eventID);
+			rs = ps.executeQuery();
+			rs.next();
+			Event event = new Event();
+			event.setUsernameDidAction(this.getUsernameByUserID(rs.getInt(2)));
+			event.setAction(rs.getString(3));
+			event.setRecipeID(rs.getInt(4));
+			event.setTimestamp(rs.getTimestamp(5));
+			return event;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public Vector<Event> getUserEvents(String username) {
+		try {
+			ps = conn.prepareStatement(getUserEvents);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }
 
