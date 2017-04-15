@@ -26,8 +26,8 @@ public class RecipediaJDBC {
 	private final static String addFollowing = "INSERT INTO Fans(userID, fanName) VALUES(?,?)";
 	private final static String removeFollower = "DELETE FROM Fans WHERE userID=? AND fanName=?";
 	private final static String addRecipe = "INSERT INTO Recipes(title, likes, image) VALUES(?,?,?)";
-    private final static String resultTable = "SELECT * FROM Recipes WHERE recipeID=?";
-	private final static String tresultTable = "SELECT * FROM Tags WHERE tagID=?";
+    private final static String resultTable = "SELECT * FROM Recipes WHERE title=?";
+	private final static String tresultTable = "SELECT * FROM Tags WHERE tag=?";
 	private final static String addIngredient = "INSERT INTO Ingredients(recipeID, quantity, units, ingredient) VALUES(?,?,?,?)";
 	private final static String addInstruction = "INSERT INTO Instructions(recipeID, instruction) VALUES(?,?)";
 	private final static String addTag = "INSERT INTO Tags(tag) VALUES(?)";
@@ -51,7 +51,11 @@ public class RecipediaJDBC {
 			Class.forName("com.mysql.jdbc.Driver");
 			
 			//change this according to your inputs
+<<<<<<< HEAD
 			conn = DriverManager.getConnection("jdbc:mysql://localhost/recipedia?user=root&password=Pickoftheweek1!&useSSL=false");
+=======
+			conn = DriverManager.getConnection("jdbc:mysql://localhost/recipedia?user=root&password=Xnd0725&useSSL=false");
+>>>>>>> 4109568ac3cf19ee90fa8eb74b34bc0210d5da2b
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -89,7 +93,7 @@ public class RecipediaJDBC {
 				st = conn.createStatement();
 				ps = conn.prepareStatement(inputUsername);
 				ps.setString(1, name);
-				rs = ps.executeQuery();
+				ResultSet rs = ps.executeQuery();
 				while(rs.next()) {
 					userToCheck = name;
 					return true;
@@ -107,7 +111,7 @@ public class RecipediaJDBC {
 			st = conn.createStatement();
 			ps = conn.prepareStatement(inputPassword);
 			ps.setString(1, password);
-			rs = ps.executeQuery();
+			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {					
 				if(rs.getString(2).equals(userToCheck) && rs.getString(3).equals(password)) {
 					return true;
@@ -123,7 +127,7 @@ public class RecipediaJDBC {
 		try {
 			ps = conn.prepareStatement(getRecipe);
 			ps.setInt(1, recipeID);
-			rs = ps.executeQuery();
+			ResultSet rs = ps.executeQuery();
 			rs.next();
 			String title = rs.getString(2);
 			int likes = rs.getInt(3);
@@ -167,8 +171,8 @@ public class RecipediaJDBC {
 	public void addSavedRecipe(int recipeID, int userID){
 		try {
 			ps = conn.prepareStatement(addSavedRecipe);
-			ps.setInt(1, recipeID);
-			ps.setInt(2, userID);
+			ps.setInt(1, userID);
+			ps.setInt(2, recipeID);
 			ps.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -178,8 +182,8 @@ public class RecipediaJDBC {
 	public void addUploadedRecipe(int recipeID, int userID) {
 		try {
 			ps = conn.prepareStatement(addUploadedRecipe);
-			ps.setInt(1, recipeID);
-			ps.setInt(2, userID);
+			ps.setInt(1, userID);
+			ps.setInt(2, recipeID);
 			ps.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -225,7 +229,7 @@ public class RecipediaJDBC {
 			User user = new User(username);
 			ps = conn.prepareStatement(inputUsername);
 			ps.setString(1, username);
-			rs = ps.executeQuery();
+			ResultSet rs = ps.executeQuery();
 			while(rs.next()){
 				int userID = rs.getInt(1);
 				user.setPassword(rs.getString(3));
@@ -245,7 +249,6 @@ public class RecipediaJDBC {
 		return null;
 		
 	}
-	
 	public int addRecipe(Recipe recipe) {
 		try {
 			ps = conn.prepareStatement(addRecipe, Statement.RETURN_GENERATED_KEYS);
@@ -331,7 +334,7 @@ public class RecipediaJDBC {
 		int recipeID = 0;
 		try {
 			st = conn.createStatement();
-			rs = st.executeQuery("SELECT * FROM Recipes WHERE title = '" + recipeName + "';");
+			ResultSet rs = st.executeQuery("SELECT * FROM Recipes WHERE title = '" + recipeName + "';");
 			if (rs.next()){
 				recipeID = Integer.parseInt(rs.getString("recipeID"));
 			}
@@ -344,11 +347,10 @@ public class RecipediaJDBC {
 	//adds a following to loggedinUser and follower for viewedUser
 	public void addtoFollowing(String loggedinUser, String viewedUser) {
 		int userID = getUserIDByUsername(loggedinUser);
-		String usernameID = Integer.toString(userID);
 		try {
 			st = conn.createStatement();
 			ps = conn.prepareStatement(addFollowing);
-			ps.setString(1, usernameID);
+			ps.setInt(1, userID);
 			ps.setString(2, viewedUser);
 			ps.executeUpdate();
 		} catch (SQLException e) {
@@ -359,11 +361,10 @@ public class RecipediaJDBC {
 	//remove a following to loggedinUser and viewedUser loses a follower
 	public void removeFromFollowing(String loggedinUser, String viewedUser) {
 		int userID = getUserIDByUsername(loggedinUser);
-		String usernameID = Integer.toString(userID);
 		try {
 			st = conn.createStatement();
 			ps = conn.prepareStatement(removeFollower);
-			ps.setString(1, usernameID);
+			ps.setInt(1, userID);
 			ps.setString(2, viewedUser);
 			ps.executeUpdate();
 		} catch (SQLException e) {
@@ -371,14 +372,14 @@ public class RecipediaJDBC {
 		}
 	}
     
-    public Set<String> nameResult(String entry) {
-        Set<String> results = new HashSet<>();
+    public Set<Recipe> nameResult(String entry) {
+        Set<Recipe> results = new HashSet<Recipe>();
         try {
-			st = conn.createStatement();
 			ps = conn.prepareStatement(resultTable);
-			rs = ps.executeQuery();
+			ps.setString(1, entry);
+			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
-				if(rs.getString(1).equalsIgnoreCase(entry)) results.add(rs.getString(1));
+				results.add(this.getRecipe(rs.getInt(1)));
 			}
 			
 		} catch (SQLException e) {
@@ -387,14 +388,14 @@ public class RecipediaJDBC {
 		
 		return results;
 	}
-	public Set<String> tagResult(String entry) {
-		Set<String> results = new HashSet<>();
+	public Set<Recipe> tagResult(String entry) {
+		Set<Recipe> results = new HashSet<>();
 		try {
 			st = conn.createStatement();
 			ps = conn.prepareStatement(tresultTable);
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				if(rs.getString(1).equalsIgnoreCase(entry)) results.add(rs.getString(1));
+				//if(rs.getString(1).equalsIgnoreCase(entry)) results.add(rs.getString(1));
 			}
 			
 		} catch (SQLException e) {
@@ -411,7 +412,7 @@ public class RecipediaJDBC {
 		try {
 			ps = conn.prepareStatement(followingTable);
 			ps.setInt(1, IDnum);
-			rs = ps.executeQuery();
+			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				following.add(rs.getString(2));
 			}
@@ -429,7 +430,7 @@ public class RecipediaJDBC {
 			st = conn.createStatement();
 			ps = conn.prepareStatement(getUsernameFromID);
 			ps.setString(1, name);
-			rs = ps.executeQuery();
+			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				return rs.getString(2);
 			}
@@ -448,7 +449,7 @@ public class RecipediaJDBC {
 			st = conn.createStatement();
 			ps = conn.prepareStatement(followerTable);
 			ps.setString(1, name);
-			rs = ps.executeQuery();
+			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				follower.add(rs.getString(1));
 			}
@@ -471,7 +472,7 @@ public class RecipediaJDBC {
 		try {
 			ps = conn.prepareStatement(inputUsername);
 			ps.setString(1, name);
-			rs = ps.executeQuery();
+			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				if(num == 1) { return rs.getString(6);}
 				else if(num == 2) { return rs.getString(4) + " " + rs.getString(5);}
@@ -499,9 +500,10 @@ public class RecipediaJDBC {
 	}
 	public Event getEvent(int eventID) {
 		try {
+			
 			ps = conn.prepareStatement(getEvent);
 			ps.setInt(1,  eventID);
-			rs = ps.executeQuery();
+			ResultSet rs = ps.executeQuery();
 			rs.next();
 			Event event = new Event();
 			event.setUsernameDidAction(this.getUsernameByUserID(rs.getInt(2)));
@@ -520,7 +522,7 @@ public class RecipediaJDBC {
 			ps = conn.prepareStatement(getUserEvents);
 			int userID = this.getUserIDByUsername(username);
 			ps.setInt(1, userID);
-			rs = ps.executeQuery();
+			ResultSet rs = ps.executeQuery();
 			Vector<Event> events = new Vector<Event>();
 			while(rs.next()) {
 				Event event = getEvent(rs.getInt(1));

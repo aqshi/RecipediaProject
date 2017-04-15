@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.* "%>
+    <%@ page import= "java.util.*, data.*, recipediaClasses.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -16,8 +17,17 @@
 		<script type='text/javascript' src='../js/Notifications.js'></script>
 	</head>
 	<%
+		RecipediaJDBC jdbc = new RecipediaJDBC();
+		
 		String search_result=request.getParameter("searchInput");
-		System.out.println(search_result);
+		//System.out.println(search_result);
+		Set<Recipe> results = jdbc.nameResult(search_result);
+		Iterator<Recipe> it = results.iterator();
+		while(it.hasNext())
+		{
+			Recipe re = it.next();
+			System.out.println(re.getName());
+		}
 	%>
 	<body>
 <!-- ===========================NAV BAR============================================ -->
@@ -32,11 +42,11 @@
 		      <li><a href="${pageContext.request.contextPath}/jsp/profile.jsp">View Profile</a></li>
 		      <li><a href="${pageContext.request.contextPath}/jsp/CreateRecipe.jsp">Create Recipes</a></li>
 		    </ul>
-		    <form class="navbar-form navbar-left">
+		    <form class="navbar-form navbar-left" action="results.jsp">
 		      <div class="form-group">
-		        <input id="search" type="text" class="form-control" placeholder="Search Recipes...">
+		        <input id="search" type="text" class="form-control" name="searchInput" placeholder="Search Recipes...">
 		      </div>
-		     <button class="btn btn-default" type="button">
+		     <button class="btn btn-default" type="submit" value="searchInput">
 	            <span class="glyphicon glyphicon-search"></span>
 	          </button>
 		    </form>

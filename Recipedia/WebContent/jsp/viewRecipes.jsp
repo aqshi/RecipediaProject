@@ -6,8 +6,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <%
-	//String recipeIDString = (String) request.getParameter("recipeID");
-	String recipeIDString = "5";
+	String recipeIDString = (String) request.getParameter("recipeID");
+	//String recipeIDString = "5";
 	int recipeID = Integer.parseInt(recipeIDString);
 	RecipediaJDBC jdbc = new RecipediaJDBC();
 	Recipe recipe = jdbc.getRecipe(recipeID);
@@ -42,11 +42,11 @@
 		      <li><a href="${pageContext.request.contextPath}/jsp/profile.jsp">View Profile</a></li>
 		      <li><a id="create-recipes-tab" href="${pageContext.request.contextPath}/jsp/CreateRecipe.jsp">Create Recipe</a></li>
 		    </ul>
-		    <form class="navbar-form navbar-left">
+		     <form class="navbar-form navbar-left" action="results.jsp">
 		      <div class="form-group">
-		        <input id="search" type="text" class="form-control" placeholder="Search Recipes...">
+		        <input id="search" type="text" class="form-control" name="searchInput" placeholder="Search Recipes...">
 		      </div>
-		     <button class="btn btn-default" type="button">
+		     <button class="btn btn-default" type="submit" value="searchInput">
 	            <span class="glyphicon glyphicon-search"></span>
 	          </button>
 		    </form>
