@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.*"%>
-<%@ page import= "java.util.*, data.*"%>
+    pageEncoding="UTF-8"%>
+<%@ page import= "java.util.*, data.*, recipediaClasses.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/profile.css">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/feed.css">
+
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/navbar.css">
+
 	
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -20,11 +22,12 @@
 	<%
 		String loggedInUser = (String) session.getAttribute("username");
 		String name = loggedInUser;
-		RecipediaJDBC2 jdbc = new RecipediaJDBC2();
-		String imageName = jdbc.getProfileInfo(loggedInUser, 1);
-		String fullName = jdbc.getProfileInfo(loggedInUser, 2);
-		Set<String> fans = jdbc.followerSet(name);
-		
+		RecipediaJDBC jdbc = new RecipediaJDBC();
+		//String imageName = jdbc.getProfileInfo(loggedInUser, 1);
+		//String fullName = jdbc.getProfileInfo(loggedInUser, 2);
+		//Set<String> fans = jdbc.followerSet(name);
+		User user = jdbc.getUserByUsername(name);
+		System.out.println("image:" + user.getImage());
 	%>
 	<body>
 	
@@ -57,24 +60,24 @@
 		<!-- =============================WHOLE PAGE================================== -->
 		<div id="main-div" class = "row">
 			<div style="float:left">
-				<img style ="width: 200px; height:200px; margin:20px 50px 20px 100px"src="<%=imageName %>"/>
+				<img style ="width: 200px; height:200px; margin:20px 50px 20px 100px"src="<%=user.getImage() %>"/>
 			</div>
 			</br>
 			<div>
-				<h1 style ="margin-left:30px"><%=fullName %></h1>
+				<h1 style ="margin-left:30px"><%=user.getFullName() %></h1>
 				<!-- <h1 style ="margin-left:30px">Stuff</h1> -->
 			</div>
 			</br>
 			<div style="clear: left" class  = "col-md-5">
 				<h1 style="margin-left:100px">Fans</h1>
 				<%
-					for(String s : fans) {
+					/* for(String s : fans) {
 						String temp = jdbc.getProfileInfo(s, 1);
-						session.setAttribute("go_to_user", s);
+						session.setAttribute("go_to_user", s); */
 					//}
 				%>
 								<div class="Row">
-    <div class="Column">
+<%--     <div class="Column">
       <img style ="width: 30px; height:30px; margin:20px 50px 20px 100px"src="<%=temp %>"/>
     </div>
     <div class="Column">C2</div>
@@ -92,7 +95,7 @@
     </p>
     </div>
     <div class="Column">C6</div>
-</div><%} %>
+</div> --%>
 			</div>
 			<div class = "col-md-6">
 				<h1 style ="margin-left:30px">Saved Recipes</h1>
