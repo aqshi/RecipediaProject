@@ -51,11 +51,7 @@ public class RecipediaJDBC {
 			Class.forName("com.mysql.jdbc.Driver");
 			
 			//change this according to your inputs
-<<<<<<< Updated upstream
 			conn = DriverManager.getConnection("jdbc:mysql://localhost/recipedia?user=root&password=790536e&useSSL=false");
-=======
-			conn = DriverManager.getConnection("jdbc:mysql://localhost/recipedia?user=root&password=Pickoftheweek1!&useSSL=false");
->>>>>>> Stashed changes
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -193,10 +189,10 @@ public class RecipediaJDBC {
 		try {
 			ps = conn.prepareStatement(getSavedRecipes);
 			ps.setInt(1, userID);
-			rs = ps.executeQuery();
+			ResultSet res = ps.executeQuery();
 			Vector<Recipe> recipes = new Vector<Recipe>();
-			while(rs.next()) {
-				int recipeID = rs.getInt(2);
+			while(res.next()) {
+				int recipeID = res.getInt(2);
 				Recipe recipe = getRecipe(recipeID);
 				recipes.add(recipe);
 			}
@@ -207,23 +203,22 @@ public class RecipediaJDBC {
 		return null;
 	}
 	public Vector<Recipe> getUploadedRecipes(int userID) {
+		Vector<Recipe> recipes = new Vector<Recipe>();
 		try {
-			
 			ps = conn.prepareStatement(getUploadedRecipes);
-			
 			ps.setInt(1, userID);
-			rs = ps.executeQuery();
-			Vector<Recipe> recipes = new Vector<Recipe>();
-			while(rs.next()) {
-				int recipeID = rs.getInt(2);
+			ResultSet res = ps.executeQuery();
+			while(res.next()) {
+				System.out.println("finding matches");
+				int recipeID = res.getInt(2);
 				Recipe recipe = getRecipe(recipeID);
 				recipes.add(recipe);
 			}
-			return recipes;
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return recipes;
 	}
 	public User getUserByUsername(String username) {
 		try {
@@ -427,7 +422,6 @@ public class RecipediaJDBC {
 		return following;
 	}
 
-	//need function to add follower to user
 	
 	// get username from ID
 	public String getUsername(String name) {
