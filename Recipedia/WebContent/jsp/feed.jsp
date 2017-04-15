@@ -29,7 +29,7 @@
 		    </ul>
 		    <form class="navbar-form navbar-left">
 		      <div class="form-group">
-		        <input id="search" type="text" class="form-control" placeholder="Search Recipes...">
+		        <input id="search" type="text" class="form-control" name="searchInput" placeholder="Search Recipes...">
 		      </div>
 		     <button class="btn btn-default" type="button" onclick="window.location.href='${pageContext.request.contextPath}/jsp/results.jsp'">
 	            <span class="glyphicon glyphicon-search"></span>
