@@ -45,6 +45,7 @@ public class RecipediaJDBC {
 	private final static String getEvent = "SELECT * FROM ActionEvents WHERE eventID=?";
 	private final static String getUsernameByID = "SELECT * FROM USERS WHERE userID=?";
 	private final static String getUserEvents = "SELECT * FROM ActionEvents WHERE userID=?";
+	private final static String getTagWithID = "SELECT * FROM TagToRecipe WHERE tagID=?";
 	public RecipediaJDBC() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -389,12 +390,19 @@ public class RecipediaJDBC {
 	public Set<Recipe> tagResult(String entry) {
 		Set<Recipe> results = new HashSet<>();
 		try {
+			
 			ps = conn.prepareStatement(tresultTable);
 			ps.setString(1, entry);
 			ResultSet rs = ps.executeQuery();
-			while(rs.next()) {
-				results.add(this.getRecipe(rs.getInt(1)));
+			rs.next();
+			int tagID = rs.getInt(1);
+			ps = conn.prepareStatement(getTagWithID);
+			ps.setInt(1, tagID);
+			ResultSet rs2 = ps.executeQuery();
+			while(rs2.next()) {
+				results.add(this.getRecipe(rs2.getInt(2)));
 			}
+			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
