@@ -31,7 +31,7 @@
       
       function signup() {
     	  var xhttp = new XMLHttpRequest();
-    	  xhttp.open("GET", "${pageContext.request.contextPath}/SignupServlet?fullname=" + document.signupform.fullname.value + "&username=" + document.signupform.username.value + "&password="+document.signupform.password.value, false);
+    	  xhttp.open("GET", "${pageContext.request.contextPath}/SignupServlet?fullname=" + document.signupform.fullname.value + "&username=" + document.signupform.username.value + "&password="+document.signupform.password.value + "&imageURL="+document.signupform.imageURL.value, false);
     	  xhttp.send();
        	  if(xhttp.responseText.trim().length > 0) {
            	  document.getElementById("result_1").innerHTML = xhttp.responseText;
@@ -119,7 +119,7 @@
 				    	</div>	
 				    	<div class="form-group">
 							<label>Image</label>
-							<input type="text" name="image"  placeholder = "url" class="form-control">
+							<input type="text" name="imageURL"  placeholder="url" class="form-control" />
 					      	
 				      	</div>
 					      	 <input type="submit" value="Sign Up" class="btn btn-default"/>
