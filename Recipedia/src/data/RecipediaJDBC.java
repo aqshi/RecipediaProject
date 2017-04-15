@@ -36,6 +36,8 @@ public class RecipediaJDBC {
 	private final static String getIngredients = "SELECT * FROM INGREDIENTS WHERE recipeID=?";
 	private final static String getInstructions = "SELECT * FROM INSTRUCTIONS WHERE recipeID=?";
 	private final static String getTags = "SELECT * FROM TagToRecipe WHERE recipeID=?";
+	private final static String getSavedRecipes = "SELECT * FROM SAVEDRECIPES WHERE userID=?";
+	private final static String getUploadedRecipes = "SELECT * FROM UPLOADEDRECIPES where userID=?";
 	public RecipediaJDBC() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -171,6 +173,38 @@ public class RecipediaJDBC {
 				e.printStackTrace();
 			}	
 	}
+	public Vector<Recipe> getSavedRecipes(int userID) {
+		try {
+			ps = conn.prepareStatement(getSavedRecipes);
+			ps.setInt(1, userID);
+			rs = ps.executeQuery();
+			Vector<Recipe> recipes = new Vector<Recipe>();
+			while(rs.next()) {
+				int recipeID = rs.getInt(2);
+				Recipe recipe = getRecipe(recipeID);
+				recipes.add(recipe);
+			}
+			return recipes;
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+	public Vector<Recipe> getUploadedRecipes(int userID) {
+		try {
+			ps = conn.prepareStatement(getUploadedRecipes);
+			ps.setInt(1, userID);
+			rs = ps.executeQuery();
+			Vector<Recipe> recipes = new Vector<Recipe>();
+			while(rs.next()) {
+				int recipeID = rs.getInt(2);
+				Recipe recipe = getRecipe(recipeID);
+				recipes.add(recipe);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	
 
 	public int addRecipe(Recipe recipe) {
@@ -240,6 +274,7 @@ public class RecipediaJDBC {
 		}
 		return userID;
 	}
+	
 
 	public int getRecipeIDByRecipeName(String recipeName){
 		int recipeID = 0;
