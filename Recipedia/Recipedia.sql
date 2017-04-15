@@ -546,6 +546,146 @@ INSERT INTO Ingredients(recipeID, quantity, units, ingredient)
 INSERT INTO Ingredients(recipeID, quantity, units, ingredient)
 	VALUES ( 22, 2 ,'slices','cooked bacon');
     
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(3, 1, 'package', 'bow tie pasta');
+
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(3, 1, 'teaspoon', 'olive oil');
+    
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(3, 2, 'cloves', 'garlic');
+
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(3, .33 , 'cup', 'sun-dried tomatoes');
+
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(3, .5 , 'pesto', 'sauce');
+    
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(4, 1, 'units', 'egg');  
+    
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(4, 1, 'teaspoon', 'pure vanilla extract');
+    
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(4, .5 , 'teaspoon', 'ground cinnamon');
+    
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(4, .25 , 'cup', 'milk');
+
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(4, 4, 'slices', 'bread');
+  
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(5, 3, 'tablespoons', 'white sugar');
+   
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(5, 3, 'teaspoons', 'baking powder');
+
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(5, 1.5 , 'teaspoons', 'baking soda');
+    
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(5, .75, 'teaspoon', 'salt');
+    
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(5, 3, 'cups', 'buttermilk');
+    
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(5, .5 , 'cup', 'milk');
+    
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(5, 3, 'units' , 'eggs');
+    
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(5, .33 , 'cup' , 'melted butter');
+
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(6, 7, 'stalk', 'asapragus (trimmed and cleaned)');
+    
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(6, 1, 'tablespoon', 'olive oil');
+    
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(6, 2, 'teaspoons', 'grainy mustard');
+
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(6, 1, 'slice', 'oka cheese (or your favorite)');
+    
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(6, 2, 'slices', 'bread');
+    
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(6, 1, 'tablespoon', 'butter (room temperature)');
+
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(7, .5 , 'cup', 'water');
+
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(7, .33 , 'cup', 'couscous');
+    
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(7, .5 , 'cup', 'chopped fresh mint');
+    
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(7, 1, 'cup', 'chopped fresh parsley');
+
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(7, .25 , 'cup', 'lemon juice');
+
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(7, 3, 'tablespoons', 'extra-virgin olive oil');
+
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(7, 2, 'teaspoons', 'minced garlic');
+
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(7, .25 , 'teaspoon' , 'salt');
+    
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(7, .25 , 'teaspoon', 'freshly ground pepper');
+
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(7, 1, 'pound', 'chicken tenders');
+
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(7, 1, 'medium', 'tomato, ,chopped');
+
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(7, 1, 'cup', 'chopped cucumber');
+    
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(7, 4, '10-inch', 'spinach wraps or tortillas');
+
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(8, 8, 'ounces', 'uncooked elbow macaroni');
+
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(8, 2, 'cups', 'shredded sharp Cheddar cheese');
+
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(8, .5 , 'cup', 'grated Parmesean cheese');
+
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(8, 3, 'cups', 'milk');
+
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(8, .25 , 'cup', 'butter');
+
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(8, 2.5 , 'tablespoons', 'all-purpose flour');
+
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(8, 2, 'tablespoons', 'butter');
+
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(8, .5 , 'cup', 'bread crumbs');
+
+INSERT INTO Ingredients (recipeID, quantity, units, ingredient)
+	VALUES(8, 1, 'pinch', 'paprika');
+
+
+    
 CREATE TABLE Instructions (
 	recipeID int(11) not null,
     instruction varchar(10000) not null,
@@ -594,6 +734,78 @@ INSERT INTO Instructions(recipeID, instruction)
 
 INSERT INTO Instructions(recipeID, instruction)
 	VALUES (22, 'Top with fresh cracked pepper and sea salt to taste.');
+
+INSERT INTO Instructions(recipeID, instruction)
+	VALUES(3, 'Bring a large pot of lightly salted water to a boil. Add pasta and cook for 8 to 10 minutes or until al dente; drain.');
+
+INSERT INTO Instructions(recipeID, instruction)
+	VALUES(3, 'Heat oil in a large skillet over medium heat. Saute garlic until tender, then stir in chicken. Season with red pepper flakes. Cook until chicken is golden, and cooked through.');
+
+INSERT INTO Instructions(recipeID, instruction)
+	VALUES(3,'In a large bowl, combine pasta, sun-dried tomatoes and pesto. Toss to coat even');
+
+INSERT INTO Instructions(recipeID, instruction)
+	VALUES(4, 'Beat egg, vanilla and cinnamon in shallow dish. Stir in milk.');
+
+
+INSERT INTO Instructions(recipeID, instruction)
+	VALUES(4, 'Dip bread in egg mixture, turning to coat both sides evenly.');
+    
+INSERT INTO Instructions(recipeID, instruction)
+	VALUES(4, 'Cook bread slices on lightly greased nonstick griddle or skillet on medium heat until browned on both sides.');
+
+    
+INSERT INTO Instructions(recipeID, instruction)
+	VALUES(5, 'In a large bowl, combine flour, sugar, baking powder, baking soda, and salt. In a separate bowl, beat together buttermilk, milk, eggs and melted butter. Keep the two mixtures separate until you are ready to cook.');
+    
+INSERT INTO Instructions(recipeID, instruction)
+	VALUES(5, 'Heat a lightly oiled griddle or frying pan over medium high heat. You can flick water across the surface and if it beads up and sizzles, its ready!');
+    
+INSERT INTO Instructions(recipeID, instruction)
+	VALUES(5, 'Pour the wet mixture into the dry mixture, using a wooden spoon or fork to blend. Stir until its just blended together. Do not over stir! Pour or scoop the batter onto the griddle, using approximately 1/2 cup for each pancake. Brown on both sides and serve hot.');
+
+INSERT INTO Instructions(recipeID, instruction)
+	VALUES(6, 'Toss the asparagus in the oil, salt and pepper.');
+   
+INSERT INTO Instructions(recipeID, instruction)
+	VALUES(6, 'Arrange the asparagus in a single layer on a baking sheet.');
+
+INSERT INTO Instructions(recipeID, instruction)
+	VALUES(6, 'Roast in a preheated 400F/200C oven until tender, about 10-30 minutes. (Note: Roasting time can vary greatly depending on how thick your asparagus is.)');
+    
+INSERT INTO Instructions(recipeID, instruction)
+	VALUES(6, 'Butter the outside of each slice of bread, spread the mustard on the inside, sprinkle half of the cheese on one slice of bread, top with the asparagus, the remaining cheese and finally the other slice of bread.');
+
+INSERT INTO Instructions(recipeID, instruction)
+	VALUES(6, 'Heat a non-stick pan over medium heat, add the sandwich and grill until golden brown and the cheese has melted, about 2-4 minutes per side.');
+
+INSERT INTO Instructions(recipeID, instruction)
+	VALUES(7, 'Bring water to a boil in a small saucepan. Stir in couscous and remove from the heat. Cover and let stand for 5 minutes. Fluff with a fork. Set aside.');
+
+INSERT INTO Instructions(recipeID, instruction) 
+	VALUES(7, 'Toss chicken tenders in  a medium bowl with 1 tablespoon of the parsley mixture and the remaining 1/8 teaspoon salt. Place the tender in a large nonstick skillet and cook over medium heat until cooked though, 3 to 5 minutes per side. Transfer to a clean cutting board. Cut into bite-size pieces when cool enough to handle.');
+
+INSERT INTO Instructions(recipeID, instruction)
+	VALUES(7,  'Stir the remaining parsley mixture into the couscous along with tomato and cucumber.');
+
+INSERT INTO Instructions(recipeID, instruction)
+	VALUES(7, 'To assemble wraps, spread about ¾ cup of the couscous mixture onto each wrap. Divide the chicken among the wraps. Roll the wraps up like a burrito, tucking in the sides to hold the ingredients in. Serve cut in half.');
+
+INSERT INTO Instructions(recipeID, instruction)
+	VALUES(8, 'Cook macaroni according to the package directions. Drain.');
+    
+INSERT INTO Instructions(recipeID, instruction)
+	VALUES(8, 'In a saucepan, melt butter or margarine over medium heat. Stir in enough flour to make a roux. Add milk to roux slowly, stirring constantly. Stir in cheeses, and cook over low heat until cheese is melted and the sauce is a little thick. Put macaroni in large casserole dish, and pour sauce over macaroni. Stir well.');
+
+INSERT INTO Instructions(recipeID, instruction)
+	VALUES(8, 'Melt butter or margarine in a skillet over medium heat. Add breadcrumbs and brown. Spread over the macaroni and cheese to cover. Sprinkle with a little paprika.');
+    
+INSERT INTO Instructions(recipeID, instruction)
+	VALUES(8, 'Bake at 350 degrees F (175 degrees C) for 30 minutes. Serve.');
+
+
+
+
 
 CREATE TABLE Fans (
 	userID int(11) not null,
