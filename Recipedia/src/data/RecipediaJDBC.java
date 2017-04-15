@@ -39,6 +39,7 @@ public class RecipediaJDBC {
 	private final static String getTags = "SELECT * FROM TagToRecipe WHERE recipeID=?";
 	private final static String getSavedRecipes = "SELECT * FROM SAVEDRECIPES WHERE userID=?";
 	private final static String getUploadedRecipes = "SELECT * FROM UPLOADEDRECIPES where userID=?";
+	private final static String getUser = "SELECT * FROM USERS where username=?";
 	public RecipediaJDBC() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -209,7 +210,23 @@ public class RecipediaJDBC {
 		return null;
 	}
 	public User getUserByUsername(String username) {
-		
+		try {
+			User user = new User(username);
+			ps = conn.prepareStatement(getUser);
+			ps.setString(1, username);
+			rs = ps.executeQuery();
+			rs.next();
+			user.setPassword(rs.getString(2));
+			user.setFname(rs.getString(3));
+			user.setLname(rs.getString(4));
+			user.setImage(rs.getString(5));
+			user.setSavedRecipes(this.getSavedRecipes(rs.getInt(1)));
+			user.setUploadedRecipes(this.getUploadedRecipes(rs.getInt(1)));
+			user.setFans(this.profileFollowingSet(username));
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return null;
 		
 	}
@@ -401,7 +418,8 @@ public class RecipediaJDBC {
 			
 			return following;
 		}
-
+	//need function to add follower to user
+	
 	// print follower
 	public Set<String> followerSet(String name) {
 		Set<String> follower = new HashSet<>();

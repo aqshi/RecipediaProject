@@ -1,5 +1,6 @@
 package recipediaClasses;
 
+import java.util.Set;
 import java.util.Vector;
 
 public class User {
@@ -11,7 +12,7 @@ public class User {
 	private String image;
 	private Vector<Recipe> savedRecipes;
 	private Vector<Recipe> uploadedRecipes;
-	private Vector<String> myFans;
+	private Set<String> myFans;
 	
 	public User(String username){
 		this.username = username;
@@ -89,7 +90,7 @@ public class User {
 		return this.uploadedRecipes;
 	}
 	
-	public void setFans(Vector<String> fans){
+	public void setFans(Set<String> fans){
 		this.myFans = fans;
 	}
 	
@@ -97,7 +98,7 @@ public class User {
 		myFans.add(fan);
 	}
 	
-	public Vector<String> getFans(){
+	public Set<String> getFans(){
 		return this.myFans;
 	}
 	
