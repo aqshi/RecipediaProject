@@ -53,7 +53,10 @@ public class RecipediaJDBC {
 			e.printStackTrace();
 		}
 	}
-	
+	//liked
+	//saves
+	//uploads
+
 	public void addUser(String fullName, String username, String password, String imageURL) {
 		Scanner scanner = new Scanner(fullName);
 		String firstName = scanner.next();
@@ -445,6 +448,10 @@ public class RecipediaJDBC {
 		}
 
 		return follower;
+	}
+	public void addEvent(String userName, int recipeID, String action) {
+		int userID = this.getUserIDByUsername(userName);
+		
 	}
 }
 
