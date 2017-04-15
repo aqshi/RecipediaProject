@@ -78,7 +78,7 @@ public class CreateRecipeServlet extends HttpServlet {
             
             System.out.println(userName);
             sr.setStatus("Success");
-            sr.setData("viewRecipes.jsp");
+            sr.setData("viewRecipes.jsp?recipeID=" + recipeKey);
             String returnJson = gson.toJson(sr);
     		out.write(returnJson);
         } else {

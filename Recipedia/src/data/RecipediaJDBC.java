@@ -26,8 +26,8 @@ public class RecipediaJDBC {
 	private final static String addFollowing = "INSERT INTO Fans(userID, fanName) VALUES(?,?)";
 	private final static String removeFollower = "DELETE FROM Fans WHERE userID=? AND fanName=?";
 	private final static String addRecipe = "INSERT INTO Recipes(title, likes, image) VALUES(?,?,?)";
-    private final static String resultTable = "SELECT * FROM Recipes WHERE recipeID=?";
-	private final static String tresultTable = "SELECT * FROM Tags WHERE tagID=?";
+    private final static String resultTable = "SELECT * FROM Recipes WHERE title=?";
+	private final static String tresultTable = "SELECT * FROM Tags WHERE tag=?";
 	private final static String addIngredient = "INSERT INTO Ingredients(recipeID, quantity, units, ingredient) VALUES(?,?,?,?)";
 	private final static String addInstruction = "INSERT INTO Instructions(recipeID, instruction) VALUES(?,?)";
 	private final static String addTag = "INSERT INTO Tags(tag) VALUES(?)";
@@ -371,14 +371,13 @@ public class RecipediaJDBC {
 		}
 	}
     
-    public Set<String> nameResult(String entry) {
-        Set<String> results = new HashSet<>();
+    public Set<Recipe> nameResult(String entry) {
+        Set<Recipe> results = new HashSet<Recipe>();
         try {
-			st = conn.createStatement();
 			ps = conn.prepareStatement(resultTable);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
-				if(rs.getString(1).equalsIgnoreCase(entry)) results.add(rs.getString(1));
+				results.add(this.getRecipe(rs.getInt(1)));
 			}
 			
 		} catch (SQLException e) {
@@ -387,8 +386,8 @@ public class RecipediaJDBC {
 		
 		return results;
 	}
-	public Set<String> tagResult(String entry) {
-		Set<String> results = new HashSet<>();
+	public Set<Recipe> tagResult(String entry) {
+		Set<Recipe> results = new HashSet<>();
 		try {
 			st = conn.createStatement();
 			ps = conn.prepareStatement(tresultTable);
