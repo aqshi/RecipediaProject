@@ -238,17 +238,7 @@ public class RecipediaJDBC {
 				user.setUploadedRecipes(this.getUploadedRecipes(userID));
 				user.setFans(this.followerSet(username));
 			}
-			rs.next();
-			int userID = rs.getInt(1);
-			user.setPassword(rs.getString(3));
-			user.setFname(rs.getString(4));
-			user.setLname(rs.getString(5));
-			user.setFullName(user.getFname(), user.getLname());
-			user.setImage(rs.getString(6));
-			user.setSavedRecipes(this.getSavedRecipes(userID));
 			
-			user.setUploadedRecipes(this.getUploadedRecipes(userID));
-			user.setFans(this.profileFollowingSet(username));
 			return user;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -433,27 +423,6 @@ public class RecipediaJDBC {
 		return following;
 	}
 
-	//print following (TEST-- NOT THIS ONE)
-	public Set<String> followingSet() {
-			String temp = userToCheck;
-			int check = getUserIDByUsername(temp);
-			String usernameID = Integer.toString(check);
-			Set<String> following = new HashSet<>();
-			try {
-				st = conn.createStatement();
-				ps = conn.prepareStatement(followingTable);
-				ps.setString(1, usernameID);
-				rs = ps.executeQuery();
-				while(rs.next()) {
-					following.add(rs.getString(3));
-				}
-				
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			
-			return following;
-		}
 	//need function to add follower to user
 	
 	// get username from ID

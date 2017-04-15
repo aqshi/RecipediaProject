@@ -20,6 +20,7 @@
 		<title>Profile</title>
 	</head>
 	<%
+		//get the user that is needed to show on profile
 		String loggedInUser = (String) session.getAttribute("username");
 		String viewedUser = (String) request.getParameter("userClicked");
 		RecipediaJDBC jdbc = new RecipediaJDBC();
