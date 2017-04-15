@@ -57,7 +57,14 @@
 	    				out.println("<div class=\"col-md-2\">");
 	    				out.println("<div class=\"image-container\">");
 	    				//Images
-	    				out.println("<a href=\"${pageContext.request.contextPath}/jsp/viewRecipes.jsp\"><img src=\"../pasta.jpeg\"></a>");
+	    				
+	    				%>
+		    			<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp">
+		    			<%
+		    	
+		    			out.println(/*"<a href=\"${pageContext.request.contextPath}/jsp/viewRecipes.jsp\">*/"<img src=\"../pasta.jpeg\"></a>");
+		    			
+	    				//out.println("<a href=\"${pageContext.request.contextPath}/jsp/viewRecipes.jsp\"><img src=\"../pasta.jpeg\"></a>");
 	    				out.println("<div class=\"dropdown\">");
 	    				out.println("<button class=\"btn btn-primary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">");
 	    				out.println("<span class=\"caret\"></span></button>");
@@ -75,7 +82,11 @@
 		    			out.println("<div class=\"col-md-2\">");
 		    			out.println("<div class=\"image-container\">");
 		    			//Images
-		    			out.println("<a href=\"${pageContext.request.contextPath}/jsp/viewRecipes.jsp\"><img src=\"../pasta.jpeg\"></a>");
+		    			%>
+		    			<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp">
+		    			<%
+		    	
+		    			out.println(/*"<a href=\"${pageContext.request.contextPath}/jsp/viewRecipes.jsp\">*/"<img src=\"../pasta.jpeg\"></a>");
 		    			out.println("<div class=\"dropdown\">");
 		    			out.println("<button class=\"btn btn-primary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">");
 		    			out.println("<span class=\"caret\"></span></button>");
