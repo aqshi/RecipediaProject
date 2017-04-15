@@ -14,7 +14,7 @@ public class RecipediaJDBC {
 	private static Connection conn = null;
 	private static Statement st = null;
 	private static PreparedStatement ps = null;
-	//private static ResultSet rs = null;
+	private static ResultSet rs = null;
 	private String userToCheck = null;
 	
 	//Strings for Database
