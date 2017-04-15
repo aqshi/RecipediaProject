@@ -21,7 +21,7 @@ public class RecipediaJDBC {
 	private final static String inputUsername = "SELECT * FROM Users WHERE username=?";
 	private final static String inputPassword = "SELECT * FROM Users WHERE pword=?";
 	private final static String followingTable = "SELECT * FROM Fans WHERE userID=?";
-	private final static String followerTable = "SELECT * FROM Following WHERE followingName=?";
+	private final static String followerTable = "SELECT * FROM Fans WHERE userID=?";
 	private final static String addFollowing = "INSERT INTO Fans(userID, fanName) VALUES(?,?)";
 	private final static String removeFollower = "DELETE FROM Fans WHERE userID=? AND fanName=?";
 	private final static String addRecipe = "INSERT INTO Recipes(title, likes, image) VALUES(?,?,?)";
@@ -141,7 +141,8 @@ public class RecipediaJDBC {
 			}
 			Vector<String> tags = new Vector<String>();
 			ps = conn.prepareStatement(getTags);
-			ps.setInt(2, recipeID);
+			ps.setInt(1, recipeID);
+			
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				String tag = rs.getString(1);
@@ -195,7 +196,9 @@ public class RecipediaJDBC {
 	}
 	public Vector<Recipe> getUploadedRecipes(int userID) {
 		try {
+			
 			ps = conn.prepareStatement(getUploadedRecipes);
+			
 			ps.setInt(1, userID);
 			rs = ps.executeQuery();
 			Vector<Recipe> recipes = new Vector<Recipe>();
@@ -217,13 +220,16 @@ public class RecipediaJDBC {
 			ps.setString(1, username);
 			rs = ps.executeQuery();
 			rs.next();
+			int userID = rs.getInt(1);
 			user.setPassword(rs.getString(3));
+			System.out.println("user id: " + rs.getInt(1));
 			user.setFname(rs.getString(4));
 			user.setLname(rs.getString(5));
 			user.setFullName(user.getFname(), user.getLname());
 			user.setImage(rs.getString(6));
-			user.setSavedRecipes(this.getSavedRecipes(rs.getInt(1)));
-			user.setUploadedRecipes(this.getUploadedRecipes(rs.getInt(1)));
+			user.setSavedRecipes(this.getSavedRecipes(userID));
+			
+			user.setUploadedRecipes(this.getUploadedRecipes(userID));
 			user.setFans(this.profileFollowingSet(username));
 			return user;
 		} catch (SQLException e) {
@@ -385,7 +391,6 @@ public class RecipediaJDBC {
 		int IDnum = getUserIDByUsername(name);
 		Set<String> following = new HashSet<>();
 		try {
-			st = conn.createStatement();
 			ps = conn.prepareStatement(followingTable);
 			ps.setInt(1, IDnum);
 			rs = ps.executeQuery();
