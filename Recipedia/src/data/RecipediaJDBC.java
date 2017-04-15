@@ -201,9 +201,11 @@ public class RecipediaJDBC {
 				Recipe recipe = getRecipe(recipeID);
 				recipes.add(recipe);
 			}
+			return recipes;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 	
 
