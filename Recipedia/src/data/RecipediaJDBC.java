@@ -217,11 +217,11 @@ public class RecipediaJDBC {
 			ps.setString(1, username);
 			rs = ps.executeQuery();
 			rs.next();
-			user.setPassword(rs.getString(2));
-			user.setFname(rs.getString(3));
-			user.setLname(rs.getString(4));
+			user.setPassword(rs.getString(3));
+			user.setFname(rs.getString(4));
+			user.setLname(rs.getString(5));
 			user.setFullName(user.getFname(), user.getLname());
-			user.setImage(rs.getString(5));
+			user.setImage(rs.getString(6));
 			user.setSavedRecipes(this.getSavedRecipes(rs.getInt(1)));
 			user.setUploadedRecipes(this.getUploadedRecipes(rs.getInt(1)));
 			user.setFans(this.profileFollowingSet(username));
