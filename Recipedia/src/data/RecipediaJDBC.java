@@ -395,7 +395,7 @@ public class RecipediaJDBC {
 			ps.setInt(1, IDnum);
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				following.add(rs.getString(3));
+				following.add(rs.getString(2));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
