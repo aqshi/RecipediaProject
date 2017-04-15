@@ -85,7 +85,7 @@
 	    				<div class="col-md-2"></div>
 	    					<div class="col-md-2">
 	    						<div class="image-container">
-		    						<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp"><img src="<%=finalResults.get(i).getImageURL() %>"></a>
+		    						<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp?recipeID=<%=finalResults.get(i).getId() %>"><img src="<%=finalResults.get(i).getImageURL() %>"></a>
 	    							<div class="dropdown">
 	    								<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
 	    								<span class="caret"></span></button>
@@ -104,7 +104,7 @@
 		    			<div class="col-sm-1"></div>
 		    				<div class="col-md-2">
 		    					<div class="image-container">
-		    						<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp"><img src="<%=finalResults.get(i).getImageURL() %>"></a>
+		    						<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp?recipeID=<%=finalResults.get(i).getId() %>"><img src="<%=finalResults.get(i).getImageURL() %>"></a>
 		    						<div class="dropdown">
 		    							<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
 		    							<span class="caret"></span></button>

@@ -46,6 +46,7 @@ public class RecipediaJDBC {
 	private final static String getUsernameByID = "SELECT * FROM USERS WHERE userID=?";
 	private final static String getUserEvents = "SELECT * FROM ActionEvents WHERE userID=?";
 	private final static String getTagWithID = "SELECT * FROM TagToRecipe WHERE tagID=?";
+	private final static String getAllTags = "SELECT * FROM Tags";
 	public RecipediaJDBC() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -160,6 +161,7 @@ public class RecipediaJDBC {
 				tags.add(tag);
 			}
 			Recipe recipe = new Recipe(ingredients, instructions, tags, title, image);
+			recipe.setId(recipeID);
 			recipe.setLikes(likes);
 			return recipe;
 		} catch(SQLException e) {
@@ -277,9 +279,18 @@ public class RecipediaJDBC {
 					ps.setString(2,  instructions.get(i));
 					ps.executeUpdate();
 				}
-				for (int i = 0; i < tags.size(); i++) {
+				PreparedStatement ps2 = conn.prepareStatement(getAllTags);
+				ResultSet rs2 = ps2.executeQuery();
+				Vector<String> addTags = new Vector<String>();
+				while(rs2.next()) {
+					String tagName = rs2.getString(2);
+					if (!recipe.getTags().contains(tagName)) {
+						addTags.add(tagName);
+					}
+				}
+				for (int i = 0; i < addTags.size(); i++) {
 					ps = conn.prepareStatement(addTag, Statement.RETURN_GENERATED_KEYS);
-					ps.setString(1, tags.get(i));
+					ps.setString(1, addTags.get(i));
 					ps.executeUpdate();
 					rs = ps.getGeneratedKeys();
 					if (rs.next()) {
