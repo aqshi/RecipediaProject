@@ -8,8 +8,15 @@ body {
 .row{
 	margin-top: 50px;
 }
+
+.header{
+	font-size: 70px;
+	color: #f7c59f;
+	text-align: center;
+}
 .headers{
 	color: #f7c59f;
+	text-align: center;
 }
 
 .navbar {
@@ -38,7 +45,17 @@ body {
 	border-radius: 25px;
 	border-width: 2px;
 	margin: 20px 20px 20px 20px;
-	height: 420px;
-	width: 420px;
+	height: 70px;
+	width: 100px;
 	background: linear-gradient(-90deg, #ff8a5b, #fc9651);
 }
+
+#ingredient-list{
+	line-height: 30px;
+	text-align: center;
+	margin-left: -50px;
+}
+
+/* #instructions{
+	line-height: 30px;
+} */

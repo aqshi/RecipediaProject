@@ -1,7 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*"%>
+ <%@ page import = "data.RecipediaJDBC" %>
+ <%@ page import = "recipediaClasses.Recipe" %>
+ <%@ page import = "recipediaClasses.Ingredient" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<%
+	//String recipeIDString = (String) request.getParameter("recipeID");
+	String recipeIDString = "2";
+	int recipeID = Integer.parseInt(recipeIDString);
+	RecipediaJDBC jdbc = new RecipediaJDBC();
+	Recipe recipe = jdbc.getRecipe(recipeID);
+	String name = recipe.getName();
+	Vector<Ingredient> ingredients = recipe.getIngredients();
+	Vector<String> instructions = recipe.getInstructions();
+	String image = recipe.getImageURL();
+	
+
+%>
 <head>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/recipe.css">
@@ -41,22 +57,42 @@
 		</nav>
 		<div class="container">
 			<div class="row">
-				<div class="col-md-4">
+				
+				<div class="col-md-3"></div>
+				<div class="col-md-6">
+					<h1 class="header"><%=name %></h1>
 					<div class="image-container">
-						<img id="recipeImage" src="../pasta.jpeg" ">
+						<img id="recipeImage" src="<%= image %>" ">
 					</div>
+					<h2 class="headers">Ingredients</h2>
+					<ul>
+					<%
+					for (Ingredient ingr : ingredients){
+						%><li id = "ingredient-list" type="none"><%= ingr.getQuantity() + " " + ingr.getUnits() + " " + ingr.getName()%></li>
+					<% 	
+					}
+					%>
+					</ul>
 					<h2 class="headers">Instructions</h2>
-					<p>Here are the instructions on how to make pasta</p><br>
-					
+					<ol>
+					<%
+					for (String step : instructions){
+						%><li id = "instructions"><%= step %></li><br/><% 
+					}
+					%>
+					</ol>
 					<h2 class="headers">Reviews</h2>
 					<p>These are the reviews</p><br>
 					
 					<h2 class="headers">Recommended Recipes</h2>
 					<p>Show the other recipes related to this recipe.</p>
 				</div>
+				<div class="col-md-3"></div>
+			</div>
+			<div class="row">
 				<div class="col-md-8">
-					<h1 class="headers">TITLE OF RECIPE</h1>
-					<h2 class="headers">Ingredients</h2>
+					
+					
 				</div>
 			</div>
 		</div>

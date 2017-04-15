@@ -58,7 +58,7 @@
 	    				//Images
 	    				
 	    				%>
-		    			<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp">
+		    			<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp" >
 		    			<%
 		    	
 		    			out.println(/*"<a href=\"${pageContext.request.contextPath}/jsp/viewRecipes.jsp\">*/"<img src=\"../pasta.jpeg\"></a>");
