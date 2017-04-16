@@ -38,9 +38,9 @@
 		      <img id='recipedia-logo' alt='recipedia-logo' src='../images/Recipedia_logo.png'>
 		    </div>
 		    <ul class="nav navbar-nav">
-		      <li><a href="${pageContext.request.contextPath}/jsp/feed.jsp">Feed</a></li>
+		      <li><a href="${pageContext.request.contextPath}/jsp/gfeed.jsp">Feed</a></li>
 		    </ul>
-		     <form class="navbar-form navbar-left" action="results.jsp">
+		     <form class="navbar-form navbar-left" action="gresults.jsp">
 		      <div class="form-group">
 		        <input id="search" type="text" class="form-control" name="searchInput" placeholder="Search Recipes...">
 		      </div>
