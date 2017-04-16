@@ -15,6 +15,33 @@
 		<link href="../js/lib/noty.css" rel="stylesheet"></link>
 		<script src="../js/lib/noty.js" type="text/javascript"></script>
 		<script type='text/javascript' src='../js/Notifications.js'></script>
+		<script>
+ 	function followchange() {
+ 		var change = document.getElementById("followButton");
+ 		var xhttp = new XMLHttpRequest();
+ 	   	if (change.value == "Unfan")
+ 	   	{
+ 	   		change.value = "Become a fan";
+ 	   		xhttp.open("GET", "${pageContext.request.contextPath}/FollowUser?userClicked=" + document.getElementById("userClicked").value, false);		    	  
+ 	    	xhttp.send();
+ 	    	/* if(xhttp.responseText.trim().length > 0) {
+ 	    		document.getElementById("print_follower").innerHTML = xhttp.responseText;
+ 	    		return false;
+ 	    	} */
+ 	   	}
+ 	
+ 	   else if(change.value == "Become a fan")
+ 	   {
+ 	       change.value = "Unfan";
+ 	       xhttp.open("GET", "${pageContext.request.contextPath}/UnfollowUser?userClicked=" + document.getElementById("userClicked").value, false);		    	  
+	    	xhttp.send();
+	    	/* if(xhttp.responseText.trim().length > 0) {
+	    		document.getElementById("print_follower").innerHTML = xhttp.responseText;
+	    		return false;
+	    	} */
+ 	   	}
+ 	}
+	</script>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Profile</title>
 	</head>
@@ -33,6 +60,7 @@
 			
 		}
 		
+		User forLoggedIn = jdbc.getUserByUsername(loggedInUser);
 		User user = jdbc.getUserByUsername(name);
 	%>
 	<body>
@@ -69,6 +97,26 @@
 				<div class="col-md-3">
 					<div class="profile-image-container">
 						<img id = "profile-image" src="<%=user.getImage() %>"/>
+					</div>
+					<div>
+					<%
+						if(name.equals(viewedUser) && !viewedUser.equals(loggedInUser)) {
+							Set<String> followOrNot = forLoggedIn.getFans();
+							if(followOrNot.contains(name)) { System.out.println(name); %>
+								<form name="followform" method="GET" onsubmit="return followchange()">
+									<input type="hidden" id="userClicked" name="userClicked" value="<%= name %>">
+									<input style="float:right; margin-top:130px;" type="submit" id="followButton" value="Unfan">
+								</form>
+					<%		}
+							
+							else { %>
+								<form name="followform" method="GET" onsubmit="return followchange()">
+									<input type="hidden" id="userClicked" name="userClicked" value="<%=name  %>">
+									<input style="float:right; margin-top:130px;" type="submit" id="followButton" value="Become a fan">
+								</form>		
+					<%		}
+						}
+					%>
 					</div>
 				</div>
 				<div class="col-md-2"></div>
@@ -107,7 +155,6 @@
 					int count = 1;
 					for(Recipe s : user.getUploadedRecipes()) {
 						String recipeImage = s.getImageURL();
-						System.out.println(s.getName());
 					if (count < 5){
 						%><a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp?recipeID=<%= s.getId() %>">
 						<img style ="width: 150px; height:150px; margin:20px 40px 20px 30px"src="<%=recipeImage%>"/>
