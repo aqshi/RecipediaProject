@@ -15,7 +15,11 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 
 import data.RecipediaJDBC;
+import messages.SavedMessage;
+import recipediaClasses.Event;
 import recipediaClasses.JsonEventData;
+import recipediaClasses.ServletResponse;
+import recipediaClasses.WebSocketEndpoint;
 
 /**
  * Servlet implementation class FeedEventServlet
@@ -51,12 +55,31 @@ public class FeedEventServlet extends HttpServlet {
         String action = eventData.getAction();
         if (action.equals("saved")) {
         	rjdbc.addSavedRecipe(rjdbc.getEvent(eventData.getId()).getRecipeID(), rjdbc.getUserIDByUsername(eventData.getUsername()));
+        	Event event = new Event();
+        	event.setAction("Saved");
+        	event.setRecipeID(rjdbc.getEvent(eventData.getId()).getRecipeID());
+        	event.setUsernameDidAction(eventData.getUsername());
+        	event.setRecipeName(rjdbc.getEvent(eventData.getId()).getRecipeName());
+        	rjdbc.addEvent(event.getUsernameDidAction(), event.getRecipeID(), event.getAction());
+        	WebSocketEndpoint wse = new WebSocketEndpoint();
+        	SavedMessage sm = new SavedMessage(event.getUsernameDidAction(), event.getRecipeName());
+        	System.out.println(rjdbc.getUsernameByUserID(rjdbc.getUserWhoUploadedRecipe(rjdbc.getEvent(eventData.getId()).getRecipeID())));
+        	System.out.println(rjdbc.getUsernameByUserID(rjdbc.getUserWhoUploadedRecipe(rjdbc.getEvent(eventData.getId()).getRecipeID())));
+        	wse.sendToUser(rjdbc.getUsernameByUserID(rjdbc.getUserWhoUploadedRecipe(rjdbc.getEvent(eventData.getId()).getRecipeID())), gson.toJson(sm));
         	//create event
         } else if (action.equals("liked")) {
         	rjdbc.updateLike(rjdbc.getEvent(eventData.getId()).getRecipeID());
-        	//create event
+        	Event event = new Event();
+        	event.setAction("Liked");
+        	event.setRecipeID(rjdbc.getEvent(eventData.getId()).getRecipeID());
+        	event.setUsernameDidAction(eventData.getUsername());
+        	event.setRecipeName(rjdbc.getEvent(eventData.getId()).getRecipeName());
+        	rjdbc.addEvent(event.getUsernameDidAction(), event.getRecipeID(), event.getAction());
+        	
         }
-        out.println("bal");
+        ServletResponse sr = new ServletResponse();
+        sr.setStatus("Success");
+        out.println(gson.toJson(sr));
 	}
 
 

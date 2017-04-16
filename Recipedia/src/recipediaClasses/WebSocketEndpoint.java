@@ -1,9 +1,11 @@
 package recipediaClasses;
 
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.locks.Lock;
@@ -25,18 +27,42 @@ import javax.websocket.server.ServerEndpoint;
 public class WebSocketEndpoint {
 	private static final Logger logger = Logger.getLogger("BotEndpoint");
 	private static final Map<String, Session> sessions = new HashMap<String, Session>();
-	private static final Map<String, User> users = new HashMap<>();
+	private static final Map<String, String> users = new HashMap<>();
+	private static final Map<String, String> usernameToSessionID = new HashMap<>();
 	private static Lock lock = new ReentrantLock();
 
 	@OnOpen
 	public void open(Session session) {
 		lock.lock();
+		System.out.println("Connection opened " + session.getId());
 		logger.log(Level.INFO, "Connection opened. (id:)" + session.getId());
 		sessions.put(session.getId(), session);
 		lock.unlock();
 	}
 
-	
+	@OnMessage
+	public void onMessage(String message, Session session) {
+		lock.lock();
+		String user = users.get(session.getId());
+		
+			// factory not yet created, use message as text file
+			InputStream is = new ByteArrayInputStream(message.getBytes());
+			//User newUser = new User();
+			
+			BufferedReader br = new BufferedReader(new InputStreamReader(is));
+			try {
+				String username = br.readLine();
+				System.out.println(message);
+				usernameToSessionID.put(message, session.getId());
+				users.put(session.getId(), message);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+
+		lock.unlock();
+	}
 
 	@OnClose
 	public void close(Session session) {
@@ -63,5 +89,20 @@ public class WebSocketEndpoint {
 			logger.log(Level.SEVERE, ex.getMessage(), ex.getStackTrace());
 		}
 		lock.unlock();
+	}
+	
+	public void sendToUser(String username, String message) {
+		lock.lock();
+		try {
+			System.out.println(usernameToSessionID.size());
+			System.out.println(usernameToSessionID.get(username));
+			System.out.println(username);
+			if (usernameToSessionID.get(username) != null && sessions.containsKey(usernameToSessionID.get(username))) {
+				sessions.get(usernameToSessionID.get(username)).getBasicRemote().sendText(message);
+			}
+			
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
