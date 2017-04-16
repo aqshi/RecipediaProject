@@ -91,7 +91,7 @@
 						String recipeImage = s.getImageURL();
 						if (countSave < 5){
 							%>
-							<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp?recipeClicked=<%=s.getName()%>">
+							<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp?recipeID=<%=s.getId()%>">
 								<img style ="width: 150px; height:150px; margin:20px 40px 20px 30px"src="<%=recipeImage%>"/>
 							</a><%
 						}

@@ -47,13 +47,16 @@ public class RecipediaJDBC {
 	private final static String getUserEvents = "SELECT * FROM ActionEvents WHERE userID=?";
 	private final static String getTagWithID = "SELECT * FROM TagToRecipe WHERE tagID=?";
 	private final static String getAllTags = "SELECT * FROM Tags";
+	private final static String getCurrNumLikes = "SELECT * FROM Recipes Where recipeID=?";
+	private final static String increaseLikeByOne = "UPDATE Recipes SET likes=?, WHERE recipeID=?";
+	
 	public RecipediaJDBC() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			
 			//change this according to your inputs
 
-			conn = DriverManager.getConnection("jdbc:mysql://localhost/recipedia?user=root&password=iwtaekcwne&useSSL=false");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost/recipedia?user=root&password=790536e&useSSL=false");
 
 
 		} catch (SQLException e) {
@@ -574,6 +577,32 @@ public class RecipediaJDBC {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public void updateLike(int recipeID) {
+		try {
+			ps = conn.prepareStatement(getCurrNumLikes);
+			ps.setInt(1, recipeID);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				updateRecipeRow(recipeID, rs.getInt(3));
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void updateRecipeRow(int recipeID, int numLikes) {
+		int updatedLikes = numLikes +1;
+		try {
+			ps = conn.prepareStatement(increaseLikeByOne);
+			ps.setInt(1, recipeID);
+			ps.setInt(2, updatedLikes);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	
