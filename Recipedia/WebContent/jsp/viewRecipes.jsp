@@ -15,9 +15,9 @@
 	Vector<Ingredient> ingredients = recipe.getIngredients();
 	Vector<String> instructions = recipe.getInstructions();
 	String image = recipe.getImageURL();
-	
-
+	int likes = recipe.getLikes();
 %>
+
 <head>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/recipe.css">
@@ -64,6 +64,7 @@
 					<div class="image-container">
 						<img id="recipeImage" src="<%= image %>" ">
 					</div>
+					<h3 id="likes">Likes: <%=likes %></h3>
 					<h2 class="headers">Ingredients</h2>
 					<ul>
 					<%
@@ -81,17 +82,20 @@
 					}
 					%>
 					</ol>
-					<h2 class="headers">Reviews</h2>
+					<div class="save-container">
+						
+					</div>
+					<!-- <h2 class="headers">Reviews</h2>
 					<p>These are the reviews</p><br>
 					
 					<h2 class="headers">Recommended Recipes</h2>
-					<p>Show the other recipes related to this recipe.</p>
+					<p>Show the other recipes related to this recipe.</p> -->
 				</div>
 				<div class="col-md-3"></div>
 			</div>
 			<div class="row">
 				<div class="col-md-8">
-					
+					<button class="save-button" onclick="saveRecipe(<%=recipe.getId()%>)">Save</button>
 					
 				</div>
 			</div>

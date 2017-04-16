@@ -50,6 +50,10 @@ body {
 	background: linear-gradient(-90deg, #ff8a5b, #fc9651);
 }
 
+#likes{
+	text-align: center;
+	color: #ff8a5b;
+}
 #ingredient-list{
 	line-height: 30px;
 	text-align: center;
