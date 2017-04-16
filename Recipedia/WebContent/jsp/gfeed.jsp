@@ -50,23 +50,24 @@ c<%@ page language="java" contentType="text/html; charset=UTF-8"
 	    		//need to grab all events, sort them by timestamp
 	    		RecipediaJDBC rjdbc = new RecipediaJDBC();
 	    		session = request.getSession(true);
-	    		String username = (String)session.getAttribute("username");
-	    		User user = rjdbc.getUserByUsername(username);
-	    		Set<String> followingSet = rjdbc.profileFollowingSet(username);
-	    		Vector<Event> events = new Vector<Event>();
-	    		Iterator<String> it = followingSet.iterator();
-	    		while(it.hasNext())
+	    		Vector<Recipe> gRecipes = rjdbc.getAllRecipes();
+	    		//String username = (String)session.getAttribute("username");
+	    		//User user = rjdbc.getUserByUsername(username);
+	    		//Set<String> followingSet = rjdbc.profileFollowingSet(username);
+	    		//Vector<Event> events = new Vector<Event>();
+	    		//Iterator<String> it = followingSet.iterator();
+	    		/*while(it.hasNext())
 	    		{
 	    			String name = it.next();
 	    			Vector<Event> newEvents = rjdbc.getUserEvents(name);
 	    			for (int i = 0; i < newEvents.size(); i++) {
 	    				events.add(newEvents.get(i));
 	    			}
-	    		}
-	    		Collections.sort(events);
+	    		}*/
+	    		//Collections.sort(events);
 	    		//rjdbc.getUserEvents();
 	    		
-	    		int counter = events.size();
+	    		int counter = /*gRecipes.size()*/9;
 	    		Vector<String> images= new Vector<String>();
 	    		for(int i=0;i<counter;i++)
 	    		{
@@ -77,7 +78,7 @@ c<%@ page language="java" contentType="text/html; charset=UTF-8"
 	    				<div class="col-md-2"></div>
 	    					<div class="col-md-2">
 	    						<div class="image-container">
-		    						<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp?recipeID=<%=events.get(i).getRecipeID() %>"><img style="margin-bottom:10px" src="<%=rjdbc.getRecipe(events.get(i).getRecipeID()).getImageURL() %>"></a>
+		    						<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp?recipeID=<%=gRecipes.get(i).getId() %>"><img style="margin-bottom:10px" src="<%=gRecipes.get(i).getImageURL() %>"></a>
 	    						</div>
 	    					</div>
 	    			<%
@@ -88,7 +89,7 @@ c<%@ page language="java" contentType="text/html; charset=UTF-8"
 		    			<div class="col-sm-1"></div>
 		    				<div class="col-md-2">
 		    					<div class="image-container">
-		    						<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp?recipeID=<%=events.get(i).getRecipeID() %>"><img style="margin-bottom:10px" src="<%=rjdbc.getRecipe(events.get(i).getRecipeID()).getImageURL() %>"></a>
+		    						<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp?recipeID=<%=gRecipes.get(i).getId() %>"><img style="margin-bottom:10px" src="<%=gRecipes.get(i).getImageURL() %>"></a>
 		    					</div>
 		    				</div>
 		    			<%
