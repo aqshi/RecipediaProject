@@ -81,8 +81,8 @@
 	    								<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
 	    								<span class="caret"></span></button>
 	    								<ul class="dropdown-menu">
-	    									<li><a href="#">Save</a></li>
-	    									<li><a href="#">Like</a></li>
+	    									<li><a id="save<%= events.get(i).getEventID()%>" href="#">Save</a></li>
+	    									<li><a id="like<%= events.get(i).getEventID()%>" href="#">Like</a></li>
 	    								</ul>
 	    							</div>
 	    						</div>
@@ -100,8 +100,8 @@
 		    							<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
 		    							<span class="caret"></span></button>
 		    							<ul class="dropdown-menu">
-		    								<li><a href="#">Save</a></li>
-		    								<li><a href="#">Like</a></li>
+		    								<li><a id="save<%= events.get(i).getEventID()%>"href="#">Save</a></li>
+		    								<li><a id="like<%= events.get(i).getEventID()%>"href="#">Like</a></li>
 		    							</ul>
 		    						</div>
 		    					</div>

@@ -9,6 +9,7 @@ public class Event implements Comparable<Event>{
 	private String recipeName;
 	private int recipeID;
 	private Timestamp timestamp;
+	private int eventID;
 	public Event() {
 		
 	}
@@ -62,6 +63,14 @@ public class Event implements Comparable<Event>{
 	}
 	public int compareTo(Event event) {
 		return event.getTimestamp().compareTo(this.getTimestamp());
+	}
+
+	public int getEventID() {
+		return eventID;
+	}
+
+	public void setEventID(int eventID) {
+		this.eventID = eventID;
 	}
 
 	
