@@ -72,8 +72,8 @@
  		<div id ="search-div" style="background-color:#F7C59F">
  			<h2 align="center" id="header" >Search Results</h2>
  		</div>
-	    <div id="main-div" class="row ">
-	    
+	    <div id="main-div" >
+	    	 
 	    	<%
 	    		//play around with counter to control how many elements appear
 	    		int counter = finalResults.size();
@@ -85,23 +85,34 @@
 	    			{
 	    				if(i!=0) out.println("<div class=\"row\">");
 	    	%>
-	    				<div class="col-md-2"></div>
-	    					<div class="col-md-2">
-	    						<div class="image-container">
-		    						<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp?recipeID=<%=finalResults.get(i).getId() %>"><img src="<%=finalResults.get(i).getImageURL() %>"></a>
-	    						</div>
-	    					</div>
+	    		<div class="col-md-1"></div> 
+					<div class= "col-md-2">
+						<div class="my_container">
+							<img  class="image" src="<%=finalResults.get(i).getImageURL() %>">
+							<div class="overlay">
+								<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp?recipeID=<%=finalResults.get(i).getId() %>">
+									<div class="text"><%= finalResults.get(i).getName() %></div>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
 	    			<%
 	    			}
 	    			else
 	    			{
 	    			%>
-		    			<div class="col-sm-1"></div>
-		    				<div class="col-md-2">
-		    					<div class="image-container">
-		    						<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp?recipeID=<%=finalResults.get(i).getId() %>"><img src="<%=finalResults.get(i).getImageURL() %>"></a>
-		    					</div>
-		    				</div>
+		    		<div class="col-sm-1"></div>
+		    			<div class="col-md-2">
+	    					<div class="my_container">
+	   							<img  class="image" src="<%=finalResults.get(i).getImageURL() %>">
+	   							<div class="overlay">
+	    							<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp?recipeID=<%=finalResults.get(i).getId() %>">
+	    								<div class="text"><%= finalResults.get(i).getName() %></div>
+	    							</a>
+	    						</div>
+	    					</div>
+	   					</div>
 		    			<%
 		    				if(i%3==2) out.println("</div>");
 	    			}
