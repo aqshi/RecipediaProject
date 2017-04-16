@@ -14,6 +14,8 @@
 		<link href="../js/lib/noty.css" rel="stylesheet"></link>
 		<script src="../js/lib/noty.js" type="text/javascript"></script>
 		<script type='text/javascript' src='../js/Notifications.js'></script>
+		<script type='text/javascript' src='../js/feed.js'></script>
+		
 	</head>
 	<body>
 <!-- ===========================NAV BAR============================================ -->
@@ -66,7 +68,6 @@
 	    		
 	    		int counter = events.size();
 	    		Vector<String> images= new Vector<String>();
-	    		
 	    		for(int i=0;i<counter;i++)
 	    		{
 	    			if(i%3==0)
@@ -81,8 +82,8 @@
 	    								<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
 	    								<span class="caret"></span></button>
 	    								<ul class="dropdown-menu">
-	    									<li><a id="save<%= events.get(i).getEventID()%>" href="#">Save</a></li>
-	    									<li><a id="like<%= events.get(i).getEventID()%>" href="#">Like</a></li>
+	    									<li><a class="save-button" recipe="<%=events.get(i).getRecipeName()%>" username="<%=username%>" id="save<%= events.get(i).getEventID()%>" href="#">Save</a></li>
+	    									<li><a class="like-button" recipe="<%=events.get(i).getRecipeName()%>" username="<%=username%>" id="like<%= events.get(i).getEventID()%>" href="#">Like</a></li>
 	    								</ul>
 	    							</div>
 	    						</div>
@@ -100,8 +101,8 @@
 		    							<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
 		    							<span class="caret"></span></button>
 		    							<ul class="dropdown-menu">
-		    								<li><a id="save<%= events.get(i).getEventID()%>"href="#">Save</a></li>
-		    								<li><a id="like<%= events.get(i).getEventID()%>"href="#">Like</a></li>
+		    								<li><a class="save-button" recipe="<%=events.get(i).getRecipeName()%>" username="<%=username%>" id="save<%= events.get(i).getEventID()%>"href="#">Save</a></li>
+		    								<li><a class="like-button" recipe="<%=events.get(i).getRecipeName()%>" username="<%=username%>" id="like<%= events.get(i).getEventID()%>"href="#">Like</a></li>
 		    							</ul>
 		    						</div>
 		    					</div>

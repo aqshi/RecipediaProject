@@ -18,6 +18,13 @@ function showNotification(user, action, recipe) {
 		});
 		newNotification.show();
 }
+function showNotificationSelf(action, recipe) {
+	var nText = "You " + action + " " + recipe + "!";
+	var newNotification = new Noty({
+		text: nText
+	})
+	newNotification.show();
+}
 $(document).ready(function() {
 	Noty.overrideDefaults({
 	    layout   : 'topRight',

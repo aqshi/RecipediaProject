@@ -548,6 +548,7 @@ public class RecipediaJDBC {
 			event.setUsernameDidAction(this.getUsernameByUserID(rs.getInt(2)));
 			event.setAction(rs.getString(3));
 			event.setRecipeID(rs.getInt(4));
+			event.setRecipeName(this.getRecipe(event.getRecipeID()).getName());
 			event.setTimestamp(rs.getTimestamp(5));
 			event.setEventID(rs.getInt(1));
 			return event;
