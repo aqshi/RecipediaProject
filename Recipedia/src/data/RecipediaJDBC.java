@@ -14,7 +14,6 @@ public class RecipediaJDBC {
 	private static Connection conn = null;
 	private static Statement st = null;
 	private static PreparedStatement ps = null;
-	private static ResultSet rs = null;
 	private String userToCheck = null;
 	
 	//Strings for Database
@@ -46,16 +45,17 @@ public class RecipediaJDBC {
 	private final static String getEvent = "SELECT * FROM ActionEvents WHERE eventID=?";
 	private final static String getUsernameByID = "SELECT * FROM USERS WHERE userID=?";
 	private final static String getUserEvents = "SELECT * FROM ActionEvents WHERE userID=?";
+	private final static String getTagWithID = "SELECT * FROM TagToRecipe WHERE tagID=?";
+	private final static String getAllTags = "SELECT * FROM Tags";
 	public RecipediaJDBC() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			
 			//change this according to your inputs
-<<<<<<< HEAD
-			conn = DriverManager.getConnection("jdbc:mysql://localhost/recipedia?user=root&password=Pickoftheweek1!&useSSL=false");
-=======
-			conn = DriverManager.getConnection("jdbc:mysql://localhost/recipedia?user=root&password=Xnd0725&useSSL=false");
->>>>>>> 4109568ac3cf19ee90fa8eb74b34bc0210d5da2b
+
+			conn = DriverManager.getConnection("jdbc:mysql://localhost/recipedia?user=root&password=iwtaekcwne&useSSL=false");
+
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -161,6 +161,7 @@ public class RecipediaJDBC {
 				tags.add(tag);
 			}
 			Recipe recipe = new Recipe(ingredients, instructions, tags, title, image);
+			recipe.setId(recipeID);
 			recipe.setLikes(likes);
 			return recipe;
 		} catch(SQLException e) {
@@ -278,18 +279,46 @@ public class RecipediaJDBC {
 					ps.setString(2,  instructions.get(i));
 					ps.executeUpdate();
 				}
-				for (int i = 0; i < tags.size(); i++) {
+				PreparedStatement ps2 = conn.prepareStatement(getAllTags);
+				ResultSet rs2 = ps2.executeQuery();
+				Vector<String> addTags = new Vector<String>();
+				Vector<String> linkTags = new Vector<String>();
+				while(rs2.next()) {
+					String tagName = rs2.getString(2);
+					if (!recipe.getTags().contains(tagName)) {
+						addTags.add(tagName);
+					} else {
+						linkTags.add(tagName);
+					}
+				}
+				//have list of tags to add
+				//need to add and link those tags first
+				for (int i = 0; i < addTags.size(); i++) {
 					ps = conn.prepareStatement(addTag, Statement.RETURN_GENERATED_KEYS);
-					ps.setString(1, tags.get(i));
+					ps.setString(1, addTags.get(i));
 					ps.executeUpdate();
-					rs = ps.getGeneratedKeys();
-					if (rs.next()) {
+					ResultSet rs3 = ps.getGeneratedKeys();
+					if (rs3.next()) {
 						ps = conn.prepareStatement(addTagConnection);
-						ps.setInt(1, rs.getInt(1));
+						ps.setInt(1, rs3.getInt(1));
 						ps.setInt(2, recipeKey);
 						ps.executeUpdate();
 					}
 					
+				}
+				//have a list of tags to link
+				//first get the tagid using the tag
+				//then add that to tagtorecipe table
+				for (int i = 0; i < linkTags.size(); i++) {
+					ps = conn.prepareStatement(tresultTable);
+					ps.setString(1, linkTags.get(i));
+					ResultSet rs3 = ps.executeQuery();
+					rs3.next();
+					int tagID = rs3.getInt(1);
+					ps = conn.prepareStatement(addTagConnection);
+					ps.setInt(1, tagID);
+					ps.setInt(2,  recipeKey);
+					ps.executeUpdate();
 				}
 				return recipeKey;
 				
@@ -320,7 +349,7 @@ public class RecipediaJDBC {
 		try {
 			ps = conn.prepareStatement(getUsernameByID);
 			ps.setInt(1, userID);
-			rs = ps.executeQuery();
+			ResultSet rs = ps.executeQuery();
 			rs.next();
 			String username = rs.getString(1);
 			return username;
@@ -391,12 +420,22 @@ public class RecipediaJDBC {
 	public Set<Recipe> tagResult(String entry) {
 		Set<Recipe> results = new HashSet<>();
 		try {
-			st = conn.createStatement();
+			
 			ps = conn.prepareStatement(tresultTable);
-			rs = ps.executeQuery();
-			while(rs.next()) {
-				//if(rs.getString(1).equalsIgnoreCase(entry)) results.add(rs.getString(1));
+			ps.setString(1, entry);
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				int tagID = rs.getInt(1);
+				ps = conn.prepareStatement(getTagWithID);
+				ps.setInt(1, tagID);
+				ResultSet rs2 = ps.executeQuery();
+				while(rs2.next()) {
+					results.add(this.getRecipe(rs2.getInt(2)));
+				}
 			}
+			
+			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

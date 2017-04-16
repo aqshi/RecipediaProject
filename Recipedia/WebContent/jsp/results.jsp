@@ -19,15 +19,28 @@
 	<%
 		RecipediaJDBC jdbc = new RecipediaJDBC();
 		
-		String search_result=request.getParameter("searchInput");
+		String searchTerm = request.getParameter("searchInput");
 		//System.out.println(search_result);
-		Set<Recipe> results = jdbc.nameResult(search_result);
-		Iterator<Recipe> it = results.iterator();
+		Set<Recipe> results = new HashSet<Recipe>();
+		Set<Recipe> nameResults = jdbc.nameResult(searchTerm);
+		Iterator<Recipe> it = nameResults.iterator();
 		while(it.hasNext())
 		{
 			Recipe re = it.next();
-			System.out.println(re.getName());
+			results.add(re);
 		}
+		Set<Recipe> tagResults = jdbc.tagResult(searchTerm);
+		Iterator<Recipe> it2 = tagResults.iterator();
+		while(it2.hasNext()) {
+			Recipe re = it2.next();
+			results.add(re);
+		}
+		Vector<Recipe> finalResults = new Vector<Recipe>();
+		Iterator<Recipe> it3 = results.iterator();
+		while(it3.hasNext()) {
+			Recipe re = it3.next();
+			finalResults.add(re);
+		}	
 	%>
 	<body>
 <!-- ===========================NAV BAR============================================ -->
@@ -50,6 +63,9 @@
 	            <span class="glyphicon glyphicon-search"></span>
 	          </button>
 		    </form>
+		     <div class="logout">
+	          	<a href="${pageContext.request.contextPath}/jsp/Login.jsp"><img id="logout-button" src="../images/logout.jpg"></a>
+	        </div>
 		  </div>
 		</nav>
  <!-- =============================WHOLE PAGE================================== -->
@@ -60,7 +76,7 @@
 	    
 	    	<%
 	    		//play around with counter to control how many elements appear
-	    		int counter = 7;
+	    		int counter = finalResults.size();
 	    		Vector<String> images= new Vector<String>();
 	    		
 	    		for(int i=0;i<counter;i++)
@@ -72,7 +88,7 @@
 	    				<div class="col-md-2"></div>
 	    					<div class="col-md-2">
 	    						<div class="image-container">
-		    						<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp"><img src="../pasta.jpeg"></a>
+		    						<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp?recipeID=<%=finalResults.get(i).getId() %>"><img src="<%=finalResults.get(i).getImageURL() %>"></a>
 	    							<div class="dropdown">
 	    								<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
 	    								<span class="caret"></span></button>
@@ -91,7 +107,7 @@
 		    			<div class="col-sm-1"></div>
 		    				<div class="col-md-2">
 		    					<div class="image-container">
-		    						<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp"><img src="../pasta.jpeg"></a>
+		    						<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp?recipeID=<%=finalResults.get(i).getId() %>"><img src="<%=finalResults.get(i).getImageURL() %>"></a>
 		    						<div class="dropdown">
 		    							<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
 		    							<span class="caret"></span></button>

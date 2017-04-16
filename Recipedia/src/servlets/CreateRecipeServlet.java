@@ -74,7 +74,7 @@ public class CreateRecipeServlet extends HttpServlet {
             System.out.println(userID);
             System.out.println(recipeKey);
             rjdbc.addUploadedRecipe(recipeKey, userID);
-            
+            rjdbc.addEvent(userName, recipeKey, "Uploaded");
             
             System.out.println(userName);
             sr.setStatus("Success");
