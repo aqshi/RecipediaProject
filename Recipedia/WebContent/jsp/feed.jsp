@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*" %>
+    <%@ page import= "java.util.*, data.*, recipediaClasses.*, data.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -42,9 +43,28 @@
 		</nav>
  <!-- =============================WHOLE PAGE================================== -->
 	    <div id="main-div" class="row ">
-	    	<%
-	    		//play around with counter to control how many elements appear
-	    		int counter = 9;
+	    
+	    		<%
+	    		//need to grab all events, sort them by timestamp
+	    		RecipediaJDBC rjdbc = new RecipediaJDBC();
+	    		session = request.getSession(true);
+	    		String username = (String)session.getAttribute("username");
+	    		User user = rjdbc.getUserByUsername(username);
+	    		Set<String> followingSet = rjdbc.profileFollowingSet(username);
+	    		Vector<Event> events = new Vector<Event>();
+	    		Iterator<String> it = followingSet.iterator();
+	    		while(it.hasNext())
+	    		{
+	    			String name = it.next();
+	    			Vector<Event> newEvents = rjdbc.getUserEvents(name);
+	    			for (int i = 0; i < newEvents.size(); i++) {
+	    				events.add(newEvents.get(i));
+	    			}
+	    		}
+	    		Collections.sort(events);
+	    		//rjdbc.getUserEvents()
+	    		
+	    		int counter = events.size();
 	    		Vector<String> images= new Vector<String>();
 	    		
 	    		for(int i=0;i<counter;i++)
@@ -52,55 +72,46 @@
 	    			if(i%3==0)
 	    			{
 	    				if(i!=0) out.println("<div class=\"row\">");
-	    				out.println("<div class=\"col-md-2\"></div>");
-	    				out.println("<div class=\"col-md-2\">");
-	    				out.println("<div class=\"image-container\">");
-	    				//Images
-	    				
-	    				%>
-		    			<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp" >
-		    			<%
-		    	
-		    			out.println(/*"<a href=\"${pageContext.request.contextPath}/jsp/viewRecipes.jsp\">*/"<img src=\"../pasta.jpeg\"></a>");
-		    			
-	    				//out.println("<a href=\"${pageContext.request.contextPath}/jsp/viewRecipes.jsp\"><img src=\"../pasta.jpeg\"></a>");
-	    				out.println("<div class=\"dropdown\">");
-	    				out.println("<button class=\"btn btn-primary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">");
-	    				out.println("<span class=\"caret\"></span></button>");
-	    				out.println("<ul class=\"dropdown-menu\">");
-	    				out.println("<li><a href=\"#\">Save</a></li>");
-	    				out.println("<li><a href=\"#\">Like</a></li>");
-	    				out.println("</ul>");
-	    				out.println("</div>");
-	    				out.println("</div>");
-	    				out.println("</div>");	
+	    		%>
+	    				<div class="col-md-2"></div>
+	    					<div class="col-md-2">
+	    						<div class="image-container">
+		    						<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp?recipeID=<%=events.get(i).getRecipeID() %>"><img src="<%=rjdbc.getRecipe(events.get(i).getRecipeID()).getImageURL() %>"></a>
+	    							<div class="dropdown">
+	    								<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+	    								<span class="caret"></span></button>
+	    								<ul class="dropdown-menu">
+	    									<li><a id="save<%= events.get(i).getEventID()%>" href="#">Save</a></li>
+	    									<li><a id="like<%= events.get(i).getEventID()%>" href="#">Like</a></li>
+	    								</ul>
+	    							</div>
+	    						</div>
+	    					</div>
+	    			<%
 	    			}
 	    			else
 	    			{
-		    			out.println("<div class=\"col-sm-1\"></div>");
-		    			out.println("<div class=\"col-md-2\">");
-		    			out.println("<div class=\"image-container\">");
-		    			//Images
-		    			%>
-		    			<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp">
+	    			%>
+		    			<div class="col-sm-1"></div>
+		    				<div class="col-md-2">
+		    					<div class="image-container">
+		    						<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp?recipeID=<%=events.get(i).getRecipeID() %>"><img src="<%=rjdbc.getRecipe(events.get(i).getRecipeID()).getImageURL() %>"></a>
+		    						<div class="dropdown">
+		    							<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+		    							<span class="caret"></span></button>
+		    							<ul class="dropdown-menu">
+		    								<li><a id="save<%= events.get(i).getEventID()%>"href="#">Save</a></li>
+		    								<li><a id="like<%= events.get(i).getEventID()%>"href="#">Like</a></li>
+		    							</ul>
+		    						</div>
+		    					</div>
+		    				</div>
 		    			<%
-		    	
-		    			out.println(/*"<a href=\"${pageContext.request.contextPath}/jsp/viewRecipes.jsp\">*/"<img src=\"../pasta.jpeg\"></a>");
-		    			out.println("<div class=\"dropdown\">");
-		    			out.println("<button class=\"btn btn-primary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">");
-		    			out.println("<span class=\"caret\"></span></button>");
-		    			out.println("<ul class=\"dropdown-menu\">");
-		    			out.println("<li><a href=\"#\">Save</a></li>");
-		    			out.println("<li><a href=\"#\">Like</a></li>");
-		    			out.println("</ul>");
-		    			out.println("</div>");
-		    			out.println("</div>");
-		    			out.println("</div>");
-		    			if(i%3==2) out.println("</div>");
+		    				if(i%3==2) out.println("</div>");
 	    			}
 	    		}
 	    	
-	    	%>
+	    				%>
 	   </div>
 	  </div>
 	  	
