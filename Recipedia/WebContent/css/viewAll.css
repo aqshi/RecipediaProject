@@ -83,7 +83,10 @@ img{
 }
 
 .recipe_container {
-	border-radius: 30%;	
+	background-color: #f0f5c2;
+	border-radius: 25px;
+	padding: 10px;
+	margin: 10px;	
 }
 
 h1 {
@@ -103,20 +106,20 @@ caption {
 .my_container {
   position: relative;
   width: 30%;
+  display: inline;
 }
 
 .image {
-  display: block;
   width: 145px;
-  height: 145px;
+  height: 140px;
 }
 
 .overlay {
   position: absolute;
-  top: 0;
+  top: -56px;
   bottom: 0;
-  left: 40px;
-  right: 50;
+  left: 30px;
+  right: 50px;
   height: 140px;
   width: 140px;
   opacity: 0;

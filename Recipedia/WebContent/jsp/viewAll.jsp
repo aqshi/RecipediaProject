@@ -53,23 +53,25 @@
 	          </div>
 		  </div>
 		</nav>
-		<!-- <div id="main-div" class="row"> -->
+		
+		<!-- WHOLE PAGE -->
 			<div id="main-div" class="row">
 			<div class="col-md-1"></div>
 			<div class="col-md-9 recipe-container">
 			
 		<%
-			if(chosenNum == 1) { %>
+		
+			if(chosenNum == 1) {
+			%>
 				<h1>Saved Recipes</h1>
 			<%	for(Recipe r : user.getSavedRecipes()) {
-					String recipeImage = r.getImageURL(); %>					
+					String recipeImage = r.getImageURL();%>					
 					<div class="my_container">
-						<img style ="width: 150px; height:150px; margin:20px 40px 20px 30px"src="<%=recipeImage%>" class="image"/>
+						<img class="image" style ="width: 150px; height:150px; margin:20px 40px 20px 30px"src="<%=recipeImage%>">
 						<div class="overlay">
 						 <a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp?recipeId=<%=r.getId()%>">
 							<div class="text"><%=r.getName() %></div>
 						</a>
-							
 	  					</div>
 	  				</div>
 			<% }
@@ -80,12 +82,11 @@
 			<%	for(Recipe r : user.getUploadedRecipes()) {
 					String recipeImage = r.getImageURL(); %>
 					<div class="my_container">
-						<img style ="width: 150px; height:150px; margin:20px 40px 20px 30px"src="<%=recipeImage%>" class="image"/>
+						<img class="image" style ="width: 150px; height:150px; margin:20px 40px 20px 30px"src="<%=recipeImage%>">
 						<div class="overlay">
 						 <a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp?recipeId=<%=r.getId()%>">
 							<div class="text"><%=r.getName() %></div>
 						</a>
-							
 	  					</div>
 	  				</div>
 				<% }
@@ -96,7 +97,7 @@
 			<%	for(String s : user.getFans()) {
 					String url = jdbc.getProfileInfo(s, 1); %>
 					<div class="my_container">
-						<img style ="width: 150px; height:150px; margin:20px 40px 20px 30px"src="<%=url%>" class="image"/>
+						<img class="image" style ="width: 150px; height:150px; margin:20px 40px 20px 30px"src="<%=url%>">
 						<div class="overlay">
 							<a href="${pageContext.request.contextPath}/jsp/profile.jsp?userClicked=<%= s %>">
 								<div class="text"><%=s %></div>
