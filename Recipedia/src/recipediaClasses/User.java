@@ -98,12 +98,12 @@ public class User {
 		myFans.add(fan);
 	}
 	
-	public Set<String> getFans(){
-		return this.myFans;
+	public void removeFan(String fan) {
+		myFans.remove(fan);
 	}
 	
-	public void removeFan(String fan){
-		myFans.remove((String)fan);
+	public Set<String> getFans(){
+		return this.myFans;
 	}
 //	
 //	public Vector<String> getFansOf(String username){

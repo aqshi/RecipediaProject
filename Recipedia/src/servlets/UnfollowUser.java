@@ -35,10 +35,7 @@ public class UnfollowUser extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
 		HttpSession retrieveUserProfile = request.getSession();
 		String user = (String) retrieveUserProfile.getAttribute("username");
-		String getUserClicked = request.getParameter("userClicked");
-		
-		System.out.println("user: " + user + " is not a fan of: " + getUserClicked);
-		
+		String getUserClicked = request.getParameter("userClicked");		
 		RecipediaJDBC jdbcDriver = new RecipediaJDBC();
 		jdbcDriver.addtoFollowing(user, getUserClicked);
 	}
