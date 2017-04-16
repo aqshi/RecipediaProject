@@ -58,7 +58,7 @@ public class RecipediaJDBC {
 			
 			//change this according to your inputs
 
-			conn = DriverManager.getConnection("jdbc:mysql://localhost/recipedia?user=root&password=abcdefg&useSSL=false");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost/recipedia?user=root&password=790536e&useSSL=false");
 
 
 		} catch (SQLException e) {
@@ -397,8 +397,6 @@ public class RecipediaJDBC {
 		
 	//adds a following to loggedinUser and follower for viewedUser
 	public void addtoFollowing(String loggedinUser, String viewedUser) {
-		System.out.println("add fan:" + viewedUser);
-		System.out.println("user clicked button: " + loggedinUser);
 		int userID = getUserIDByUsername(loggedinUser);
 		User user = new User(viewedUser);
 		try {
@@ -415,8 +413,6 @@ public class RecipediaJDBC {
 		
 	//remove a following to loggedinUser and viewedUser loses a follower
 	public void removeFromFollowing(String loggedinUser, String viewedUser) {
-		System.out.println("remove fan:" + viewedUser);
-		System.out.println("user clicked button: " + loggedinUser);
 		int userID = getUserIDByUsername(loggedinUser);
 		User user = new User(viewedUser);
 		try {

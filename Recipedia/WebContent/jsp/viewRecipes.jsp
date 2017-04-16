@@ -7,7 +7,6 @@
 <html>
 <%
 	String recipeIDString = (String) request.getParameter("recipeID");
-	//String recipeIDString = "5";
 	int recipeID = Integer.parseInt(recipeIDString);
 	RecipediaJDBC jdbc = new RecipediaJDBC();
 	Recipe recipe = jdbc.getRecipe(recipeID);
@@ -28,6 +27,23 @@
 		<link href="../js/lib/noty.css" rel="stylesheet"></link>
 		<script src="../js/lib/noty.js" type="text/javascript"></script>
 		<script type='text/javascript' src='../js/Notifications.js'></script>
+		<script>
+ 			function recipeUpdate() {
+ 				var change = document.getElementById("recipeButton");
+		 		var xhttp = new XMLHttpRequest();
+		 	   	if (change.value == "Save")
+		 	   	{
+		 	   		xhttp.open("GET", "${pageContext.request.contextPath}/ActiononRecipeServlet?buttonClicked=" + document.getElementById("buttonClicked").value, false);		    	  
+		 	    	xhttp.send();
+		 	   	}
+		 	
+		 	   else if(change.value == "Update")
+		 	   {
+		 	       	xhttp.open("GET", "${pageContext.request.contextPath}/ActiononRecipeServlet?buttonClicked=" + document.getElementById("buttonClicked").value, false);		    	  
+			    	xhttp.send();
+		 	   	}
+		 	}
+		</script>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>View Recipe</title>
 	</head>
@@ -85,18 +101,19 @@
 					<div class="save-container">
 						
 					</div>
-					<!-- <h2 class="headers">Reviews</h2>
-					<p>These are the reviews</p><br>
-					
-					<h2 class="headers">Recommended Recipes</h2>
-					<p>Show the other recipes related to this recipe.</p> -->
 				</div>
 				<div class="col-md-3"></div>
 			</div>
 			<div class="row">
 				<div class="col-md-8">
-					<button class="save-button" onclick="saveRecipe(<%=recipe.getId()%>)">Save</button>
-					
+					<form name="saveform" method="GET" onsubmit="recipeUpdate()">
+						<input type="hidden" id="saveClicked" name="buttonClicked" value="<%=recipe.getId()  %>">
+						<input type="submit" id="recipeButton" value="Save">
+					</form>
+					<form name="updateform" method="GET" onsubmit="recipeUpdate()">
+						<input type="hidden" id="updateClicked" name="buttonClicked" value="<%=recipe.getId()  %>">
+						<input type="submit" id="recipeButton" value="Update">
+					</form>
 				</div>
 			</div>
 		</div>
