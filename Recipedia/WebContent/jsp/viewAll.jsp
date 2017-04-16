@@ -110,7 +110,7 @@
 		</div>
 		</div>
 		<div id="back-to-profile">
-			<form action="${pageContext.request.contextPath}/jsp/profile.jsp?userClicked?=<%=viewedUser%>"><input type="submit" value="Back to Profile" /></form>		
+			<form action="${pageContext.request.contextPath}/jsp/profile.jsp?userClicked?=<%=viewedUser%>"><input type="submit" id="back-to-profile-btn" value="Back to Profile" /></form>		
 		</div>
 </body>
 </html>
