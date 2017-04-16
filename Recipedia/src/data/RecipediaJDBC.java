@@ -50,6 +50,7 @@ public class RecipediaJDBC {
 	private final static String getCurrNumLikes = "SELECT * FROM Recipes Where recipeID=?";
 	private final static String increaseLikeByOne = "UPDATE Recipes SET likes=? WHERE recipeID=?";
 	private final static String getSavedRecipe = "SELECT * FROM SAVEDRECIPES WHERE recipeID=?";
+	private final static String getAllRecipes = " SELECT * FROM Recipes";
 	
 	public RecipediaJDBC() {
 		try {
@@ -57,7 +58,7 @@ public class RecipediaJDBC {
 			
 			//change this according to your inputs
 
-			conn = DriverManager.getConnection("jdbc:mysql://localhost/recipedia?user=root&password=790536e&useSSL=false");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost/recipedia?user=root&password=abcdefg&useSSL=false");
 
 
 		} catch (SQLException e) {
@@ -89,7 +90,25 @@ public class RecipediaJDBC {
 		
 		scanner.close();
 	}
-
+	public Vector<Recipe> getAllRecipes()
+	{
+		try {
+			ps = conn.prepareStatement(getAllRecipes);
+			//ps.setInt(1, userID);
+			ResultSet res = ps.executeQuery();
+			Vector<Recipe> recipes = new Vector<Recipe>();
+			while(res.next()) {
+				int recipeID = res.getInt(1);
+				Recipe recipe = getRecipe(recipeID);
+				recipes.add(recipe);
+			}
+			return recipes;
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
 	
 	//checks if username exists
 	public boolean doesUserExist(String name) {
