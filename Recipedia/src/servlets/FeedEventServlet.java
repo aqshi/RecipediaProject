@@ -63,9 +63,12 @@ public class FeedEventServlet extends HttpServlet {
         	rjdbc.addEvent(event.getUsernameDidAction(), event.getRecipeID(), event.getAction());
         	WebSocketEndpoint wse = new WebSocketEndpoint();
         	SavedMessage sm = new SavedMessage(event.getUsernameDidAction(), event.getRecipeName());
-        	System.out.println(rjdbc.getUsernameByUserID(rjdbc.getUserWhoUploadedRecipe(rjdbc.getEvent(eventData.getId()).getRecipeID())));
-        	System.out.println(rjdbc.getUsernameByUserID(rjdbc.getUserWhoUploadedRecipe(rjdbc.getEvent(eventData.getId()).getRecipeID())));
-        	wse.sendToUser(rjdbc.getUsernameByUserID(rjdbc.getUserWhoUploadedRecipe(rjdbc.getEvent(eventData.getId()).getRecipeID())), gson.toJson(sm));
+//        	System.out.println(rjdbc.getUsernameByUserID(rjdbc.getUserWhoUploadedRecipe(rjdbc.getEvent(eventData.getId()).getRecipeID())));
+//        	System.out.println(rjdbc.getUsernameByUserID(rjdbc.getUserWhoUploadedRecipe(rjdbc.getEvent(eventData.getId()).getRecipeID())));
+        	ServletResponse sr = new ServletResponse();
+            sr.setStatus("Success");
+            out.println(gson.toJson(sr));
+        	//wse.sendToUser(rjdbc.getUsernameByUserID(rjdbc.getUserWhoUploadedRecipe(rjdbc.getEvent(eventData.getId()).getRecipeID())), gson.toJson(sm));
         	//create event
         } else if (action.equals("liked")) {
         	rjdbc.updateLike(rjdbc.getEvent(eventData.getId()).getRecipeID());
@@ -74,12 +77,14 @@ public class FeedEventServlet extends HttpServlet {
         	event.setRecipeID(rjdbc.getEvent(eventData.getId()).getRecipeID());
         	event.setUsernameDidAction(eventData.getUsername());
         	event.setRecipeName(rjdbc.getEvent(eventData.getId()).getRecipeName());
+        	
         	rjdbc.addEvent(event.getUsernameDidAction(), event.getRecipeID(), event.getAction());
+        	ServletResponse sr = new ServletResponse();
+            sr.setStatus("Success");
+            out.println(gson.toJson(sr));
         	
         }
-        ServletResponse sr = new ServletResponse();
-        sr.setStatus("Success");
-        out.println(gson.toJson(sr));
+        
 	}
 
 
