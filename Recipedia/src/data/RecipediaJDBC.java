@@ -585,6 +585,9 @@ public class RecipediaJDBC {
 			ps.setInt(1, recipeID);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
+				System.out.println(rs.getString(1));
+				System.out.println(rs.getString(2));
+				System.out.println(rs.getString(3));
 				updateRecipeRow(recipeID, rs.getInt(3));
 			}
 		} catch(SQLException e) {
@@ -594,6 +597,7 @@ public class RecipediaJDBC {
 	
 	public void updateRecipeRow(int recipeID, int numLikes) {
 		int updatedLikes = numLikes +1;
+		System.out.println("updated likes: " + updatedLikes);
 		try {
 			ps = conn.prepareStatement(increaseLikeByOne);
 			ps.setInt(1, recipeID);
