@@ -78,7 +78,7 @@ c<%@ page language="java" contentType="text/html; charset=UTF-8"
 	    				<div class="col-md-2"></div>
 	    					<div class="col-md-2">
 	    						<div class="image-container">
-		    						<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp?recipeID=<%=gRecipes.get(i).getId() %>"><img style="margin-bottom:10px" src="<%=gRecipes.get(i).getImageURL() %>"></a>
+		    						<a href="${pageContext.request.contextPath}/jsp/gViewRecipes.jsp?recipeID=<%=gRecipes.get(i).getId() %>"><img style="margin-bottom:10px" src="<%=gRecipes.get(i).getImageURL() %>"></a>
 	    						</div>
 	    					</div>
 	    			<%
@@ -89,7 +89,7 @@ c<%@ page language="java" contentType="text/html; charset=UTF-8"
 		    			<div class="col-sm-1"></div>
 		    				<div class="col-md-2">
 		    					<div class="image-container">
-		    						<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp?recipeID=<%=gRecipes.get(i).getId() %>"><img style="margin-bottom:10px" src="<%=gRecipes.get(i).getImageURL() %>"></a>
+		    						<a href="${pageContext.request.contextPath}/jsp/gViewRecipes.jsp?recipeID=<%=gRecipes.get(i).getId() %>"><img style="margin-bottom:10px" src="<%=gRecipes.get(i).getImageURL() %>"></a>
 		    					</div>
 		    				</div>
 		    			<%
