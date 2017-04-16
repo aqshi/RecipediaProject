@@ -52,7 +52,7 @@ public class WebSocketEndpoint {
 			BufferedReader br = new BufferedReader(new InputStreamReader(is));
 			try {
 				String username = br.readLine();
-				System.out.println(message);
+				//System.out.println(message);
 				usernameToSessionID.put(message, session.getId());
 				users.put(session.getId(), message);
 			} catch (IOException e) {
@@ -68,10 +68,7 @@ public class WebSocketEndpoint {
 	public void close(Session session) {
 		lock.lock();
 		logger.log(Level.INFO, "Connection closed. (id:)" + session.getId());
-		sessions.remove(session.getId());
-		if (users.get(session.getId()) != null) {
-			users.remove(session.getId());
-		}
+		
 		lock.unlock();
 	}
 
@@ -97,8 +94,10 @@ public class WebSocketEndpoint {
 			System.out.println(usernameToSessionID.size());
 			System.out.println(usernameToSessionID.get(username));
 			System.out.println(username);
-			if (usernameToSessionID.get(username) != null && sessions.containsKey(usernameToSessionID.get(username))) {
+			System.out.println("sending message");
+			if (usernameToSessionID.containsKey(username) && sessions.containsKey(usernameToSessionID.get(username))) {
 				sessions.get(usernameToSessionID.get(username)).getBasicRemote().sendText(message);
+				System.out.println("sent");
 			}
 			
 		} catch(IOException e) {
