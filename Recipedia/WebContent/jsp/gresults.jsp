@@ -8,7 +8,7 @@
 		<title>Search Results</title>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/results.css">
-				<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/navbar.css">
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/navbar.css">
 		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -85,9 +85,14 @@
 	    	%>
 	    				<div class="col-md-2"></div>
 	    					<div class="col-md-2">
-	    						<div class="image-container">
-		    						<a href="${pageContext.request.contextPath}/jsp/gViewRecipes.jsp?recipeID=<%=finalResults.get(i).getId() %>"><img src="<%=finalResults.get(i).getImageURL() %>"></a>
-	    						</div>
+	    						<div class="my_container">
+									<img  class="image" src="<%=finalResults.get(i).getImageURL() %>">
+									<div class="overlay">
+										<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp?recipeID=<%=finalResults.get(i).getId() %>">
+											<div class="text"><%= finalResults.get(i).getName() %></div>
+										</a>
+									</div>
+								</div>
 	    					</div>
 	    			<%
 	    			}
@@ -96,9 +101,14 @@
 	    			%>
 		    			<div class="col-sm-1"></div>
 		    				<div class="col-md-2">
-		    					<div class="image-container">
-		    						<a href="${pageContext.request.contextPath}/jsp/gViewRecipes.jsp?recipeID=<%=finalResults.get(i).getId() %>"><img src="<%=finalResults.get(i).getImageURL() %>"></a>
-		    					</div>
+		    					<div class="my_container">
+									<img  class="image" src="<%=finalResults.get(i).getImageURL() %>">
+									<div class="overlay">
+										<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp?recipeID=<%=finalResults.get(i).getId() %>">
+											<div class="text"><%= finalResults.get(i).getName() %></div>
+										</a>
+									</div>
+								</div>
 		    				</div>
 		    			<%
 		    				if(i%3==2) out.println("</div>");
