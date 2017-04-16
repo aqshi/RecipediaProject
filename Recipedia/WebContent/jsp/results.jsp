@@ -89,14 +89,6 @@
 	    					<div class="col-md-2">
 	    						<div class="image-container">
 		    						<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp?recipeID=<%=finalResults.get(i).getId() %>"><img src="<%=finalResults.get(i).getImageURL() %>"></a>
-	    							<div class="dropdown">
-	    								<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-	    								<span class="caret"></span></button>
-	    								<ul class="dropdown-menu">
-	    									<li><a id="save<%= finalResults.get(i).getId()%>" href="#">Save</a></li>
-	    									<li><a id="like<%= finalResults.get(i).getId()%>" href="#">Like</a></li>
-	    								</ul>
-	    							</div>
 	    						</div>
 	    					</div>
 	    			<%
@@ -108,14 +100,6 @@
 		    				<div class="col-md-2">
 		    					<div class="image-container">
 		    						<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp?recipeID=<%=finalResults.get(i).getId() %>"><img src="<%=finalResults.get(i).getImageURL() %>"></a>
-		    						<div class="dropdown">
-		    							<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-		    							<span class="caret"></span></button>
-		    							<ul class="dropdown-menu">
-		    								<li><a id="save<%= finalResults.get(i).getId()%>" href="#">Save</a></li>
-		    								<li><a id="like<%= finalResults.get(i).getId()%>" href="#">Like</a></li>
-		    							</ul>
-		    						</div>
 		    					</div>
 		    				</div>
 		    			<%
