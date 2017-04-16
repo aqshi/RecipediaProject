@@ -2,7 +2,7 @@ package recipediaClasses;
 
 import java.sql.Timestamp;
 
-public class Event {
+public class Event implements Comparable<Event>{
 	private String action;
 	private String usernameDidAction;
 	private String usernameGotAction;
@@ -60,4 +60,9 @@ public class Event {
 	public void setTimestamp(Timestamp timestamp) {
 		this.timestamp = timestamp;
 	}
+	public int compareTo(Event event) {
+		return event.getTimestamp().compareTo(this.getTimestamp());
+	}
+
+	
 }
