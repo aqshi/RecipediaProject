@@ -1,5 +1,6 @@
 package recipediaClasses;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
 
@@ -16,6 +17,7 @@ public class User {
 	
 	public User(String username){
 		this.username = username;
+		myFans = new HashSet<>();
 	}
 	
 	public void setFullName(String fname, String lname){

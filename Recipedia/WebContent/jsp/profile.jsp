@@ -24,21 +24,13 @@
  	   		change.value = "Become a fan";
  	   		xhttp.open("GET", "${pageContext.request.contextPath}/FollowUser?userClicked=" + document.getElementById("userClicked").value, false);		    	  
  	    	xhttp.send();
- 	    	/* if(xhttp.responseText.trim().length > 0) {
- 	    		document.getElementById("print_follower").innerHTML = xhttp.responseText;
- 	    		return false;
- 	    	} */
  	   	}
  	
  	   else if(change.value == "Become a fan")
  	   {
- 	       change.value = "Unfan";
- 	       xhttp.open("GET", "${pageContext.request.contextPath}/UnfollowUser?userClicked=" + document.getElementById("userClicked").value, false);		    	  
+ 	       	change.value = "Unfan";
+ 	       	xhttp.open("GET", "${pageContext.request.contextPath}/UnfollowUser?userClicked=" + document.getElementById("userClicked").value, false);		    	  
 	    	xhttp.send();
-	    	/* if(xhttp.responseText.trim().length > 0) {
-	    		document.getElementById("print_follower").innerHTML = xhttp.responseText;
-	    		return false;
-	    	} */
  	   	}
  	}
 	</script>
@@ -108,7 +100,7 @@
 					<%
 						if(name.equals(viewedUser) && !viewedUser.equals(loggedInUser)) {
 							Set<String> followOrNot = forLoggedIn.getFans();
-							if(followOrNot.contains(name)) { %>
+							if(!followOrNot.contains(name)) { %>
 								<form name="followform" method="GET" onsubmit="return followchange()">
 									<input type="hidden" id="userClicked" name="userClicked" value="<%= name %>">
 									<input  type="submit" id="followButton" value="Become a fan">
