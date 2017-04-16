@@ -91,12 +91,6 @@
 				</div>
 				<div class="col-md-3"></div>
 			</div>
-			<div class="row">
-				<div class="col-md-8">
-					<button class="save-button" onclick="saveRecipe(<%=recipe.getId()%>)">Save</button>
-					
-				</div>
-			</div>
 		</div>
 </body>
 </html>
