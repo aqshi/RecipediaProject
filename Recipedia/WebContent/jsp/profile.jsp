@@ -102,7 +102,7 @@
 					<%
 						if(name.equals(viewedUser) && !viewedUser.equals(loggedInUser)) {
 							Set<String> followOrNot = forLoggedIn.getFans();
-							if(followOrNot.contains(name)) { System.out.println(name); %>
+							if(followOrNot.contains(name)) { %>
 								<form name="followform" method="GET" onsubmit="return followchange()">
 									<input type="hidden" id="userClicked" name="userClicked" value="<%= name %>">
 									<input style="float:right; margin-top:130px;" type="submit" id="followButton" value="Unfan">

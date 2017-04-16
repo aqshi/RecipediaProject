@@ -378,12 +378,12 @@ public class RecipediaJDBC {
 		
 	//adds a following to loggedinUser and follower for viewedUser
 	public void addtoFollowing(String loggedinUser, String viewedUser) {
-		int userID = getUserIDByUsername(loggedinUser);
+		int userID = getUserIDByUsername(viewedUser);
 		try {
 			st = conn.createStatement();
 			ps = conn.prepareStatement(addFollowing);
 			ps.setInt(1, userID);
-			ps.setString(2, viewedUser);
+			ps.setString(2, loggedinUser);
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
