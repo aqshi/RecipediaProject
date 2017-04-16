@@ -141,3 +141,12 @@ caption {
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
 }
+
+#back-to-profile-btn{
+	margin-top:2px;
+	border-radius: 15px;
+	text-decoration: none;
+	margin-left: 30px;
+	border: none;
+	background-color: #f4bd9a; 
+}
