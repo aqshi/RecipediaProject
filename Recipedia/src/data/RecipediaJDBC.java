@@ -48,7 +48,7 @@ public class RecipediaJDBC {
 	private final static String getTagWithID = "SELECT * FROM TagToRecipe WHERE tagID=?";
 	private final static String getAllTags = "SELECT * FROM Tags";
 	private final static String getCurrNumLikes = "SELECT * FROM Recipes Where recipeID=?";
-	private final static String increaseLikeByOne = "UPDATE Recipes SET likes=?, WHERE recipeID=?";
+	private final static String increaseLikeByOne = "UPDATE Recipes SET likes=? WHERE recipeID=?";
 	
 	public RecipediaJDBC() {
 		try {
@@ -600,8 +600,8 @@ public class RecipediaJDBC {
 		System.out.println("updated likes: " + updatedLikes);
 		try {
 			ps = conn.prepareStatement(increaseLikeByOne);
-			ps.setInt(1, recipeID);
-			ps.setInt(2, updatedLikes);
+			ps.setInt(2, recipeID);
+			ps.setInt(1, updatedLikes);
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
