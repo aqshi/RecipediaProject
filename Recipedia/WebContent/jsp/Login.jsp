@@ -127,7 +127,7 @@
 					    	<br/>
 					    	<br/>
 					    	<br/>
-							<a id ="continue-as-guest-btn" href="feed.jsp" class ="btn btn-default">Continue as guest</a>
+							<a id ="continue-as-guest-btn" href="gfeed.jsp" class ="btn btn-default">Continue as guest</a>
 						<!-- </div> -->
 		      </form>
 			</div>
