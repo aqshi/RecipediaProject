@@ -378,13 +378,15 @@ public class RecipediaJDBC {
 		
 	//adds a following to loggedinUser and follower for viewedUser
 	public void addtoFollowing(String loggedinUser, String viewedUser) {
-		int userID = getUserIDByUsername(viewedUser);
+		System.out.println("add fan:" + viewedUser);
+		System.out.println("user clicked button: " + loggedinUser);
+		int userID = getUserIDByUsername(loggedinUser);
 		User user = new User(viewedUser);
 		try {
 			st = conn.createStatement();
 			ps = conn.prepareStatement(addFollowing);
 			ps.setInt(1, userID);
-			ps.setString(2, loggedinUser);
+			ps.setString(2, viewedUser);
 			ps.executeUpdate();
 			user.addFan(loggedinUser);
 		} catch (SQLException e) {
@@ -394,13 +396,15 @@ public class RecipediaJDBC {
 		
 	//remove a following to loggedinUser and viewedUser loses a follower
 	public void removeFromFollowing(String loggedinUser, String viewedUser) {
-		int userID = getUserIDByUsername(viewedUser);
+		System.out.println("remove fan:" + viewedUser);
+		System.out.println("user clicked button: " + loggedinUser);
+		int userID = getUserIDByUsername(loggedinUser);
 		User user = new User(viewedUser);
 		try {
 			st = conn.createStatement();
 			ps = conn.prepareStatement(removeFollower);
 			ps.setInt(1, userID);
-			ps.setString(2, loggedinUser);
+			ps.setString(2, viewedUser);
 			ps.executeUpdate();
 			user.removeFan(loggedinUser);
 		} catch (SQLException e) {
