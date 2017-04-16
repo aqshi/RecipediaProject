@@ -79,7 +79,9 @@ c<%@ page language="java" contentType="text/html; charset=UTF-8"
 	    				<div class="col-md-2"></div>
 	    					<div class="col-md-2">
 	    						<div class="image-container">
-		    						<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp?recipeID=<%=events.get(i).getRecipeID() %>"><img src="<%=rjdbc.getRecipe(events.get(i).getRecipeID()).getImageURL() %>"></a>
+		    						<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp?recipeID=<%=events.get(i).getRecipeID() %>">
+	    								<img src="<%=rjdbc.getRecipe(events.get(i).getRecipeID()).getImageURL() %>">
+		    						</a>
 	    							<div class="dropdown">
 	    								<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
 	    								<span class="caret"></span></button>
@@ -88,6 +90,7 @@ c<%@ page language="java" contentType="text/html; charset=UTF-8"
 	    									<li><a class="like-button" recipe="<%=events.get(i).getRecipeName()%>" username="<%=username%>" id="like<%= events.get(i).getEventID()%>" href="#">Like</a></li>
 	    								</ul>
 	    							</div>
+	    							<figcaption class="caption"><%=events.get(i).getUsernameDidAction()%> <%=events.get(i).getAction().toLowerCase() %> <%= events.get(i).getRecipeName() %> </figcaption>
 	    						</div>
 	    					</div>
 	    			<%
@@ -107,6 +110,7 @@ c<%@ page language="java" contentType="text/html; charset=UTF-8"
 		    								<li><a class="like-button" recipe="<%=events.get(i).getRecipeName()%>" username="<%=username%>" id="like<%= events.get(i).getEventID()%>"href="#">Like</a></li>
 		    							</ul>
 		    						</div>
+		    						<figcaption class="caption"><%=events.get(i).getUsernameDidAction()%> <%=events.get(i).getAction().toLowerCase() %> <%= events.get(i).getRecipeName() %> </figcaption>
 		    					</div>
 		    				</div>
 		    			<%

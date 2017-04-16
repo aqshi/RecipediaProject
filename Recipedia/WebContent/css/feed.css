@@ -10,11 +10,12 @@ body{
 	border-style: none;
 }
 
-
-.image-container{
-	background-color: #f7c59f;
-	border-radius: 15%;
+.caption{
+	color: black;
+	margin-left: 17px;
+	font-size: 12px;
 }
+
 
 a{
 	color: white;
