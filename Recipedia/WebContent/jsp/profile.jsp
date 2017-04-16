@@ -98,6 +98,12 @@
 					<div class="profile-image-container">
 						<img id = "profile-image" src="<%=user.getImage() %>"/>
 					</div>
+					
+				</div>
+				<div class="col-md-2"></div>
+				<div class="col-md-6">
+					<h1 id = "name"><%=user.getFullName() %></h1>
+					<h1 id="username">@<%=user.getUsername() %></h1>
 					<div>
 					<%
 						if(name.equals(viewedUser) && !viewedUser.equals(loggedInUser)) {
@@ -105,24 +111,19 @@
 							if(followOrNot.contains(name)) { %>
 								<form name="followform" method="GET" onsubmit="return followchange()">
 									<input type="hidden" id="userClicked" name="userClicked" value="<%= name %>">
-									<input style="float:right; margin-top:130px;" type="submit" id="followButton" value="Unfan">
+									<input  type="submit" id="followButton" value="Become a fan">
 								</form>
 					<%		}
 							
 							else { %>
 								<form name="followform" method="GET" onsubmit="return followchange()">
 									<input type="hidden" id="userClicked" name="userClicked" value="<%=name  %>">
-									<input style="float:right; margin-top:130px;" type="submit" id="followButton" value="Become a fan">
+									<input type="submit" id="followButton" value="Unfan">
 								</form>		
 					<%		}
 						}
 					%>
 					</div>
-				</div>
-				<div class="col-md-2"></div>
-				<div class="col-md-6">
-					<h1 id = "name"><%=user.getFullName() %></h1>
-					<h1 id="username">@<%=user.getUsername() %></h1>
 				</div>
 			</div>
 		</div>
