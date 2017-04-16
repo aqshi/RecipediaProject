@@ -22,7 +22,7 @@ $(document).ready(function() {
 	            url: '../FeedEventServlet',
 	            data: JSON.stringify(data),
 	            contentType: "application/json; charset=utf-8",
-	            async: false,
+	            async: true,
 	        	xhrFields: {
 	        		withCredentials: true
 	        	}
@@ -59,7 +59,7 @@ $(document).ready(function() {
 	            url: '../FeedEventServlet',
 	            data: JSON.stringify(data),
 	            contentType: "application/json; charset=utf-8",
-	            async: false,
+	            async: true,
 	        	xhrFields: {
 	        		withCredentials: true
 	        	}

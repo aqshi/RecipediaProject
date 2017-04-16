@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
+import data.RecipediaJDBC;
 import recipediaClasses.JsonEventData;
 
 /**
@@ -45,7 +46,17 @@ public class FeedEventServlet extends HttpServlet {
         if(br != null){
             json = br.readLine();
         }
+        RecipediaJDBC rjdbc = new RecipediaJDBC();
         JsonEventData eventData = gson.fromJson(json, JsonEventData.class);
+        String action = eventData.getAction();
+        if (action.equals("saved")) {
+        	rjdbc.addSavedRecipe(rjdbc.getEvent(eventData.getId()).getRecipeID(), rjdbc.getUserIDByUsername(eventData.getUsername()));
+        	//create event
+        } else if (action.equals("liked")) {
+        	rjdbc.updateLike(rjdbc.getEvent(eventData.getId()).getRecipeID());
+        	//create event
+        }
+        out.println("bal");
 	}
 
 
