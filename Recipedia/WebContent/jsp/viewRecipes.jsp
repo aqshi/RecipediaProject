@@ -31,17 +31,8 @@
  			function recipeUpdate() {
  				var change = document.getElementById("recipeButton");
 		 		var xhttp = new XMLHttpRequest();
-		 	   	if (change.value == "Save")
-		 	   	{
-		 	   		xhttp.open("GET", "${pageContext.request.contextPath}/ActiononRecipeServlet?buttonClicked=" + document.getElementById("buttonClicked").value +"&recipeButton="+document.getElementById("recipeButton").value, false);		    	  
+		 	   		xhttp.open("GET", "${pageContext.request.contextPath}/ActiononRecipeServlet?buttonClicked=" + document.getElementById("recipeID").value +"&recipeButton="+change.value, false);		    	  
 		 	    	xhttp.send();
-		 	   	}
-		 	
-		 	   else if(change.value == "Update")
-		 	   {
-		 	       	xhttp.open("GET", "${pageContext.request.contextPath}/ActiononRecipeServlet?buttonClicked=" + document.getElementById("buttonClicked").value +"&recipeButton="+document.getElementById("recipeButton").value, false);		    	  
-			    	xhttp.send();
-		 	   	}
 		 	}
 		</script>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -107,12 +98,12 @@
 			<div class="row">
 				<div class="col-md-8">
 					<form name="saveform" method="GET" onsubmit="recipeUpdate()">
-						<input type="hidden" id="saveClicked" name="buttonClicked" value="<%= recipeID  %>">
+						<input type="hidden" id="recipeID" name="recipeID" value="<%= recipeID  %>">
 						<input type="submit" id="recipeButton" value="Save">
 					</form>
-					<form name="updateform" method="GET" onsubmit="recipeUpdate()">
-						<input type="hidden" id="updateClicked" name="buttonClicked" value="<%= recipeID  %>">
-						<input type="submit" id="recipeButton" value="Update">
+					<form name="likeform" method="GET" onsubmit="recipeUpdate()">
+						<input type="hidden" id="recipeID" name="recipeID" value="<%= recipeID  %>">
+						<input type="submit" id="recipeButton" value="Like">
 					</form>
 				</div>
 			</div>

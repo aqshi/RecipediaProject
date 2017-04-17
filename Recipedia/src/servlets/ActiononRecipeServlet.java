@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import data.RecipediaJDBC;
+import recipediaClasses.Event;
 
 /**
  * Servlet implementation class ActiononRecipeServlet
@@ -32,15 +33,20 @@ public class ActiononRecipeServlet extends HttpServlet {
 		
 		
 		//need to do event = new event
-		System.out.println("in servlet");
 		HttpSession retrieveUserProfile = request.getSession();
 		String user = (String) retrieveUserProfile.getAttribute("username");		
-		String recipeID = request.getParameter("buttonClicked");
+		String recipeIDString = request.getParameter("buttonClicked");
+		int recipeID = Integer.parseInt(recipeIDString);
 		String action = request.getParameter("recipeButton");
-		System.out.println("recipeID: " + recipeID);
 		System.out.println("action: " + action);
+		//do we need this?
+		Event event = new Event();
+		event.setRecipeID(recipeID);
+		event.setUsernameDidAction(user);
+		event.setAction(action);
+		
 		RecipediaJDBC jdbcDriver = new RecipediaJDBC();
-		//jdbcDriver.addEvent(user, recipeID, action);
+		jdbcDriver.addEvent(user, recipeID, action);
 		response.sendRedirect("jsp/viewRecipes.jsp?recipeID=" + recipeID);
 	}
 
