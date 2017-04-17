@@ -826,9 +826,6 @@ INSERT INTO Fans(userID, fanName)
 
 INSERT INTO Fans(userID, fanName)
 	VALUES(2, 'ashi');
-
-INSERT INTO Fans(userID, fanName)
-	VALUES(3, 'dimizrahi');
     
 INSERT INTO Fans(userID, fanName)
 	VALUES(3, 'janthony');
