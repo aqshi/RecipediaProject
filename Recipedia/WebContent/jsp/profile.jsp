@@ -52,6 +52,7 @@
 			
 		}
 		
+		System.out.println("viewing user: " + name);
 		User forLoggedIn = jdbc.getUserByUsername(loggedInUser);
 		User user = jdbc.getUserByUsername(name);
 	%>
@@ -99,8 +100,15 @@
 					<div>
 					<%
 						if(name.equals(viewedUser) && !viewedUser.equals(loggedInUser)) {
-							Set<String> followOrNot = forLoggedIn.getFans();
-							if(!followOrNot.contains(name)) { %>
+							Set<String> followOrNot = user.getFans();
+							System.out.println("user: " + user.getUsername());
+							for(String s : followOrNot) {
+								System.out.println("fan name: "+s);
+							}
+							
+							System.out.println("see if loggedin user exists: " + loggedInUser);
+							
+							if(!followOrNot.contains(loggedInUser)) { %>
 								<form name="followform" method="GET" onsubmit="followchange()">
 									<input type="hidden" id="userClicked" name="userClicked" value="<%= name %>">
 									<input  type="submit" id="followButton" value="Become a fan">
