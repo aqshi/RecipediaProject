@@ -38,22 +38,20 @@ public class ActiononRecipeServlet extends HttpServlet {
 		String recipeIDString = request.getParameter("buttonClicked");
 		int recipeID = Integer.parseInt(recipeIDString);
 		String action = request.getParameter("recipeButton");
-<<<<<<< HEAD
+
 		System.out.println("action: " + action);
 		System.out.println("recipeID: " + recipeID);
 		RecipediaJDBC jdbcDriver = new RecipediaJDBC();
-=======
+		
 
->>>>>>> 93c57cc1e3a742e1a1c49852f1dfc008f5bed63b
-		//do we need this?
 		if (action.equals("Save")) {
+			System.out.println("saved action");
 			Event event = new Event();
 			event.setRecipeID(recipeID);
 			event.setUsernameDidAction(user);
 			event.setAction(action);
-			
-			
 			jdbcDriver.addEvent(user, recipeID, action);
+			jdbcDriver.addSavedRecipe(recipeID, jdbcDriver.getUserIDByUsername(user));
 		} else if (action.equals("Like")) {
 			jdbcDriver.updateLike(recipeID);
 		}
