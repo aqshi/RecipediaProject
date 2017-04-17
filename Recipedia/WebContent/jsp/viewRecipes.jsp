@@ -28,12 +28,18 @@
 		<script src="../js/lib/noty.js" type="text/javascript"></script>
 		<script type='text/javascript' src='../js/Notifications.js'></script>
 		<script>
- 			function recipeUpdate() {
- 				var change = document.getElementById("recipeButton");
+ 			function recipeUpdateSave() {
+ 				var change = document.getElementById("recipeSaveButton");
 		 		var xhttp = new XMLHttpRequest();
-		 	   		xhttp.open("GET", "${pageContext.request.contextPath}/ActiononRecipeServlet?buttonClicked=" + document.getElementById("recipeID").value +"&recipeButton="+change.value, false);		    	  
+		 	   		xhttp.open("GET", "${pageContext.request.contextPath}/ActiononRecipeServlet?buttonClicked=" + document.getElementById("recipeIDSave").value +"&recipeButton="+change.value, false);		    	  
 		 	    	xhttp.send();
 		 	}
+ 			function recipeUpdateLike() {
+ 				var change = document.getElementById("recipeLikeButton");
+		 		var xhttp = new XMLHttpRequest();
+		 	   		xhttp.open("GET", "${pageContext.request.contextPath}/ActiononRecipeServlet?buttonClicked=" + document.getElementById("recipeIDLike").value +"&recipeButton="+change.value, false);		    	  
+		 	    	xhttp.send();
+ 			}
 		</script>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>View Recipe</title>
@@ -97,13 +103,13 @@
 			</div>
 			<div class="row">
 				<div class="col-md-8">
-					<form name="saveform" method="GET" onsubmit="recipeUpdate()">
-						<input type="hidden" id="recipeID" name="recipeID" value="<%= recipeID  %>">
-						<input type="submit" id="recipeButton" value="Save">
+					<form name="saveform" method="GET" onsubmit="recipeUpdateSave()">
+						<input type="hidden" id="recipeIDSave" name="recipeID" value="<%= recipeID  %>">
+						<input type="submit" id="recipeSaveButton" value="Save">
 					</form>
-					<form name="likeform" method="GET" onsubmit="recipeUpdate()">
-						<input type="hidden" id="recipeID" name="recipeID" value="<%= recipeID  %>">
-						<input type="submit" id="recipeButton" value="Like">
+					<form name="likeform" method="GET" onsubmit="recipeUpdateLike()">
+						<input type="hidden" id="recipeIDLike" name="recipeID" value="<%= recipeID  %>">
+						<input type="submit" id="recipeLikeButton" value="Like">
 					</form>
 				</div>
 			</div>

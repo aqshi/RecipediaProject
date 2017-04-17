@@ -39,14 +39,21 @@ public class ActiononRecipeServlet extends HttpServlet {
 		int recipeID = Integer.parseInt(recipeIDString);
 		String action = request.getParameter("recipeButton");
 		System.out.println("action: " + action);
-		//do we need this?
-		Event event = new Event();
-		event.setRecipeID(recipeID);
-		event.setUsernameDidAction(user);
-		event.setAction(action);
-		
+		System.out.println("recipeID: " + recipeID);
 		RecipediaJDBC jdbcDriver = new RecipediaJDBC();
-		jdbcDriver.addEvent(user, recipeID, action);
+		//do we need this?
+		if (action.equals("Save")) {
+			Event event = new Event();
+			event.setRecipeID(recipeID);
+			event.setUsernameDidAction(user);
+			event.setAction(action);
+			
+			
+			jdbcDriver.addEvent(user, recipeID, action);
+		} else if (action.equals("Like")) {
+			jdbcDriver.updateLike(recipeID);
+		}
+		
 		response.sendRedirect("jsp/viewRecipes.jsp?recipeID=" + recipeID);
 	}
 

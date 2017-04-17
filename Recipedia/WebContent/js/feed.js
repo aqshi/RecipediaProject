@@ -5,8 +5,6 @@
 $(document).ready(function() {
 	var savedButtons = document.getElementsByClassName("save-button");
 	
-	var generalUserName = savedButtons[0].getAttribute("username");
-	socket.send(generalUserName);
 	for (var i = 0; i < savedButtons.length; i++) {
 		savedButtons[i].addEventListener("click", function(event) {
 			var buttonClicked = event.target || event.srcElement;
