@@ -160,7 +160,7 @@ public class RecipediaJDBC {
 			rs = ps.executeQuery();
 			Vector<Ingredient> ingredients = new Vector<Ingredient>();
 			while(rs.next()) {
-				int quantity = rs.getInt(2);
+				double quantity = rs.getDouble(2);
 				String units = rs.getString(3);
 				String name = rs.getString(4);
 				Ingredient ingredient = new Ingredient(name, units, quantity);
