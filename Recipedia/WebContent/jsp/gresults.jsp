@@ -88,7 +88,7 @@
 	    						<div class="my_container">
 									<img  class="image" src="<%=finalResults.get(i).getImageURL() %>">
 									<div class="overlay">
-										<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp?recipeID=<%=finalResults.get(i).getId() %>">
+										<a href="${pageContext.request.contextPath}/jsp/gViewRecipes.jsp?recipeID=<%=finalResults.get(i).getId() %>">
 											<div class="text"><%= finalResults.get(i).getName() %></div>
 										</a>
 									</div>
@@ -104,7 +104,7 @@
 		    					<div class="my_container">
 									<img  class="image" src="<%=finalResults.get(i).getImageURL() %>">
 									<div class="overlay">
-										<a href="${pageContext.request.contextPath}/jsp/viewRecipes.jsp?recipeID=<%=finalResults.get(i).getId() %>">
+										<a href="${pageContext.request.contextPath}/jsp/gViewRecipes.jsp?recipeID=<%=finalResults.get(i).getId() %>">
 											<div class="text"><%= finalResults.get(i).getName() %></div>
 										</a>
 									</div>
