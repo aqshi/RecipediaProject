@@ -119,7 +119,6 @@
 				    	<div class="form-group">
 							<label>Image</label>
 							<input type="text" name="imageURL"  placeholder="url" class="form-control" />
-					      	
 				      	</div>
 					      	 <input type="submit" value="Sign Up" class="btn btn-default"/>
 					      	 <div id="result_1"></div>	
