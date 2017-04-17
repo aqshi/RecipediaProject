@@ -38,7 +38,7 @@ public class ActiononRecipeServlet extends HttpServlet {
 		String recipeIDString = request.getParameter("buttonClicked");
 		int recipeID = Integer.parseInt(recipeIDString);
 		String action = request.getParameter("recipeButton");
-		System.out.println("action: " + action);
+
 		//do we need this?
 		Event event = new Event();
 		event.setRecipeID(recipeID);
