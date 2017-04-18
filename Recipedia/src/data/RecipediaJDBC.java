@@ -51,6 +51,7 @@ public class RecipediaJDBC {
 	private final static String increaseLikeByOne = "UPDATE Recipes SET likes=? WHERE recipeID=?";
 	private final static String getSavedRecipe = "SELECT * FROM SAVEDRECIPES WHERE recipeID=?";
 	private final static String getAllRecipes = " SELECT * FROM Recipes";
+	private final static String userTable = "SELECT * FROM Users";
 	
 	public RecipediaJDBC() {
 		try {
@@ -58,7 +59,7 @@ public class RecipediaJDBC {
 			
 			//change this according to your inputs
 
-			conn = DriverManager.getConnection("jdbc:mysql://localhost/recipedia?user=root&password=iwtaekcwne&useSSL=false");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost/recipedia?user=root&password=790536e&useSSL=false");
 
 
 		} catch (SQLException e) {
@@ -250,6 +251,7 @@ public class RecipediaJDBC {
 	public User getUserByUsername(String username) {
 		try {
 			User user = new User(username);
+			//System.out.println("in method: " + username);
 			ps = conn.prepareStatement(inputUsername);
 			ps.setString(1, username);
 			ResultSet rs = ps.executeQuery();
@@ -317,6 +319,7 @@ public class RecipediaJDBC {
 				//need to add and link those tags first
 				for (int i = 0; i < addTags.size(); i++) {
 					ps = conn.prepareStatement(addTag, Statement.RETURN_GENERATED_KEYS);
+					System.out.println("add tags: " + addTags.get(i));
 					ps.setString(1, addTags.get(i));
 					ps.executeUpdate();
 					ResultSet rs3 = ps.getGeneratedKeys();
@@ -333,6 +336,7 @@ public class RecipediaJDBC {
 				//then add that to tagtorecipe table
 				for (int i = 0; i < linkTags.size(); i++) {
 					ps = conn.prepareStatement(tresultTable);
+					System.out.println("link: " + linkTags.get(i));
 					ps.setString(1, linkTags.get(i));
 					ResultSet rs3 = ps.executeQuery();
 					rs3.next();
@@ -644,6 +648,28 @@ public class RecipediaJDBC {
 		return -1;
 	}
 	
+	// user search
+		public Set<String> userSearch(String search) {
+			Set<String> searchResults = new HashSet<>();
+			try {
+				st = conn.createStatement();
+				ps = conn.prepareStatement(userTable);
+				ResultSet rs = ps.executeQuery();
+				User user = getUserByUsername(search);
+				//System.out.println("wanting to search: " + search);
+				//System.out.println(user.getFullName());
+				while (rs.next()) {
+					if (rs.getString(2).toLowerCase().equals(search) || rs.getString(4).toLowerCase().equals(search)
+							|| rs.getString(5).toLowerCase().equals(search)) {
+						searchResults.add(rs.getString(2));
+					}
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+			return searchResults;
+		}
 	
 }
 

@@ -20,7 +20,6 @@
 		RecipediaJDBC jdbc = new RecipediaJDBC();
 		
 		String searchTerm = request.getParameter("searchInput");
-		//System.out.println(search_result);
 		Set<Recipe> results = new HashSet<Recipe>();
 		Set<Recipe> nameResults = jdbc.nameResult(searchTerm);
 		Iterator<Recipe> it = nameResults.iterator();
@@ -40,7 +39,16 @@
 		while(it3.hasNext()) {
 			Recipe re = it3.next();
 			finalResults.add(re);
-		}	
+		}
+		
+		Set<String> userResults = new HashSet<String>();
+		Set<String> matches = jdbc.userSearch(searchTerm);
+		Iterator<String> iterate = matches.iterator();
+		while(iterate.hasNext()) {
+			String re = iterate.next();
+			userResults.add(re);
+		}
+		
 	%>
 	<body>
 <!-- ===========================NAV BAR============================================ -->
@@ -76,6 +84,7 @@
 	    	 
 	    	<%
 	    		//play around with counter to control how many elements appear
+	    	if(finalResults.size() > 0) {
 	    		int counter = finalResults.size();
 	    		Vector<String> images= new Vector<String>();
 	    		
@@ -117,6 +126,54 @@
 		    				if(i%3==2) out.println("</div>");
 	    			}
 	    		}
+	    		}
+	    	
+	    	else {
+	    		int counter = userResults.size();
+	    		User user;
+	    		Vector<String> images= new Vector<String>();
+	    		for(String a : userResults) {
+	    			user = jdbc.getUserByUsername(a);
+	    		for(int i=0;i<counter;i++)
+	    		{
+	    			if(i%3==0)
+	    			{
+	    				if(i!=0) out.println("<div class=\"row\">");
+	    	%>
+	    		<div class="col-md-1"></div> 
+					<div class= "col-md-2">
+						<div class="my_container">
+							<img  class="image" src="<%=user.getImage() %>">
+							<div class="overlay">
+								<a href="${pageContext.request.contextPath}/jsp/profile.jsp?userClicked=<%= a %>">
+									<div class="text"><%= user.getFullName() %></div>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+	    			<%
+	    			}
+	    			else
+	    			{
+	    			%>
+		    		<div class="col-sm-1"></div>
+		    			<div class="col-md-2">
+	    					<div class="my_container">
+	   							<img  class="image" src="<%=user.getImage() %>">
+	   							<div class="overlay">
+	    							<a href="${pageContext.request.contextPath}/jsp/profile.jsp?userClicked=<%= a %>">
+	    								<div class="text"><%= user.getFullName() %></div>
+	    							</a>
+	    						</div>
+	    					</div>
+	   					</div>
+		    			<%
+		    				if(i%3==2) out.println("</div>");
+	    			}
+	    		}	
+	    	}
+	    }
 	    	
 	    				%>
 	   </div>
